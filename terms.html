@@ -1,181 +1,420 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terms of Service - Nomology</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Judson:wght@400;700&family=Nunito+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --nomology-red: #C1272D;
+            --nomology-brown: #6B5B4F;
+            --nomology-light: #FAF7F2;
+            --nomology-dark: #1a1a1a;
+            --border-color: #e0d8d0;
+            --warning-bg: #fef3c7;
+            --warning-border: #f59e0b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #FAF7F2;
-            color: #1a1a1a;
+            font-family: 'Nunito Sans', -apple-system, BlinkMacSystemFont, sans-serif;
             line-height: 1.7;
-            padding: 20px;
+            color: var(--nomology-dark);
+            background: var(--nomology-light);
+            min-height: 100vh;
         }
-        .container {
-            max-width: 700px;
+
+        .header {
+            background: white;
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 800px;
             margin: 0 auto;
-            padding: 40px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
-        header {
-            margin-bottom: 40px;
-        }
-        .back-link {
-            color: #C1272D;
+
+        .header a {
             text-decoration: none;
-            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
+
+        .logo {
+            width: 36px;
+            height: 36px;
+            background: var(--nomology-red);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .header-title {
+            font-family: 'Judson', Georgia, serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--nomology-dark);
+        }
+
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px 80px;
+        }
+
         h1 {
-            font-family: Georgia, serif;
-            font-size: 32px;
-            margin: 16px 0 8px;
-            color: #1a1a1a;
+            font-family: 'Judson', Georgia, serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--nomology-dark);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
         }
-        .updated {
-            color: #6B5B4F;
-            font-size: 14px;
-        }
+
         h2 {
-            font-family: Georgia, serif;
-            font-size: 22px;
-            margin: 32px 0 16px;
-            color: #1a1a1a;
+            font-family: 'Judson', Georgia, serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--nomology-dark);
+            letter-spacing: -0.3px;
         }
-        p, li {
-            color: #333;
-            margin-bottom: 16px;
+
+        h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--nomology-dark);
         }
-        ul {
-            margin-left: 24px;
-            margin-bottom: 16px;
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--nomology-dark);
         }
+
+        .effective-date {
+            color: var(--nomology-brown);
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+        }
+
+        .summary-box {
+            background: white;
+            border-left: 4px solid var(--nomology-red);
+            padding: 1.25rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .summary-box p {
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        .warning-box {
+            background: var(--warning-bg);
+            border-left: 4px solid var(--warning-border);
+            padding: 1.25rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .warning-box p {
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        th, td {
+            text-align: left;
+            padding: 0.875rem 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background: white;
+            font-weight: 600;
+            color: var(--nomology-brown);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        ul, ol {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+        }
+
         li {
-            margin-bottom: 8px;
+            margin-bottom: 0.5rem;
         }
-        strong {
-            color: #1a1a1a;
-        }
+
         a {
-            color: #C1272D;
+            color: var(--nomology-red);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .contact-box {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .contact-box p {
+            margin: 0.25rem 0;
+        }
+
+        @media (max-width: 600px) {
+            .content {
+                padding: 24px 16px 60px;
+            }
+
+            h1 {
+                font-size: 1.75rem;
+            }
+
+            h2 {
+                font-size: 1.25rem;
+            }
+
+            table {
+                font-size: 0.85rem;
+            }
+
+            th, td {
+                padding: 0.625rem 0.75rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <a href="/" class="back-link">← Back to Nomology</a>
-            <h1>Terms of Service</h1>
-            <p class="updated">Last updated: January 2025</p>
-        </header>
+    <div class="header">
+        <div class="header-content">
+            <a href="/">
+                <div class="logo">🍽️</div>
+                <span class="header-title">Nomology</span>
+            </a>
+        </div>
+    </div>
 
-        <p>Welcome to Nomology. By using our app, you agree to these Terms of Service. Please read them carefully.</p>
+    <div class="content">
+        <h1>Terms of Service</h1>
+        <p class="effective-date">Effective date: 11 January 2025</p>
 
-        <h2>1. Acceptance of Terms</h2>
+        <div class="summary-box">
+            <p><strong>In brief:</strong> Nomology is a recipe discovery app. These terms explain the rules for using it. The key points: we provide recipe inspiration, not professional advice; AI-generated content should be reviewed before use; subscriptions auto-renew; and we're governed by English law.</p>
+        </div>
 
-        <p>By accessing or using Nomology, you agree to be bound by these Terms. If you do not agree, please do not use the app.</p>
+        <h2>1. Agreement to terms</h2>
+        <p>By creating an account or using Nomology, you agree to these Terms of Service and our <a href="/privacy">Privacy Policy</a>. If you don't agree, please don't use the app.</p>
+        <p>Nomology is operated by David Maude, a sole trader based at 15 Village Road, Hull, HU8 8QP, United Kingdom.</p>
 
-        <h2>2. Description of Service</h2>
+        <h2>2. The service</h2>
+        <p>Nomology is a recipe discovery and meal planning app. We provide personalised recipe recommendations based on your taste preferences, tools to save, organise, and plan meals, AI-powered features to create and refine recipes, and social features ("Circles") to share meal planning with others.</p>
+        <p>Some features require a paid subscription. We may add, modify, or remove features at any time.</p>
 
-        <p>Nomology is a recipe discovery and meal planning app that learns your taste preferences to provide personalised recommendations. Some features require a paid subscription.</p>
+        <h2>3. Your account</h2>
 
-        <h2>3. Account Registration</h2>
+        <h3>Eligibility</h3>
+        <p>You must be at least 13 years old to use Nomology. By creating an account, you confirm that you meet this requirement.</p>
 
-        <p>You must create an account to use Nomology. You agree to:</p>
-        <ul>
-            <li>Provide accurate and complete information</li>
-            <li>Keep your login credentials secure</li>
-            <li>Notify us of any unauthorised use of your account</li>
-            <li>Be responsible for all activity under your account</li>
-        </ul>
+        <h3>Account security</h3>
+        <p>You are responsible for keeping your account credentials secure. Please use a strong password and don't share your login details. If you believe your account has been compromised, contact us immediately at <a href="mailto:support@nomology.food">support@nomology.food</a>.</p>
 
-        <h2>4. Subscriptions and Payments</h2>
+        <h3>Accurate information</h3>
+        <p>Please provide accurate information when creating your account and keep it up to date.</p>
 
-        <p><strong>Free Features:</strong> Recipe recommendations, ratings, taste profile building, and bookmarks are free to use.</p>
+        <h2>4. Subscriptions and payments</h2>
 
-        <p><strong>Premium Features:</strong> AI recipe creation, meal planning, shopping lists, and Circles require a paid subscription.</p>
+        <h3>Free and paid tiers</h3>
+        <p>Nomology offers a free tier with core features and paid subscription tiers with additional features. Current subscription options are:</p>
 
-        <p><strong>Billing:</strong> Subscriptions are billed through the App Store (iOS) or Google Play (Android). By subscribing, you agree to their respective payment terms.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Tier</th>
+                    <th>Monthly price</th>
+                    <th>Annual price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Creator</td>
+                    <td>£3.99</td>
+                    <td>£39.99</td>
+                </tr>
+                <tr>
+                    <td>Circles</td>
+                    <td>£5.99</td>
+                    <td>£59.99</td>
+                </tr>
+                <tr>
+                    <td>Creator Pro</td>
+                    <td>£12.99</td>
+                    <td>£119.99</td>
+                </tr>
+                <tr>
+                    <td>Circles Pro</td>
+                    <td>£15.99</td>
+                    <td>£159.99</td>
+                </tr>
+            </tbody>
+        </table>
 
-        <p><strong>Auto-Renewal:</strong> Subscriptions automatically renew unless cancelled at least 24 hours before the end of the current billing period.</p>
+        <p>Prices may change. We will notify you of any price changes before they affect your subscription.</p>
 
-        <p><strong>Cancellation:</strong> You may cancel your subscription at any time through your device's subscription settings. You will retain access until the end of your current billing period.</p>
+        <h3>Free trials</h3>
+        <p>New subscribers may be eligible for a 7-day free trial. If you don't cancel before the trial ends, you will be charged for the subscription.</p>
 
-        <p><strong>Refunds:</strong> Refunds are handled by Apple or Google according to their policies. We cannot process refunds directly.</p>
+        <h3>Auto-renewal</h3>
+        <p>Subscriptions automatically renew at the end of each billing period (monthly or annual) unless you cancel at least 24 hours before the renewal date.</p>
 
-        <p><strong>Price Changes:</strong> We may change subscription prices. You will be notified in advance and can cancel before the new price takes effect.</p>
+        <h3>Payment and refunds</h3>
+        <p>Payments are processed by Apple (for iOS) or Google (for Android) through their respective app stores. We do not have access to your payment card details.</p>
+        <p>Refunds are handled by Apple or Google according to their policies. If you believe you are entitled to a refund, please contact Apple or Google directly through their support channels. We cannot process refunds directly.</p>
 
-        <h2>5. AI-Generated Content</h2>
+        <h3>Cancellation</h3>
+        <p>You can cancel your subscription at any time through your device's subscription settings (Apple App Store or Google Play Store). After cancellation, you will retain access to paid features until the end of your current billing period.</p>
 
-        <p>Nomology uses AI to generate recipe suggestions, modifications, and images. You understand that:</p>
-        <ul>
-            <li>AI-generated content is provided for inspiration and guidance</li>
-            <li>You should verify cooking times, temperatures, and food safety practices</li>
-            <li>We are not responsible for outcomes from following AI-generated recipes</li>
-            <li>AI usage is subject to monthly limits based on your subscription tier</li>
-        </ul>
+        <h2>5. Acceptable use</h2>
+        <p>You agree to use Nomology lawfully and respectfully. You must not use the service to violate any laws or regulations, infringe anyone's intellectual property rights, harass, abuse, or harm others, distribute spam, malware, or harmful content, attempt to gain unauthorised access to our systems, or use automated tools to scrape or extract data from the service.</p>
+        <p>We reserve the right to suspend or terminate accounts that violate these terms.</p>
 
-        <h2>6. User Content</h2>
+        <h2>6. User content</h2>
 
-        <p>You retain ownership of content you create (recipes, collections, notes). By sharing content within Circles or publicly, you grant us a licence to display and distribute that content within the app.</p>
+        <h3>Your content</h3>
+        <p>You retain ownership of content you create in Nomology, such as recipes, notes, and collections. By using the service, you grant us a licence to store, display, and process your content as necessary to provide the service.</p>
 
-        <p>You agree not to post content that is:</p>
-        <ul>
-            <li>Illegal, harmful, or offensive</li>
-            <li>Infringing on others' intellectual property</li>
-            <li>Spam or commercial advertising</li>
-            <li>Misleading or fraudulent</li>
-        </ul>
+        <h3>Shared content</h3>
+        <p>If you share content within a Circle, other members of that Circle will be able to view it. You are responsible for ensuring you have the right to share any content you post.</p>
 
-        <h2>7. Circles (Groups)</h2>
+        <h3>Content removal</h3>
+        <p>We may remove content that violates these terms or that we reasonably believe is harmful or illegal.</p>
 
-        <p>Circles allow you to share meal planning with family and friends. Circle owners are responsible for managing membership. We are not responsible for disputes between Circle members.</p>
+        <h2>7. Circles (social features)</h2>
+        <p>Circles allow you to share meal planning with family, friends, or household members. By creating or joining a Circle, you agree that your display name will be visible to other members of the Circle, content you share within the Circle will be visible to other members, and you will respect other members and not share inappropriate content.</p>
+        <p>Circle owners can remove members at any time. Members can leave a Circle at any time. If you are removed from or leave a Circle, you will no longer have access to content shared within it.</p>
 
-        <h2>8. Acceptable Use</h2>
+        <h2>8. AI-generated content</h2>
 
-        <p>You agree not to:</p>
-        <ul>
-            <li>Use the app for any illegal purpose</li>
-            <li>Attempt to access other users' accounts</li>
-            <li>Interfere with the app's operation or security</li>
-            <li>Scrape or collect data from the app</li>
-            <li>Resell or redistribute the app or its content</li>
-        </ul>
+        <div class="warning-box">
+            <p><strong>Important:</strong> AI features are provided for inspiration and convenience. AI-generated recipes and suggestions may contain errors. Always review AI-generated content before use, especially ingredient lists, cooking times, and temperatures.</p>
+        </div>
 
-        <h2>9. Intellectual Property</h2>
+        <h3>How AI features work</h3>
+        <p>Nomology uses artificial intelligence to parse recipes from text or URLs, suggest modifications to recipes based on your preferences, and generate images for recipes. These features use third-party AI services (see our <a href="/privacy">Privacy Policy</a> for details).</p>
 
-        <p>Nomology, including its design, features, and content (excluding user-generated content), is owned by us and protected by intellectual property laws. You may not copy, modify, or distribute any part of the app without permission.</p>
+        <h3>Limitations</h3>
+        <p>AI-generated content may be inaccurate, incomplete, or unsuitable. AI may introduce ingredients not present in original recipes. Cooking times and temperatures may be incorrect. We do not guarantee that AI outputs are safe, accurate, or appropriate for your needs.</p>
 
-        <h2>10. Disclaimers</h2>
+        <h3>Your responsibility</h3>
+        <p>You are responsible for reviewing any AI-generated content before using it. This includes checking all ingredients (especially if you have dietary restrictions or exclusions), verifying cooking times and temperatures, and using your own judgement about food safety.</p>
 
-        <p>Nomology is provided "as is" without warranties of any kind. We do not guarantee that:</p>
-        <ul>
-            <li>The app will be error-free or uninterrupted</li>
-            <li>Recommendations will meet your specific needs</li>
-            <li>AI-generated content will be accurate or suitable</li>
-        </ul>
-        <p><strong>Food Safety:</strong> Always use proper food handling and cooking practices. We are not responsible for foodborne illness or allergic reactions.</p>
+        <h2>9. Food safety and ingredient exclusions</h2>
 
-        <h2>11. Limitation of Liability</h2>
+        <div class="warning-box">
+            <p><strong>Nomology is not a substitute for professional medical or dietary advice.</strong></p>
+        </div>
 
-        <p>To the maximum extent permitted by law, we shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of the app.</p>
+        <h3>Ingredient exclusions</h3>
+        <p>Nomology allows you to exclude ingredients from your recommendations. This feature is designed to help filter recipes based on your preferences, but it has limitations.</p>
+        <p>Our ingredient database, including tracking of allergens in compound ingredients, is maintained on a best-effort basis. We cannot guarantee complete identification of all ingredients or allergens in recipes, that recipes from external sources are accurately labelled, that AI-generated recipes correctly exclude all unwanted ingredients, or detection of cross-contamination risks ("may contain" warnings).</p>
 
-        <h2>12. Termination</h2>
+        <h3>If you have allergies or medical dietary requirements</h3>
+        <p>If you have food allergies or medical dietary requirements, you should always read ingredient labels on packaged foods, verify ingredients with original recipe sources, exercise the same caution as when trying any unfamiliar food, and consult healthcare professionals for allergy management.</p>
+        <p>Nomology's exclusion features are an aid, not a guarantee. You remain responsible for ensuring the food you prepare is safe for you to eat.</p>
 
-        <p>We may suspend or terminate your account if you violate these Terms. You may delete your account at any time through the app settings.</p>
+        <h2>10. Intellectual property</h2>
 
-        <h2>13. Changes to Terms</h2>
+        <h3>Our content</h3>
+        <p>Nomology, including its design, features, and original content, is owned by us and protected by intellectual property laws. You may not copy, modify, or distribute our content without permission.</p>
 
-        <p>We may update these Terms from time to time. Continued use of the app after changes constitutes acceptance of the new Terms.</p>
+        <h3>Recipe content</h3>
+        <p>Many recipes in Nomology come from third-party sources. We link to original sources where available. Copyright in those recipes belongs to their respective owners.</p>
 
-        <h2>14. Governing Law</h2>
+        <h3>Feedback</h3>
+        <p>If you provide feedback or suggestions about Nomology, we may use them without obligation to you.</p>
 
-        <p>These Terms are governed by the laws of England and Wales. Any disputes shall be resolved in the courts of England and Wales.</p>
+        <h2>11. Service availability</h2>
+        <p>We aim to keep Nomology available and working well, but we cannot guarantee uninterrupted service. We may need to suspend the service for maintenance, updates, or due to circumstances beyond our control.</p>
+        <p>We do not guarantee that the service will be available at all times, error-free, or free of viruses or other harmful components. We may discontinue the service or any features at any time with reasonable notice.</p>
 
-        <h2>15. Contact Us</h2>
+        <h2>12. Limitation of liability</h2>
+        <p>To the fullest extent permitted by law:</p>
+        <p>We provide Nomology "as is" without warranties of any kind, whether express or implied. We are not liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of the service. Our total liability to you for any claims arising from these terms or your use of the service is limited to the amount you have paid us in the 12 months before the claim arose (or £100 if you have not paid us anything).</p>
+        <p>Nothing in these terms excludes or limits our liability for death or personal injury caused by our negligence, fraud or fraudulent misrepresentation, or any other liability that cannot be excluded by law.</p>
 
-        <p>If you have questions about these Terms, please contact us at:</p>
-        <p><a href="mailto:support@nomology.food">support@nomology.food</a></p>
+        <h3>Food safety</h3>
+        <p>We are not liable for any illness, injury, or other harm resulting from food you prepare using recipes or information from Nomology. You are responsible for ensuring food safety when cooking.</p>
+
+        <h2>13. Termination</h2>
+
+        <h3>By you</h3>
+        <p>You can stop using Nomology at any time. To delete your account, use the account deletion option in the app settings or contact <a href="mailto:support@nomology.food">support@nomology.food</a>.</p>
+
+        <h3>By us</h3>
+        <p>We may suspend or terminate your account if you violate these terms, if we are required to do so by law, or if we discontinue the service. Where possible, we will give you notice before terminating your account.</p>
+
+        <h3>Effect of termination</h3>
+        <p>On termination, your right to use the service ends. Provisions of these terms that should survive termination (such as limitations of liability) will continue to apply.</p>
+
+        <h2>14. Changes to these terms</h2>
+        <p>We may update these terms from time to time. If we make significant changes, we will notify you through the app or by email before the changes take effect. Your continued use of Nomology after changes take effect constitutes acceptance of the new terms.</p>
+
+        <h2>15. Governing law and disputes</h2>
+        <p>These terms are governed by the laws of England and Wales. Any disputes arising from these terms or your use of Nomology will be subject to the exclusive jurisdiction of the courts of England and Wales.</p>
+        <p>If you are a consumer, this does not affect any mandatory consumer protection rights you may have under the laws of your country of residence.</p>
+
+        <h2>16. General</h2>
+        <p>If any part of these terms is found to be unenforceable, the remaining parts will continue to apply. Our failure to enforce any part of these terms does not waive our right to do so later. These terms, together with our Privacy Policy, constitute the entire agreement between you and us regarding Nomology.</p>
+
+        <h2>17. Contact us</h2>
+        <p>If you have questions about these terms, please contact us:</p>
+        <div class="contact-box">
+            <p><strong>Email:</strong> <a href="mailto:support@nomology.food">support@nomology.food</a></p>
+            <p><strong>Post:</strong> David Maude, 15 Village Road, Hull, HU8 8QP, United Kingdom</p>
+        </div>
     </div>
 </body>
 </html>

@@ -1,143 +1,394 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy - Nomology</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Judson:wght@400;700&family=Nunito+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --nomology-red: #C1272D;
+            --nomology-brown: #6B5B4F;
+            --nomology-light: #FAF7F2;
+            --nomology-dark: #1a1a1a;
+            --border-color: #e0d8d0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #FAF7F2;
-            color: #1a1a1a;
+            font-family: 'Nunito Sans', -apple-system, BlinkMacSystemFont, sans-serif;
             line-height: 1.7;
-            padding: 20px;
+            color: var(--nomology-dark);
+            background: var(--nomology-light);
+            min-height: 100vh;
         }
-        .container {
-            max-width: 700px;
+
+        .header {
+            background: white;
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 800px;
             margin: 0 auto;
-            padding: 40px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
-        header {
-            margin-bottom: 40px;
-        }
-        .back-link {
-            color: #C1272D;
+
+        .header a {
             text-decoration: none;
-            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
+
+        .logo {
+            width: 36px;
+            height: 36px;
+            background: var(--nomology-red);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .header-title {
+            font-family: 'Judson', Georgia, serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--nomology-dark);
+        }
+
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px 80px;
+        }
+
         h1 {
-            font-family: Georgia, serif;
-            font-size: 32px;
-            margin: 16px 0 8px;
-            color: #1a1a1a;
+            font-family: 'Judson', Georgia, serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--nomology-dark);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
         }
-        .updated {
-            color: #6B5B4F;
-            font-size: 14px;
-        }
+
         h2 {
-            font-family: Georgia, serif;
-            font-size: 22px;
-            margin: 32px 0 16px;
-            color: #1a1a1a;
+            font-family: 'Judson', Georgia, serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--nomology-dark);
+            letter-spacing: -0.3px;
         }
-        p, li {
-            color: #333;
-            margin-bottom: 16px;
+
+        h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--nomology-dark);
         }
-        ul {
-            margin-left: 24px;
-            margin-bottom: 16px;
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--nomology-dark);
         }
+
+        .effective-date {
+            color: var(--nomology-brown);
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+        }
+
+        .summary-box {
+            background: white;
+            border-left: 4px solid var(--nomology-red);
+            padding: 1.25rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .summary-box p {
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        th, td {
+            text-align: left;
+            padding: 0.875rem 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background: white;
+            font-weight: 600;
+            color: var(--nomology-brown);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        ul, ol {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+        }
+
         li {
-            margin-bottom: 8px;
+            margin-bottom: 0.5rem;
         }
-        strong {
-            color: #1a1a1a;
-        }
+
         a {
-            color: #C1272D;
+            color: var(--nomology-red);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .contact-box {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .contact-box p {
+            margin: 0.25rem 0;
+        }
+
+        @media (max-width: 600px) {
+            .content {
+                padding: 24px 16px 60px;
+            }
+
+            h1 {
+                font-size: 1.75rem;
+            }
+
+            h2 {
+                font-size: 1.25rem;
+            }
+
+            table {
+                font-size: 0.85rem;
+            }
+
+            th, td {
+                padding: 0.625rem 0.75rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <a href="/" class="back-link">← Back to Nomology</a>
-            <h1>Privacy Policy</h1>
-            <p class="updated">Last updated: January 2025</p>
-        </header>
+    <div class="header">
+        <div class="header-content">
+            <a href="/">
+                <div class="logo">🍽️</div>
+                <span class="header-title">Nomology</span>
+            </a>
+        </div>
+    </div>
 
-        <p>Nomology ("we", "our", or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your information when you use our mobile application.</p>
+    <div class="content">
+        <h1>Privacy Policy</h1>
+        <p class="effective-date">Effective date: 11 January 2025</p>
 
-        <h2>Information We Collect</h2>
+        <div class="summary-box">
+            <p><strong>In brief:</strong> Nomology is a recipe app that learns your food preferences. We collect the information you give us and use it to recommend recipes you'll enjoy. We don't sell your personal data. You can delete your account and data at any time.</p>
+        </div>
 
-        <p><strong>Account Information:</strong> When you create an account, we collect your email address and display name. If you sign in with Apple or Google, we receive basic profile information from those services.</p>
+        <h2>1. Who we are</h2>
+        <p>Nomology is operated by David Maude, a sole trader based in the United Kingdom.</p>
+        <div class="contact-box">
+            <p><strong>Address:</strong> 15 Village Road, Hull, HU8 8QP</p>
+            <p><strong>Privacy enquiries:</strong> <a href="mailto:privacy@nomology.food">privacy@nomology.food</a></p>
+            <p><strong>General support:</strong> <a href="mailto:support@nomology.food">support@nomology.food</a></p>
+        </div>
 
-        <p><strong>Taste Profile Data:</strong> We collect your recipe ratings, flavour preferences, ingredient likes/dislikes, and cooking preferences to personalise your recommendations. This is core to how Nomology works.</p>
+        <h2>2. What data we collect</h2>
 
-        <p><strong>User-Generated Content:</strong> Recipes you create, collections you build, and any content you share within Circles (groups).</p>
+        <h3>Account information</h3>
+        <p>When you create an account, we collect your email address and display name. You may optionally add a profile photo. If you sign in using Apple or Google, we receive basic profile information from those services (but not your password).</p>
 
-        <p><strong>Usage Data:</strong> We collect information about how you use the app, including features accessed, recipes viewed, and interactions. This helps us improve the app.</p>
+        <h3>Your food preferences</h3>
+        <p>To recommend recipes you'll enjoy, we collect information about your tastes, including recipe ratings, ingredient preferences, cuisine preferences, cooking skill level, and equipment you have available. If you choose to exclude certain ingredients (for any reason—allergies, dietary requirements, or personal preference), we store those exclusions to filter your recommendations.</p>
 
-        <p><strong>Device Information:</strong> Basic device information such as device type, operating system version, and app version for troubleshooting and compatibility.</p>
+        <h3>Content you create</h3>
+        <p>If you use our premium features, we store recipes you create or import, recipe collections, meal plans, shopping lists, and notes you add to recipes. If you join or create a Circle (a shared group), we store content you share within that group.</p>
 
-        <h2>How We Use Your Information</h2>
+        <h3>Usage information</h3>
+        <p>We collect information about how you use the app, including which features you access, recipes you view, and technical information such as your device type, operating system version, and app version. We also collect crash logs to help us fix problems.</p>
 
+        <h3>Subscription information</h3>
+        <p>If you subscribe to a paid plan, we track your subscription status and AI feature usage (to enforce usage limits). We do not see or store your payment card details—payments are handled entirely by Apple or Google.</p>
+
+        <h2>3. How we use your data</h2>
+        <p>We use your information to provide and improve Nomology, including to give you personalised recipe recommendations based on your taste profile, to enable features you've chosen to use (meal planning, shopping lists, Circles), to process your subscription and enforce usage limits, to send you important service messages (such as password resets or subscription confirmations), to fix bugs and improve the app, and to prevent fraud and abuse.</p>
+        <p>We do not use your personal data for advertising. We do not sell your personal data to third parties.</p>
+
+        <h3>Anonymised analytics</h3>
+        <p>We may use anonymised, aggregated data about food preferences and trends for analytics purposes, including sharing insights with third parties. This data cannot be linked back to you personally. For example, we might report that "40% of users prefer spicy food"—but never information about any individual user.</p>
+
+        <h2>4. Our legal basis for processing</h2>
+        <p>Under UK data protection law, we need a lawful basis to process your personal data. Our bases are as follows:</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Processing activity</th>
+                    <th>Legal basis</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Providing the app and its features</td>
+                    <td>Contract (necessary to deliver the service you've signed up for)</td>
+                </tr>
+                <tr>
+                    <td>Personalising recommendations</td>
+                    <td>Legitimate interests (improving your experience)</td>
+                </tr>
+                <tr>
+                    <td>Subscription management</td>
+                    <td>Contract</td>
+                </tr>
+                <tr>
+                    <td>Fixing bugs and improving the app</td>
+                    <td>Legitimate interests</td>
+                </tr>
+                <tr>
+                    <td>Preventing fraud</td>
+                    <td>Legitimate interests</td>
+                </tr>
+                <tr>
+                    <td>Sending service messages</td>
+                    <td>Contract / Legitimate interests</td>
+                </tr>
+                <tr>
+                    <td>Anonymised analytics</td>
+                    <td>Legitimate interests</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>5. Who we share your data with</h2>
+        <p>We use trusted third-party services to operate Nomology. These providers process data on our behalf and are contractually required to protect it.</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Service</th>
+                    <th>Purpose</th>
+                    <th>Data shared</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Supabase</td>
+                    <td>Database and authentication</td>
+                    <td>All account and preference data (encrypted, stored in EU)</td>
+                </tr>
+                <tr>
+                    <td>RevenueCat</td>
+                    <td>Subscription management</td>
+                    <td>User ID, subscription status</td>
+                </tr>
+                <tr>
+                    <td>Apple App Store / Google Play</td>
+                    <td>Payment processing</td>
+                    <td>Purchase transactions (we don't see card details)</td>
+                </tr>
+                <tr>
+                    <td>Anthropic (Claude AI)</td>
+                    <td>AI recipe features</td>
+                    <td>Recipe text and prompts you submit (no user identifiers)</td>
+                </tr>
+                <tr>
+                    <td>Google Cloud (Imagen)</td>
+                    <td>AI image generation</td>
+                    <td>Recipe descriptions (no user identifiers)</td>
+                </tr>
+                <tr>
+                    <td>Firebase</td>
+                    <td>Push notifications</td>
+                    <td>Device tokens</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>AI features and your prompts</h3>
+        <p>When you use AI features (such as creating a recipe from a URL or refining a recipe), the text you provide is sent to our AI providers. We do not send your user ID or other personal identifiers with this data. However, please be aware that if you include personal information in your prompts (for example, "my husband John is allergic to..."), that text will be processed by the AI service.</p>
+
+        <h2>6. International data transfers</h2>
+        <p>Your main account data is stored by Supabase in the European Union (Stockholm, Sweden). Some of our other service providers are based in the United States, including Anthropic, RevenueCat, Firebase, and Google Cloud.</p>
+        <p>Where data is transferred outside the UK, we ensure appropriate safeguards are in place. Our US-based providers operate under Standard Contractual Clauses approved by the UK authorities, which provide contractual protections for your data.</p>
+
+        <h2>7. How long we keep your data</h2>
+        <p>We retain your personal data for as long as your account is active. If you delete your account, we will delete your personal data within 30 days. Some data may be retained for longer if required by law (for example, financial records for tax purposes) or if anonymised for analytics.</p>
+
+        <h2>8. Your rights</h2>
+        <p>Under UK data protection law, you have the following rights:</p>
         <ul>
-            <li>To provide personalised recipe recommendations based on your taste profile</li>
-            <li>To power AI features like recipe creation and meal planning</li>
-            <li>To enable social features like Circles for shared meal planning</li>
-            <li>To process subscription payments (handled securely by Apple/Google)</li>
-            <li>To improve our app and develop new features</li>
-            <li>To communicate important updates about the service</li>
+            <li><strong>Access:</strong> You can request a copy of the personal data we hold about you.</li>
+            <li><strong>Rectification:</strong> You can ask us to correct inaccurate data.</li>
+            <li><strong>Erasure:</strong> You can ask us to delete your data (the "right to be forgotten").</li>
+            <li><strong>Portability:</strong> You can request your data in a portable format.</li>
+            <li><strong>Objection:</strong> You can object to processing based on legitimate interests.</li>
+            <li><strong>Restriction:</strong> You can ask us to restrict processing in certain circumstances.</li>
         </ul>
+        <p>To exercise any of these rights, please email <a href="mailto:privacy@nomology.food">privacy@nomology.food</a>. We will respond within one month.</p>
+        <p>You also have the right to lodge a complaint with the Information Commissioner's Office (ICO) at <a href="https://ico.org.uk">ico.org.uk</a> if you believe we have not handled your data properly.</p>
 
-        <h2>Data Storage and Security</h2>
+        <h2>9. Data security</h2>
+        <p>We take reasonable measures to protect your data, including encryption of data in transit and at rest, secure authentication (including support for Apple and Google sign-in), access controls limiting who can access user data, and regular security reviews.</p>
+        <p>However, no system is completely secure. If you become aware of any security issues, please contact us immediately at <a href="mailto:privacy@nomology.food">privacy@nomology.food</a>.</p>
 
-        <p>Your data is stored securely using Supabase, a trusted database platform with encryption at rest and in transit. We implement appropriate technical and organisational measures to protect your personal information.</p>
+        <h2>10. Children's privacy</h2>
+        <p>Nomology is not intended for children under 13 years of age. We do not knowingly collect personal data from children under 13. If you believe a child has provided us with personal data, please contact us and we will delete it.</p>
 
-        <h2>Third-Party Services</h2>
+        <h2>11. Changes to this policy</h2>
+        <p>We may update this privacy policy from time to time. If we make significant changes, we will notify you through the app or by email before the changes take effect. The "effective date" at the top of this page shows when the policy was last updated.</p>
 
-        <p>We use the following third-party services:</p>
-        <ul>
-            <li><strong>Supabase:</strong> Database and authentication</li>
-            <li><strong>RevenueCat:</strong> Subscription management</li>
-            <li><strong>Apple/Google:</strong> Payment processing for subscriptions</li>
-            <li><strong>Anthropic (Claude):</strong> AI-powered recipe features</li>
-            <li><strong>Google Cloud:</strong> Image generation for recipes</li>
-        </ul>
-        <p>These services have their own privacy policies governing how they handle data.</p>
-
-        <h2>Your Rights</h2>
-
-        <p>You have the right to:</p>
-        <ul>
-            <li>Access the personal data we hold about you</li>
-            <li>Request correction of inaccurate data</li>
-            <li>Request deletion of your account and data</li>
-            <li>Export your data in a portable format</li>
-            <li>Withdraw consent for optional data processing</li>
-        </ul>
-        <p>To exercise these rights, contact us at <a href="mailto:privacy@nomology.food">privacy@nomology.food</a>.</p>
-
-        <h2>Data Retention</h2>
-
-        <p>We retain your data for as long as your account is active. If you delete your account, we will delete your personal data within 30 days, except where we are required to retain it for legal purposes.</p>
-
-        <h2>Children's Privacy</h2>
-
-        <p>Nomology is not intended for children under 13. We do not knowingly collect personal information from children under 13. If you believe we have collected such information, please contact us.</p>
-
-        <h2>Changes to This Policy</h2>
-
-        <p>We may update this Privacy Policy from time to time. We will notify you of significant changes through the app or via email.</p>
-
-        <h2>Contact Us</h2>
-
-        <p>If you have questions about this Privacy Policy, please contact us at:</p>
-        <p><a href="mailto:privacy@nomology.food">privacy@nomology.food</a></p>
+        <h2>12. Contact us</h2>
+        <p>If you have any questions about this privacy policy or how we handle your data, please contact us:</p>
+        <div class="contact-box">
+            <p><strong>Email:</strong> <a href="mailto:privacy@nomology.food">privacy@nomology.food</a></p>
+            <p><strong>Post:</strong> David Maude, 15 Village Road, Hull, HU8 8QP, United Kingdom</p>
+        </div>
     </div>
 </body>
 </html>

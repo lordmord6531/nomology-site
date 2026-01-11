@@ -1,15 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nomology - Discover Recipes You'll Love</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Judson:wght@400;700&family=Nunito+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --nomology-red: #C1272D;
+            --nomology-brown: #6B5B4F;
+            --nomology-light: #FAF7F2;
+            --nomology-dark: #1a1a1a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #FAF7F2;
-            color: #1a1a1a;
+            font-family: 'Nunito Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--nomology-light);
+            color: var(--nomology-dark);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -17,14 +32,16 @@
             justify-content: center;
             padding: 20px;
         }
+
         .container {
             text-align: center;
             max-width: 500px;
         }
+
         .logo {
             width: 80px;
             height: 80px;
-            background: #C1272D;
+            background: var(--nomology-red);
             border-radius: 20px;
             margin: 0 auto 24px;
             display: flex;
@@ -32,38 +49,51 @@
             justify-content: center;
             font-size: 40px;
         }
+
         h1 {
-            font-family: Georgia, serif;
-            font-size: 32px;
+            font-family: 'Judson', Georgia, serif;
+            font-size: 36px;
+            font-weight: 700;
             margin-bottom: 12px;
-            color: #1a1a1a;
+            color: var(--nomology-dark);
+            letter-spacing: -0.5px;
         }
+
         p {
-            color: #6B5B4F;
+            font-family: 'Nunito Sans', sans-serif;
+            color: var(--nomology-brown);
             font-size: 18px;
             line-height: 1.6;
             margin-bottom: 32px;
+            font-weight: 400;
         }
+
         .badge {
             display: inline-block;
             background: rgba(193, 39, 45, 0.1);
-            color: #C1272D;
-            padding: 8px 16px;
-            border-radius: 20px;
+            color: var(--nomology-red);
+            padding: 10px 20px;
+            border-radius: 24px;
             font-size: 14px;
             font-weight: 600;
+            letter-spacing: 0.5px;
         }
+
         .links {
             margin-top: 48px;
             font-size: 14px;
         }
+
         .links a {
-            color: #6B5B4F;
+            color: var(--nomology-brown);
             text-decoration: none;
-            margin: 0 12px;
+            margin: 0 16px;
+            font-weight: 500;
+            transition: color 0.2s ease;
         }
+
         .links a:hover {
-            color: #C1272D;
+            color: var(--nomology-red);
         }
     </style>
 </head>
