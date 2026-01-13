@@ -153,9 +153,12 @@
             position: relative;
         }
 
-        .hero-image .image-placeholder {
+        .hero-image img {
+            width: 100%;
             aspect-ratio: 4/5;
             max-height: 600px;
+            object-fit: cover;
+            border-radius: 20px;
         }
 
         .hero-image .floating-badge {
@@ -206,8 +209,11 @@
             font-size: 20px;
         }
 
-        .problem-image .image-placeholder {
+        .problem-image img {
+            width: 100%;
             aspect-ratio: 1/1;
+            object-fit: cover;
+            border-radius: 20px;
         }
 
         /* How It Works */
@@ -235,11 +241,14 @@
             margin-bottom: 32px;
         }
 
-        .step-image .image-placeholder {
+        .step-image img {
+            width: 100%;
             aspect-ratio: 1/1;
             max-width: 280px;
             margin: 0 auto;
             border-radius: 50%;
+            object-fit: cover;
+            display: block;
         }
 
         .step-number {
@@ -337,10 +346,10 @@
             direction: ltr;
         }
 
-        .context-card-image .image-placeholder {
+        .context-card-image img {
+            width: 100%;
             height: 100%;
-            border-radius: 0;
-            border: none;
+            object-fit: cover;
         }
 
         .context-card-content {
@@ -628,7 +637,7 @@
                 direction: ltr;
             }
 
-            .context-card-image .image-placeholder {
+            .context-card-image img {
                 aspect-ratio: 16/9;
             }
 
@@ -653,7 +662,7 @@
                 gap: 48px;
             }
 
-            .step-image .image-placeholder {
+            .step-image img {
                 max-width: 200px;
             }
 
@@ -696,12 +705,7 @@
                 <p class="lead">Nomology learns what you love - the textures, the flavours, the combinations that make you reach for seconds - and finds recipes that match. No more endless scrolling. No more "that was just okay."</p>
             </div>
             <div class="hero-image">
-                <div class="image-placeholder">
-                    <span class="icon">🍳</span>
-                    <strong>Hero Image</strong>
-                    <p>Warm, inviting food scene. Person enjoying a meal, or beautiful table spread with home-cooked food.</p>
-                    <span class="specs">800 x 1000px • Portrait • JPG/WebP</span>
-                </div>
+                <img src="/images/hero_image.png" alt="Beautiful home-cooked dinner spread on a rustic table with warm lighting">
                 <div class="floating-badge">
                     <div class="number">158</div>
                     <div class="label">taste dimensions</div>
@@ -720,12 +724,7 @@
                 <p>We built Nomology to dig it back out.</p>
             </div>
             <div class="problem-image">
-                <div class="image-placeholder">
-                    <span class="icon">😩</span>
-                    <strong>Problem Image</strong>
-                    <p>Relatable moment: person looking frustrated at fridge, or overwhelmed by recipe options on phone.</p>
-                    <span class="specs">600 x 600px • Square • JPG/WebP</span>
-                </div>
+                <img src="/images/problem_image.png" alt="Person looking overwhelmed while standing at open refrigerator">
             </div>
         </div>
     </section>
@@ -740,12 +739,7 @@
             <div class="steps">
                 <div class="step">
                     <div class="step-image">
-                        <div class="image-placeholder">
-                            <span class="icon">👆</span>
-                            <strong>Swipe</strong>
-                            <p>Hand swiping on phone, or recipe cards fanning out</p>
-                            <span class="specs">560 x 560px • Circle crop</span>
-                        </div>
+                        <img src="/images/how_it_works-swipe.png" alt="Hand swiping on phone through recipe cards">
                     </div>
                     <span class="step-number">1</span>
                     <h3>Swipe</h3>
@@ -753,12 +747,7 @@
                 </div>
                 <div class="step">
                     <div class="step-image">
-                        <div class="image-placeholder">
-                            <span class="icon">⭐</span>
-                            <strong>Rate</strong>
-                            <p>Person tasting food thoughtfully, or giving a thumbs up</p>
-                            <span class="specs">560 x 560px • Circle crop</span>
-                        </div>
+                        <img src="/images/how_it_works-rate.png" alt="Person enjoying a bite of delicious food">
                     </div>
                     <span class="step-number">2</span>
                     <h3>Rate</h3>
@@ -766,12 +755,7 @@
                 </div>
                 <div class="step">
                     <div class="step-image">
-                        <div class="image-placeholder">
-                            <span class="icon">🎯</span>
-                            <strong>Discover</strong>
-                            <p>Delighted face seeing perfect meal, or beautiful dish that's "just right"</p>
-                            <span class="specs">560 x 560px • Circle crop</span>
-                        </div>
+                        <img src="/images/how_it_works-discover.png" alt="Person delighted by a perfectly matched meal">
                     </div>
                     <span class="step-number">3</span>
                     <h3>Discover</h3>
@@ -802,12 +786,7 @@
             <div class="context-grid">
                 <div class="context-card">
                     <div class="context-card-image">
-                        <div class="image-placeholder">
-                            <span class="icon">🌍</span>
-                            <strong>Explorer</strong>
-                            <p>Exotic dish, colourful ingredients, or someone trying something new</p>
-                            <span class="specs">400 x 320px</span>
-                        </div>
+                        <img src="/images/for_the_explorer.png" alt="Vibrant exotic dish with colorful ingredients">
                     </div>
                     <div class="context-card-content">
                         <span class="context-card-label">For the Explorer</span>
@@ -817,12 +796,7 @@
                 </div>
                 <div class="context-card reverse">
                     <div class="context-card-image">
-                        <div class="image-placeholder">
-                            <span class="icon">👨‍👩‍👧‍👦</span>
-                            <strong>Family</strong>
-                            <p>Happy family at dinner table, or kids helping cook</p>
-                            <span class="specs">400 x 320px</span>
-                        </div>
+                        <img src="/images/for_the_family.png" alt="Happy family enjoying dinner together">
                     </div>
                     <div class="context-card-content">
                         <span class="context-card-label">For the Family</span>
@@ -832,12 +806,7 @@
                 </div>
                 <div class="context-card">
                     <div class="context-card-image">
-                        <div class="image-placeholder">
-                            <span class="icon">🥂</span>
-                            <strong>Circle</strong>
-                            <p>Friends sharing a meal, dinner party scene</p>
-                            <span class="specs">400 x 320px</span>
-                        </div>
+                        <img src="/images/for_the_circle.png" alt="Friends gathered around dinner table sharing food">
                     </div>
                     <div class="context-card-content">
                         <span class="context-card-label">For the Circle</span>
@@ -847,12 +816,7 @@
                 </div>
                 <div class="context-card reverse">
                     <div class="context-card-image">
-                        <div class="image-placeholder">
-                            <span class="icon">👨‍🍳</span>
-                            <strong>Cook</strong>
-                            <p>Hands-on cooking action, chopping, stirring, or plating</p>
-                            <span class="specs">400 x 320px</span>
-                        </div>
+                        <img src="/images/for_the_cook.png" alt="Hands actively cooking, chopping fresh ingredients">
                     </div>
                     <div class="context-card-content">
                         <span class="context-card-label">For the Cook</span>
