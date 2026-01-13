@@ -486,16 +486,7 @@
         }
 
         .founder .container {
-            max-width: 900px;
-            display: grid;
-            grid-template-columns: 280px 1fr;
-            gap: 64px;
-            align-items: center;
-        }
-
-        .founder-image .image-placeholder {
-            aspect-ratio: 1/1;
-            border-radius: 24px;
+            max-width: 800px;
         }
 
         .founder-note {
@@ -530,6 +521,27 @@
 
         .founder-note p:last-of-type {
             margin-bottom: 32px;
+        }
+
+        .founder-footer {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            margin-top: 32px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .founder-image img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .founder-meta {
+            display: flex;
+            flex-direction: column;
         }
 
         .founder-signature {
@@ -641,14 +653,8 @@
                 aspect-ratio: 16/9;
             }
 
-            .founder .container {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .founder-image {
-                max-width: 200px;
-                margin: 0 auto;
+            .founder-footer {
+                justify-content: center;
             }
         }
 
@@ -868,14 +874,6 @@
     <!-- Founder Note -->
     <section class="founder">
         <div class="container">
-            <div class="founder-image">
-                <div class="image-placeholder">
-                    <span class="icon">👤</span>
-                    <strong>Founder Photo</strong>
-                    <p>Friendly, approachable headshot. Kitchen or casual setting.</p>
-                    <span class="specs">560 x 560px • Square</span>
-                </div>
-            </div>
             <div class="founder-note">
                 <p>I'm the kind of cook who reads four recipes before making one. I love the creative part of combining ideas, tweaking flavours, timing multiple dishes to land together. But there's always that moment of doubt: is this going to work, or have I just wasted an evening?</p>
                 <p>The truth is, I've always wanted to be more adventurous with food. But I hate the uncertainty of trying something new and not liking it. For years I've wished I could somehow taste-test the future, to know before I commit that the risk is actually worth taking.</p>
@@ -883,8 +881,15 @@
                 <p>Nomology is the thing I couldn't find, so I built it. It learns what actually works for you, not what's trending, not what works for everyone else, but your specific tastes and your family's.</p>
                 <p>That confidence of peering into the future has unlocked a new kind of joy for me in my cooking. The experiment that actually lands, the new flavour you'd never have tried, the family meal where we get to enjoy the food, and one another, without whining.</p>
                 <p>I hope it brings some of that joy to your kitchen and dinner table.</p>
-                <p class="founder-signature">Dave</p>
-                <p class="founder-title">Founder</p>
+                <div class="founder-footer">
+                    <div class="founder-image">
+                        <img src="/images/founder.jpg" alt="Dave, Founder of Nomology">
+                    </div>
+                    <div class="founder-meta">
+                        <span class="founder-signature">Dave</span>
+                        <span class="founder-title">Founder</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
