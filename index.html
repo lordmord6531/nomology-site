@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nomology - Discover Recipes You'll Love</title>
+    <title>Nomology - Find Food You'll Actually Love</title>
+    <meta name="description" content="Nomology learns what you love - the textures, the flavours, the combinations - and finds recipes that match. Discover food joy through personalised taste-matching.">
+    <link rel="icon" href="/favicon.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Judson:wght@400;700&family=Nunito+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -13,6 +15,7 @@
             --nomology-brown: #6B5B4F;
             --nomology-light: #FAF7F2;
             --nomology-dark: #1a1a1a;
+            --section-spacing: 80px;
         }
 
         * {
@@ -25,17 +28,58 @@
             font-family: 'Nunito Sans', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--nomology-light);
             color: var(--nomology-dark);
-            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-family: 'Judson', Georgia, serif;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        h1 {
+            font-size: clamp(32px, 6vw, 48px);
+            margin-bottom: 16px;
+        }
+
+        h2 {
+            font-size: clamp(24px, 4vw, 36px);
+            margin-bottom: 24px;
+            color: var(--nomology-dark);
+        }
+
+        h3 {
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        p {
+            color: var(--nomology-brown);
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        section {
+            padding: var(--section-spacing) 0;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 80vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 20px;
-        }
-
-        .container {
             text-align: center;
-            max-width: 500px;
+            padding: 60px 24px;
         }
 
         .logo {
@@ -50,22 +94,13 @@
             font-size: 40px;
         }
 
-        h1 {
-            font-family: 'Judson', Georgia, serif;
-            font-size: 36px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            color: var(--nomology-dark);
-            letter-spacing: -0.5px;
+        .hero h1 {
+            max-width: 600px;
         }
 
-        p {
-            font-family: 'Nunito Sans', sans-serif;
-            color: var(--nomology-brown);
-            font-size: 18px;
-            line-height: 1.6;
-            margin-bottom: 32px;
-            font-weight: 400;
+        .hero p {
+            max-width: 520px;
+            margin: 0 auto 32px;
         }
 
         .badge {
@@ -79,34 +114,518 @@
             letter-spacing: 0.5px;
         }
 
-        .links {
-            margin-top: 48px;
-            font-size: 14px;
+        /* Problem Section */
+        .problem {
+            background: white;
         }
 
-        .links a {
+        .problem-content {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .problem p {
+            margin-bottom: 20px;
+        }
+
+        .problem p:last-of-type {
+            color: var(--nomology-dark);
+            font-weight: 600;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            text-align: center;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 48px;
+        }
+
+        .step {
+            padding: 32px 24px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+        }
+
+        .step-number {
+            width: 48px;
+            height: 48px;
+            background: var(--nomology-red);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Judson', serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0 auto 16px;
+        }
+
+        .step h3 {
+            color: var(--nomology-dark);
+        }
+
+        .step p {
+            font-size: 16px;
+        }
+
+        /* Secret Blend Section */
+        .secret-blend {
+            background: var(--nomology-dark);
+            color: white;
+        }
+
+        .secret-blend h2 {
+            color: white;
+            text-align: center;
+        }
+
+        .secret-blend-content {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .secret-blend p {
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 24px;
+        }
+
+        .highlight {
+            color: var(--nomology-red);
+            font-weight: 700;
+        }
+
+        .dimension-badge {
+            display: inline-block;
+            background: rgba(193, 39, 45, 0.2);
+            color: var(--nomology-red);
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: 700;
+            margin: 24px 0;
+        }
+
+        /* Joy Contexts */
+        .joy-contexts {
+            text-align: center;
+        }
+
+        .context-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 48px;
+        }
+
+        .context-card {
+            background: white;
+            border-radius: 16px;
+            padding: 32px 24px;
+            text-align: left;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border-top: 4px solid var(--nomology-red);
+        }
+
+        .context-card h3 {
+            color: var(--nomology-red);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            font-family: 'Nunito Sans', sans-serif;
+            font-weight: 700;
+        }
+
+        .context-card .card-title {
+            font-family: 'Judson', serif;
+            font-size: 22px;
+            color: var(--nomology-dark);
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .context-card p {
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* Support Section */
+        .support {
+            background: white;
+        }
+
+        .support-intro {
+            max-width: 700px;
+            margin: 0 auto 48px;
+            text-align: center;
+        }
+
+        .support-intro p {
+            margin-bottom: 16px;
+        }
+
+        .tiers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .tier {
+            background: var(--nomology-light);
+            border-radius: 16px;
+            padding: 28px 24px;
+            text-align: center;
+        }
+
+        .tier.featured {
+            background: var(--nomology-dark);
+            color: white;
+        }
+
+        .tier.featured h3,
+        .tier.featured .tier-tagline {
+            color: white;
+        }
+
+        .tier.featured p {
+            color: rgba(255,255,255,0.8);
+        }
+
+        .tier.featured .tier-price {
+            color: var(--nomology-red);
+        }
+
+        .tier h3 {
+            font-size: 22px;
+            margin-bottom: 4px;
+        }
+
+        .tier-tagline {
+            font-size: 13px;
             color: var(--nomology-brown);
+            font-style: italic;
+            margin-bottom: 12px;
+        }
+
+        .tier-price {
+            font-family: 'Judson', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--nomology-dark);
+            margin-bottom: 12px;
+        }
+
+        .tier-price span {
+            font-size: 14px;
+            font-weight: 400;
+            opacity: 0.7;
+        }
+
+        .tier p {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .support-closing {
+            max-width: 600px;
+            margin: 48px auto 0;
+            text-align: center;
+            font-size: 16px;
+            font-style: italic;
+            color: var(--nomology-brown);
+        }
+
+        /* Founder Note */
+        .founder {
+            text-align: center;
+        }
+
+        .founder-note {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px 32px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            position: relative;
+        }
+
+        .founder-note::before {
+            content: '"';
+            font-family: 'Judson', serif;
+            font-size: 120px;
+            color: var(--nomology-red);
+            opacity: 0.15;
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            line-height: 1;
+        }
+
+        .founder-note p {
+            font-size: 17px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .founder-note p:last-of-type {
+            margin-bottom: 24px;
+        }
+
+        .founder-signature {
+            font-family: 'Judson', serif;
+            font-size: 18px;
+            color: var(--nomology-dark);
+            font-weight: 700;
+        }
+
+        .founder-title {
+            font-size: 14px;
+            color: var(--nomology-brown);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--nomology-dark);
+            color: white;
+            text-align: center;
+            padding: 48px 24px;
+        }
+
+        .footer-badge {
+            display: inline-block;
+            background: var(--nomology-red);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 32px;
+        }
+
+        .footer-links {
+            margin-bottom: 24px;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
             text-decoration: none;
             margin: 0 16px;
+            font-size: 14px;
             font-weight: 500;
             transition: color 0.2s ease;
         }
 
-        .links a:hover {
-            color: var(--nomology-red);
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-tagline {
+            font-size: 14px;
+            color: rgba(255,255,255,0.5);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            :root {
+                --section-spacing: 60px;
+            }
+
+            .hero {
+                min-height: 70vh;
+                padding: 40px 20px;
+            }
+
+            .steps {
+                gap: 24px;
+            }
+
+            .context-cards {
+                gap: 16px;
+            }
+
+            .tiers {
+                gap: 16px;
+            }
+
+            .founder-note {
+                padding: 32px 24px;
+            }
+
+            .founder-note::before {
+                font-size: 80px;
+                top: -10px;
+                left: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-links a {
+                display: block;
+                margin: 8px 0;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
+    <!-- Hero -->
+    <section class="hero">
         <div class="logo">🍽️</div>
-        <h1>Nomology</h1>
-        <p>Discover recipes you'll love, tailored to your unique taste.</p>
+        <h1>Find food you'll actually love.</h1>
+        <p>Nomology learns what you love - the textures, the flavours, the combinations that make you reach for seconds - and finds recipes that match. No more endless scrolling. No more "that was just okay."</p>
         <span class="badge">Coming Soon</span>
-        <div class="links">
+    </section>
+
+    <!-- Problem -->
+    <section class="problem">
+        <div class="container">
+            <div class="problem-content">
+                <h2>We've all been there.</h2>
+                <p>It's 5pm. You're staring at the fridge. The kids want different things. You've made the same five recipes for months. Pinterest gave you something beautiful that tasted like cardboard. The recipe apps show you what's popular - not what <em>you'd</em> actually enjoy.</p>
+                <p>Food should bring joy. But somewhere between meal planning spreadsheets and disappointing dinner experiments, that joy got buried.</p>
+                <p>We built Nomology to dig it back out.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2>Simple as swipe, rate, eat.</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Swipe</h3>
+                    <p>Tell us what catches your eye. Quick swipes on recipes and ingredients start building your taste profile. No questionnaires. No setup wizards. Just honest reactions.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Rate</h3>
+                    <p>Cook something. Tell us how it went. Each rating teaches us more about what makes <em>your</em> taste buds happy - the subtle things even you might not consciously notice.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Discover</h3>
+                    <p>Watch your recommendations get eerily good. Recipes that match not just your dietary needs, but your actual preferences. The kind of food you'll make again and again.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Secret Blend -->
+    <section class="secret-blend">
+        <div class="container">
+            <div class="secret-blend-content">
+                <h2>Our secret blend.</h2>
+                <p>You know how KFC guards their 11 herbs and spices? We guard something different.</p>
+                <div class="dimension-badge">158 dimensions of flavour and texture</div>
+                <p>This isn't generic AI suggesting popular recipes. This is proprietary taste-matching that models the nuanced relationship between you and food - umami depth, textural contrast, spice tolerance, ingredient combinations, and dozens of factors you've never consciously considered.</p>
+                <p>Every swipe, every rating teaches our algorithm more about your unique palate. Over time, Nomology doesn't just know what you might like. <span class="highlight">It knows what you'll love.</span></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Joy Contexts -->
+    <section class="joy-contexts">
+        <div class="container">
+            <h2>Food joy looks different for everyone.</h2>
+            <div class="context-cards">
+                <div class="context-card">
+                    <h3>For the Explorer</h3>
+                    <p class="card-title">Adventure awaits</p>
+                    <p>You love discovering new cuisines, unusual ingredients, techniques you've never tried. Nomology feeds your curiosity with recipes that push your boundaries - but still land within your taste preferences. Adventure without the disappointment.</p>
+                </div>
+                <div class="context-card">
+                    <h3>For the Family</h3>
+                    <p class="card-title">Everyone's happy</p>
+                    <p>Three kids, three opinions, zero patience for "I don't like this" at 6pm. Build taste profiles for your whole household and find recipes that actually work for everyone. Weekly meal planning that doesn't require a spreadsheet.</p>
+                </div>
+                <div class="context-card">
+                    <h3>For the Circle</h3>
+                    <p class="card-title">Share the joy</p>
+                    <p>Hosting friends? Planning group meals? Create a Circle and find recipes that match everyone's tastes. Dinner parties where nobody's politely pushing food around their plate.</p>
+                </div>
+                <div class="context-card">
+                    <h3>For the Cook</h3>
+                    <p class="card-title">Master your craft</p>
+                    <p>You don't just eat food - you <em>make</em> it. Guided cooking timers, technique suggestions, and the ability to cook multiple recipes simultaneously without burning anything. Turn cooking from stress into genuine joy.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support -->
+    <section class="support">
+        <div class="container">
+            <div class="support-intro">
+                <h2>Built with love. Sustained by you.</h2>
+                <p>Nomology isn't backed by venture capital or big food corporations. It's a passion project, built by someone who genuinely believes that better food experiences make better lives.</p>
+                <p>Our free tier gives you real, meaningful access to taste-matched recipes. But if Nomology brings joy to your kitchen, your support keeps the project alive and growing.</p>
+            </div>
+            <div class="tiers">
+                <div class="tier">
+                    <h3>Free</h3>
+                    <p class="tier-tagline">"Just getting started"</p>
+                    <p class="tier-price">£0</p>
+                    <p>Swipe, rate, and discover recipes matched to your taste. The core Nomology experience, no strings attached.</p>
+                </div>
+                <div class="tier">
+                    <h3>Creator</h3>
+                    <p class="tier-tagline">"Keep the lights on"</p>
+                    <p class="tier-price">£3.99<span>/month</span></p>
+                    <p>Expanded AI features to build and refine your own recipes. Your support covers real costs - servers, testing, and development.</p>
+                </div>
+                <div class="tier featured">
+                    <h3>Circles</h3>
+                    <p class="tier-tagline">"Fund the future"</p>
+                    <p class="tier-price">£5.99<span>/month</span></p>
+                    <p>Share taste profiles with family and friends. Plan meals together. Champion support funds new features and expansion.</p>
+                </div>
+                <div class="tier">
+                    <h3>Pro</h3>
+                    <p class="tier-tagline">"All in"</p>
+                    <p class="tier-price">£12.99<span>/month</span></p>
+                    <p>Everything Nomology offers. For true food enthusiasts who want to support the full vision.</p>
+                </div>
+            </div>
+            <p class="support-closing">Every subscription, at any level, is a vote of confidence in food joy. You're not buying a product - you're backing a vision.</p>
+        </div>
+    </section>
+
+    <!-- Founder Note -->
+    <section class="founder">
+        <div class="container">
+            <div class="founder-note">
+                <p>I built Nomology because I was tired of the 5pm panic. Three kids, no plan, and the same rotation of "safe" meals that nobody was excited about anymore.</p>
+                <p>I wanted something that actually understood what my family likes - not what's trending, not what an algorithm thinks everyone wants, but what genuinely works for us.</p>
+                <p>This is that thing. And I hope it brings as much joy to your kitchen as it has to mine.</p>
+                <p class="founder-signature">Dave</p>
+                <p class="founder-title">Founder, Nomology</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <span class="footer-badge">Coming Soon</span>
+        <div class="footer-links">
             <a href="/privacy">Privacy Policy</a>
             <a href="/terms">Terms of Service</a>
         </div>
-    </div>
+        <p class="footer-tagline">Made with love for people who love food.</p>
+    </footer>
 </body>
 </html>
