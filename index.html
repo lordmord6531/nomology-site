@@ -8,14 +8,17 @@
     <link rel="icon" href="/favicon.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Judson:wght@400;700&family=Nunito+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Judson:wght@400;700&family=Nunito+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --nomology-red: #C1272D;
+            --nomology-red-light: rgba(193, 39, 45, 0.08);
             --nomology-brown: #6B5B4F;
             --nomology-light: #FAF7F2;
             --nomology-dark: #1a1a1a;
-            --section-spacing: 80px;
+            --nomology-cream: #F5F0E8;
+            --section-spacing: 120px;
+            --container-max: 1200px;
         }
 
         * {
@@ -26,7 +29,7 @@
 
         body {
             font-family: 'Nunito Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--nomology-light);
+            background: white;
             color: var(--nomology-dark);
             line-height: 1.6;
         }
@@ -36,82 +39,145 @@
             font-family: 'Judson', Georgia, serif;
             font-weight: 700;
             letter-spacing: -0.5px;
+            line-height: 1.2;
         }
 
         h1 {
-            font-size: clamp(32px, 6vw, 48px);
-            margin-bottom: 16px;
+            font-size: clamp(40px, 7vw, 64px);
+            margin-bottom: 24px;
         }
 
         h2 {
-            font-size: clamp(24px, 4vw, 36px);
-            margin-bottom: 24px;
+            font-size: clamp(32px, 5vw, 48px);
+            margin-bottom: 20px;
             color: var(--nomology-dark);
         }
 
         h3 {
-            font-size: 20px;
-            margin-bottom: 8px;
+            font-size: 24px;
+            margin-bottom: 12px;
         }
 
         p {
             color: var(--nomology-brown);
             font-size: 18px;
+            line-height: 1.8;
+        }
+
+        .lead {
+            font-size: 20px;
             line-height: 1.7;
+        }
+
+        .accent {
+            color: var(--nomology-red);
         }
 
         /* Layout */
         .container {
-            max-width: 1000px;
+            max-width: var(--container-max);
             margin: 0 auto;
-            padding: 0 24px;
+            padding: 0 40px;
         }
 
         section {
             padding: var(--section-spacing) 0;
         }
 
-        /* Hero Section */
-        .hero {
-            min-height: 80vh;
+        /* Image Placeholders */
+        .image-placeholder {
+            background: linear-gradient(135deg, var(--nomology-cream) 0%, #E8E0D5 100%);
+            border-radius: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            color: var(--nomology-brown);
+            font-size: 14px;
             text-align: center;
-            padding: 60px 24px;
+            padding: 24px;
+            border: 2px dashed rgba(107, 91, 79, 0.3);
         }
 
-        .logo {
-            width: 80px;
-            height: 80px;
-            background: var(--nomology-red);
-            border-radius: 20px;
-            margin: 0 auto 24px;
+        .image-placeholder .icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+            opacity: 0.6;
+        }
+
+        .image-placeholder .specs {
+            font-size: 12px;
+            opacity: 0.7;
+            margin-top: 8px;
+            font-family: 'Courier Prime', monospace;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 90vh;
+            background: var(--nomology-light);
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 40px;
+            padding: 80px 0;
+            overflow: hidden;
         }
 
-        .hero h1 {
-            max-width: 600px;
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
         }
 
-        .hero p {
-            max-width: 520px;
-            margin: 0 auto 32px;
+        .hero-content {
+            max-width: 540px;
         }
 
-        .badge {
+        .hero-eyebrow {
             display: inline-block;
-            background: rgba(193, 39, 45, 0.1);
+            background: var(--nomology-red-light);
             color: var(--nomology-red);
-            padding: 10px 20px;
-            border-radius: 24px;
+            padding: 8px 16px;
+            border-radius: 20px;
             font-size: 14px;
             font-weight: 600;
             letter-spacing: 0.5px;
+            margin-bottom: 24px;
+        }
+
+        .hero p {
+            margin-bottom: 32px;
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        .hero-image .image-placeholder {
+            aspect-ratio: 4/5;
+            max-height: 600px;
+        }
+
+        .hero-image .floating-badge {
+            position: absolute;
+            bottom: 40px;
+            left: -30px;
+            background: white;
+            padding: 20px 28px;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .floating-badge .number {
+            font-family: 'Judson', serif;
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--nomology-red);
+        }
+
+        .floating-badge .label {
+            font-size: 14px;
+            color: var(--nomology-brown);
         }
 
         /* Problem Section */
@@ -119,173 +185,224 @@
             background: white;
         }
 
-        .problem-content {
-            max-width: 700px;
-            margin: 0 auto;
-            text-align: center;
+        .problem .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
         }
 
-        .problem p {
-            margin-bottom: 20px;
+        .problem-content h2 {
+            margin-bottom: 32px;
         }
 
-        .problem p:last-of-type {
+        .problem-content p {
+            margin-bottom: 24px;
+        }
+
+        .problem-content p:last-of-type {
             color: var(--nomology-dark);
             font-weight: 600;
+            font-size: 20px;
+        }
+
+        .problem-image .image-placeholder {
+            aspect-ratio: 1/1;
         }
 
         /* How It Works */
         .how-it-works {
+            background: var(--nomology-light);
+        }
+
+        .how-it-works .section-header {
             text-align: center;
+            max-width: 600px;
+            margin: 0 auto 64px;
         }
 
         .steps {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 40px;
-            margin-top: 48px;
         }
 
         .step {
-            padding: 32px 24px;
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            text-align: center;
+        }
+
+        .step-image {
+            margin-bottom: 32px;
+        }
+
+        .step-image .image-placeholder {
+            aspect-ratio: 1/1;
+            max-width: 280px;
+            margin: 0 auto;
+            border-radius: 50%;
         }
 
         .step-number {
-            width: 48px;
-            height: 48px;
+            display: inline-block;
+            width: 40px;
+            height: 40px;
             background: var(--nomology-red);
             color: white;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             font-family: 'Judson', serif;
-            font-size: 24px;
+            font-size: 20px;
             font-weight: 700;
-            margin: 0 auto 16px;
+            line-height: 40px;
+            margin-bottom: 16px;
         }
 
         .step h3 {
-            color: var(--nomology-dark);
+            margin-bottom: 16px;
         }
 
         .step p {
             font-size: 16px;
+            max-width: 300px;
+            margin: 0 auto;
         }
 
         /* Secret Blend Section */
         .secret-blend {
             background: var(--nomology-dark);
             color: white;
+            text-align: center;
+        }
+
+        .secret-blend .container {
+            max-width: 800px;
         }
 
         .secret-blend h2 {
             color: white;
-            text-align: center;
-        }
-
-        .secret-blend-content {
-            max-width: 700px;
-            margin: 0 auto;
-            text-align: center;
         }
 
         .secret-blend p {
-            color: rgba(255,255,255,0.85);
-            margin-bottom: 24px;
-        }
-
-        .highlight {
-            color: var(--nomology-red);
-            font-weight: 700;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 32px;
         }
 
         .dimension-badge {
             display: inline-block;
-            background: rgba(193, 39, 45, 0.2);
+            background: rgba(193, 39, 45, 0.25);
             color: var(--nomology-red);
-            padding: 12px 24px;
-            border-radius: 30px;
-            font-size: 18px;
+            padding: 16px 32px;
+            border-radius: 40px;
+            font-size: 24px;
             font-weight: 700;
-            margin: 24px 0;
+            margin: 32px 0 48px;
+            font-family: 'Judson', serif;
+        }
+
+        .secret-blend .highlight {
+            color: var(--nomology-red);
+            font-weight: 700;
         }
 
         /* Joy Contexts */
         .joy-contexts {
-            text-align: center;
+            background: white;
         }
 
-        .context-cards {
+        .joy-contexts .section-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 64px;
+        }
+
+        .context-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-            margin-top: 48px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
         }
 
         .context-card {
-            background: white;
-            border-radius: 16px;
-            padding: 32px 24px;
-            text-align: left;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-            border-top: 4px solid var(--nomology-red);
+            background: var(--nomology-light);
+            border-radius: 24px;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 320px;
+        }
+
+        .context-card.reverse {
+            direction: rtl;
+        }
+
+        .context-card.reverse > * {
+            direction: ltr;
+        }
+
+        .context-card-image .image-placeholder {
+            height: 100%;
+            border-radius: 0;
+            border: none;
+        }
+
+        .context-card-content {
+            padding: 40px 32px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .context-card-label {
+            color: var(--nomology-red);
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 700;
+            margin-bottom: 8px;
         }
 
         .context-card h3 {
-            color: var(--nomology-red);
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-            font-family: 'Nunito Sans', sans-serif;
-            font-weight: 700;
-        }
-
-        .context-card .card-title {
-            font-family: 'Judson', serif;
-            font-size: 22px;
-            color: var(--nomology-dark);
-            margin-bottom: 12px;
-            font-weight: 700;
+            font-size: 26px;
+            margin-bottom: 16px;
         }
 
         .context-card p {
             font-size: 15px;
-            line-height: 1.6;
+            line-height: 1.7;
         }
 
         /* Support Section */
         .support {
-            background: white;
+            background: var(--nomology-light);
         }
 
-        .support-intro {
-            max-width: 700px;
-            margin: 0 auto 48px;
+        .support .section-header {
             text-align: center;
+            max-width: 700px;
+            margin: 0 auto 64px;
         }
 
-        .support-intro p {
-            margin-bottom: 16px;
+        .support .section-header p {
+            margin-top: 20px;
         }
 
-        .tiers {
+        .tier-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
             max-width: 900px;
             margin: 0 auto;
         }
 
         .tier {
-            background: var(--nomology-light);
-            border-radius: 16px;
-            padding: 28px 24px;
-            text-align: center;
+            background: white;
+            border-radius: 24px;
+            padding: 40px 32px;
+            position: relative;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .tier:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.08);
         }
 
         .tier.featured {
@@ -293,105 +410,129 @@
             color: white;
         }
 
-        .tier.featured h3,
-        .tier.featured .tier-tagline {
-            color: white;
-        }
-
+        .tier.featured .tier-tagline,
         .tier.featured p {
-            color: rgba(255,255,255,0.8);
+            color: rgba(255,255,255,0.75);
         }
 
         .tier.featured .tier-price {
-            color: var(--nomology-red);
+            color: white;
+        }
+
+        .tier.featured::before {
+            content: 'Most Popular';
+            position: absolute;
+            top: -12px;
+            left: 32px;
+            background: var(--nomology-red);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
         }
 
         .tier h3 {
-            font-size: 22px;
+            font-size: 28px;
             margin-bottom: 4px;
         }
 
         .tier-tagline {
-            font-size: 13px;
+            font-size: 14px;
             color: var(--nomology-brown);
             font-style: italic;
-            margin-bottom: 12px;
+            margin-bottom: 20px;
         }
 
         .tier-price {
             font-family: 'Judson', serif;
-            font-size: 28px;
+            font-size: 42px;
             font-weight: 700;
             color: var(--nomology-dark);
-            margin-bottom: 12px;
+            margin-bottom: 16px;
         }
 
         .tier-price span {
-            font-size: 14px;
+            font-size: 16px;
             font-weight: 400;
-            opacity: 0.7;
+            opacity: 0.6;
         }
 
         .tier p {
-            font-size: 14px;
-            line-height: 1.5;
+            font-size: 15px;
+            line-height: 1.6;
         }
 
         .support-closing {
-            max-width: 600px;
-            margin: 48px auto 0;
             text-align: center;
-            font-size: 16px;
+            max-width: 600px;
+            margin: 64px auto 0;
+            font-size: 18px;
             font-style: italic;
-            color: var(--nomology-brown);
         }
 
         /* Founder Note */
         .founder {
-            text-align: center;
+            background: white;
+        }
+
+        .founder .container {
+            max-width: 900px;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 64px;
+            align-items: center;
+        }
+
+        .founder-image .image-placeholder {
+            aspect-ratio: 1/1;
+            border-radius: 24px;
         }
 
         .founder-note {
-            max-width: 600px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            padding: 40px 32px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            font-family: 'Courier Prime', 'Courier New', monospace;
+            background: var(--nomology-cream);
+            border-radius: 24px;
+            padding: 48px;
             position: relative;
         }
 
         .founder-note::before {
             content: '"';
             font-family: 'Judson', serif;
-            font-size: 120px;
+            font-size: 160px;
             color: var(--nomology-red);
             opacity: 0.15;
             position: absolute;
-            top: -20px;
+            top: -30px;
             left: 20px;
             line-height: 1;
         }
 
         .founder-note p {
+            font-family: 'Courier Prime', monospace;
             font-size: 17px;
-            margin-bottom: 20px;
+            line-height: 1.9;
+            margin-bottom: 24px;
             position: relative;
             z-index: 1;
+            color: var(--nomology-dark);
         }
 
         .founder-note p:last-of-type {
-            margin-bottom: 24px;
+            margin-bottom: 32px;
         }
 
         .founder-signature {
             font-family: 'Judson', serif;
-            font-size: 18px;
+            font-size: 24px;
             color: var(--nomology-dark);
             font-weight: 700;
+            margin-bottom: 4px;
         }
 
         .founder-title {
+            font-family: 'Nunito Sans', sans-serif;
             font-size: 14px;
             color: var(--nomology-brown);
         }
@@ -401,30 +542,30 @@
             background: var(--nomology-dark);
             color: white;
             text-align: center;
-            padding: 48px 24px;
+            padding: 80px 40px;
         }
 
         .footer-badge {
             display: inline-block;
             background: var(--nomology-red);
             color: white;
-            padding: 12px 28px;
-            border-radius: 30px;
-            font-size: 15px;
+            padding: 16px 40px;
+            border-radius: 40px;
+            font-size: 18px;
             font-weight: 600;
             letter-spacing: 0.5px;
-            margin-bottom: 32px;
+            margin-bottom: 48px;
         }
 
         .footer-links {
-            margin-bottom: 24px;
+            margin-bottom: 32px;
         }
 
         .footer-links a {
-            color: rgba(255,255,255,0.7);
+            color: rgba(255,255,255,0.6);
             text-decoration: none;
-            margin: 0 16px;
-            font-size: 14px;
+            margin: 0 24px;
+            font-size: 15px;
             font-weight: 500;
             transition: color 0.2s ease;
         }
@@ -434,31 +575,94 @@
         }
 
         .footer-tagline {
-            font-size: 14px;
-            color: rgba(255,255,255,0.5);
+            font-size: 16px;
+            color: rgba(255,255,255,0.4);
+            font-style: italic;
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
             :root {
-                --section-spacing: 60px;
+                --section-spacing: 80px;
             }
 
-            .hero {
-                min-height: 70vh;
-                padding: 40px 20px;
+            .container {
+                padding: 0 32px;
+            }
+
+            .hero .container {
+                grid-template-columns: 1fr;
+                gap: 48px;
+                text-align: center;
+            }
+
+            .hero-content {
+                max-width: 100%;
+            }
+
+            .hero-image .floating-badge {
+                left: auto;
+                right: 20px;
+                bottom: 20px;
+            }
+
+            .problem .container {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+
+            .problem-image {
+                order: -1;
+            }
+
+            .problem-image .image-placeholder {
+                max-width: 500px;
+                margin: 0 auto;
+            }
+
+            .context-card {
+                grid-template-columns: 1fr;
+            }
+
+            .context-card.reverse {
+                direction: ltr;
+            }
+
+            .context-card-image .image-placeholder {
+                aspect-ratio: 16/9;
+            }
+
+            .founder .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .founder-image {
+                max-width: 200px;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --section-spacing: 64px;
             }
 
             .steps {
-                gap: 24px;
+                grid-template-columns: 1fr;
+                gap: 48px;
             }
 
-            .context-cards {
-                gap: 16px;
+            .step-image .image-placeholder {
+                max-width: 200px;
             }
 
-            .tiers {
-                gap: 16px;
+            .context-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tier-grid {
+                grid-template-columns: 1fr;
             }
 
             .founder-note {
@@ -466,16 +670,18 @@
             }
 
             .founder-note::before {
-                font-size: 80px;
-                top: -10px;
-                left: 10px;
+                font-size: 100px;
             }
         }
 
         @media (max-width: 480px) {
+            .container {
+                padding: 0 20px;
+            }
+
             .footer-links a {
                 display: block;
-                margin: 8px 0;
+                margin: 12px 0;
             }
         }
     </style>
@@ -483,20 +689,43 @@
 <body>
     <!-- Hero -->
     <section class="hero">
-        <div class="logo">🍽️</div>
-        <h1>Find food you'll actually love.</h1>
-        <p>Nomology learns what you love - the textures, the flavours, the combinations that make you reach for seconds - and finds recipes that match. No more endless scrolling. No more "that was just okay."</p>
-        <span class="badge">Coming Soon</span>
+        <div class="container">
+            <div class="hero-content">
+                <span class="hero-eyebrow">Coming Soon</span>
+                <h1>Find food you'll <span class="accent">actually</span> love.</h1>
+                <p class="lead">Nomology learns what you love - the textures, the flavours, the combinations that make you reach for seconds - and finds recipes that match. No more endless scrolling. No more "that was just okay."</p>
+            </div>
+            <div class="hero-image">
+                <div class="image-placeholder">
+                    <span class="icon">🍳</span>
+                    <strong>Hero Image</strong>
+                    <p>Warm, inviting food scene. Person enjoying a meal, or beautiful table spread with home-cooked food.</p>
+                    <span class="specs">800 x 1000px • Portrait • JPG/WebP</span>
+                </div>
+                <div class="floating-badge">
+                    <div class="number">158</div>
+                    <div class="label">taste dimensions</div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- Problem -->
     <section class="problem">
         <div class="container">
             <div class="problem-content">
-                <h2>We've all been there.</h2>
-                <p>It's 5pm. You're staring at the fridge. The kids want different things. You've made the same five recipes for months. Pinterest gave you something beautiful that tasted like cardboard. The recipe apps show you what's popular - not what <em>you'd</em> actually enjoy.</p>
-                <p>Food should bring joy. But somewhere between meal planning spreadsheets and disappointing dinner experiments, that joy got buried.</p>
+                <h2>We've all <span class="accent">been there.</span></h2>
+                <p>It's 5pm. You're staring at the fridge. The kids want different things. You've made the same five recipes for months. Pinterest gave you something beautiful that tasted like cardboard.</p>
+                <p>The recipe apps show you what's popular - not what <em>you'd</em> actually enjoy. Food should bring joy. But somewhere between meal planning spreadsheets and disappointing dinner experiments, that joy got buried.</p>
                 <p>We built Nomology to dig it back out.</p>
+            </div>
+            <div class="problem-image">
+                <div class="image-placeholder">
+                    <span class="icon">😩</span>
+                    <strong>Problem Image</strong>
+                    <p>Relatable moment: person looking frustrated at fridge, or overwhelmed by recipe options on phone.</p>
+                    <span class="specs">600 x 600px • Square • JPG/WebP</span>
+                </div>
             </div>
         </div>
     </section>
@@ -504,22 +733,49 @@
     <!-- How It Works -->
     <section class="how-it-works">
         <div class="container">
-            <h2>Simple as swipe, rate, eat.</h2>
+            <div class="section-header">
+                <h2>Simple as <span class="accent">swipe, rate, eat.</span></h2>
+                <p>No questionnaires. No setup wizards. Just three simple steps to food you'll love.</p>
+            </div>
             <div class="steps">
                 <div class="step">
-                    <div class="step-number">1</div>
+                    <div class="step-image">
+                        <div class="image-placeholder">
+                            <span class="icon">👆</span>
+                            <strong>Swipe</strong>
+                            <p>Hand swiping on phone, or recipe cards fanning out</p>
+                            <span class="specs">560 x 560px • Circle crop</span>
+                        </div>
+                    </div>
+                    <span class="step-number">1</span>
                     <h3>Swipe</h3>
-                    <p>Tell us what catches your eye. Quick swipes on recipes and ingredients start building your taste profile. No questionnaires. No setup wizards. Just honest reactions.</p>
+                    <p>Tell us what catches your eye. Quick swipes on recipes and ingredients start building your taste profile. Just honest reactions.</p>
                 </div>
                 <div class="step">
-                    <div class="step-number">2</div>
+                    <div class="step-image">
+                        <div class="image-placeholder">
+                            <span class="icon">⭐</span>
+                            <strong>Rate</strong>
+                            <p>Person tasting food thoughtfully, or giving a thumbs up</p>
+                            <span class="specs">560 x 560px • Circle crop</span>
+                        </div>
+                    </div>
+                    <span class="step-number">2</span>
                     <h3>Rate</h3>
-                    <p>Cook something. Tell us how it went. Each rating teaches us more about what makes <em>your</em> taste buds happy - the subtle things even you might not consciously notice.</p>
+                    <p>Cook something. Tell us how it went. Each rating teaches us more about what makes your taste buds happy.</p>
                 </div>
                 <div class="step">
-                    <div class="step-number">3</div>
+                    <div class="step-image">
+                        <div class="image-placeholder">
+                            <span class="icon">🎯</span>
+                            <strong>Discover</strong>
+                            <p>Delighted face seeing perfect meal, or beautiful dish that's "just right"</p>
+                            <span class="specs">560 x 560px • Circle crop</span>
+                        </div>
+                    </div>
+                    <span class="step-number">3</span>
                     <h3>Discover</h3>
-                    <p>Watch your recommendations get eerily good. Recipes that match not just your dietary needs, but your actual preferences. The kind of food you'll make again and again.</p>
+                    <p>Watch your recommendations get eerily good. Recipes that match your actual preferences. Food you'll make again and again.</p>
                 </div>
             </div>
         </div>
@@ -528,40 +784,81 @@
     <!-- Secret Blend -->
     <section class="secret-blend">
         <div class="container">
-            <div class="secret-blend-content">
-                <h2>Our secret blend.</h2>
-                <p>You know how KFC guards their 11 herbs and spices? We guard something different.</p>
-                <div class="dimension-badge">158 dimensions of flavour and texture</div>
-                <p>This isn't generic AI suggesting popular recipes. This is proprietary taste-matching that models the nuanced relationship between you and food - umami depth, textural contrast, spice tolerance, ingredient combinations, and dozens of factors you've never consciously considered.</p>
-                <p>Every swipe, every rating teaches our algorithm more about your unique palate. Over time, Nomology doesn't just know what you might like. <span class="highlight">It knows what you'll love.</span></p>
-            </div>
+            <h2>Our <span class="accent">secret blend.</span></h2>
+            <p class="lead">You know how KFC guards their 11 herbs and spices? We guard something different.</p>
+            <div class="dimension-badge">158 dimensions of flavour and texture</div>
+            <p>This isn't generic AI suggesting popular recipes. This is proprietary taste-matching that models the nuanced relationship between you and food - umami depth, textural contrast, spice tolerance, ingredient combinations, and dozens of factors you've never consciously considered.</p>
+            <p>Every swipe, every rating teaches our algorithm more about your unique palate. Over time, Nomology doesn't just know what you might like. <span class="highlight">It knows what you'll love.</span></p>
         </div>
     </section>
 
     <!-- Joy Contexts -->
     <section class="joy-contexts">
         <div class="container">
-            <h2>Food joy looks different for everyone.</h2>
-            <div class="context-cards">
+            <div class="section-header">
+                <h2>Food joy looks <span class="accent">different for everyone.</span></h2>
+                <p>However you experience food, Nomology adapts to you.</p>
+            </div>
+            <div class="context-grid">
                 <div class="context-card">
-                    <h3>For the Explorer</h3>
-                    <p class="card-title">Adventure awaits</p>
-                    <p>You love discovering new cuisines, unusual ingredients, techniques you've never tried. Nomology feeds your curiosity with recipes that push your boundaries - but still land within your taste preferences. Adventure without the disappointment.</p>
+                    <div class="context-card-image">
+                        <div class="image-placeholder">
+                            <span class="icon">🌍</span>
+                            <strong>Explorer</strong>
+                            <p>Exotic dish, colourful ingredients, or someone trying something new</p>
+                            <span class="specs">400 x 320px</span>
+                        </div>
+                    </div>
+                    <div class="context-card-content">
+                        <span class="context-card-label">For the Explorer</span>
+                        <h3>Adventure awaits</h3>
+                        <p>You love discovering new cuisines, unusual ingredients, techniques you've never tried. Nomology feeds your curiosity with recipes that push your boundaries - but still land within your taste preferences.</p>
+                    </div>
+                </div>
+                <div class="context-card reverse">
+                    <div class="context-card-image">
+                        <div class="image-placeholder">
+                            <span class="icon">👨‍👩‍👧‍👦</span>
+                            <strong>Family</strong>
+                            <p>Happy family at dinner table, or kids helping cook</p>
+                            <span class="specs">400 x 320px</span>
+                        </div>
+                    </div>
+                    <div class="context-card-content">
+                        <span class="context-card-label">For the Family</span>
+                        <h3>Everyone's happy</h3>
+                        <p>Three kids, three opinions, zero patience for "I don't like this" at 6pm. Build taste profiles for your whole household and find recipes that actually work for everyone.</p>
+                    </div>
                 </div>
                 <div class="context-card">
-                    <h3>For the Family</h3>
-                    <p class="card-title">Everyone's happy</p>
-                    <p>Three kids, three opinions, zero patience for "I don't like this" at 6pm. Build taste profiles for your whole household and find recipes that actually work for everyone. Weekly meal planning that doesn't require a spreadsheet.</p>
+                    <div class="context-card-image">
+                        <div class="image-placeholder">
+                            <span class="icon">🥂</span>
+                            <strong>Circle</strong>
+                            <p>Friends sharing a meal, dinner party scene</p>
+                            <span class="specs">400 x 320px</span>
+                        </div>
+                    </div>
+                    <div class="context-card-content">
+                        <span class="context-card-label">For the Circle</span>
+                        <h3>Share the joy</h3>
+                        <p>Hosting friends? Planning group meals? Create a Circle and find recipes that match everyone's tastes. Dinner parties where nobody's politely pushing food around their plate.</p>
+                    </div>
                 </div>
-                <div class="context-card">
-                    <h3>For the Circle</h3>
-                    <p class="card-title">Share the joy</p>
-                    <p>Hosting friends? Planning group meals? Create a Circle and find recipes that match everyone's tastes. Dinner parties where nobody's politely pushing food around their plate.</p>
-                </div>
-                <div class="context-card">
-                    <h3>For the Cook</h3>
-                    <p class="card-title">Master your craft</p>
-                    <p>You don't just eat food - you <em>make</em> it. Guided cooking timers, technique suggestions, and the ability to cook multiple recipes simultaneously without burning anything. Turn cooking from stress into genuine joy.</p>
+                <div class="context-card reverse">
+                    <div class="context-card-image">
+                        <div class="image-placeholder">
+                            <span class="icon">👨‍🍳</span>
+                            <strong>Cook</strong>
+                            <p>Hands-on cooking action, chopping, stirring, or plating</p>
+                            <span class="specs">400 x 320px</span>
+                        </div>
+                    </div>
+                    <div class="context-card-content">
+                        <span class="context-card-label">For the Cook</span>
+                        <h3>Master your craft</h3>
+                        <p>You don't just eat food - you <em>make</em> it. Guided cooking timers, technique suggestions, and the ability to cook multiple recipes simultaneously without burning anything.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -570,12 +867,11 @@
     <!-- Support -->
     <section class="support">
         <div class="container">
-            <div class="support-intro">
-                <h2>Built with love. Sustained by you.</h2>
+            <div class="section-header">
+                <h2>Built with love. <span class="accent">Sustained by you.</span></h2>
                 <p>Nomology isn't backed by venture capital or big food corporations. It's a passion project, built by someone who genuinely believes that better food experiences make better lives.</p>
-                <p>Our free tier gives you real, meaningful access to taste-matched recipes. But if Nomology brings joy to your kitchen, your support keeps the project alive and growing.</p>
             </div>
-            <div class="tiers">
+            <div class="tier-grid">
                 <div class="tier">
                     <h3>Free</h3>
                     <p class="tier-tagline">"Just getting started"</p>
@@ -608,15 +904,20 @@
     <!-- Founder Note -->
     <section class="founder">
         <div class="container">
+            <div class="founder-image">
+                <div class="image-placeholder">
+                    <span class="icon">👤</span>
+                    <strong>Founder Photo</strong>
+                    <p>Friendly, approachable headshot. Kitchen or casual setting.</p>
+                    <span class="specs">560 x 560px • Square</span>
+                </div>
+            </div>
             <div class="founder-note">
-                <p>I'm the kind of cook who reads four recipes before making one. I love the creative part of combining ideas, tweaking flavours, timing multiple dishes to land together. But there's always that moment of doubt: is this going to work, or have I just wasted an evening?</p>
-                <p>The truth is, I've always wanted to be more adventurous with food. But I hate the uncertainty of trying something new and not liking it. For years I've wished I could somehow taste-test the future, to know before I commit that the risk is actually worth taking.</p>
-                <p>Add three kids with three different palates, and cooking became less joy, more negotiation. There's a particular kind of defeat in clearing plates that still have food on them, knowing the "I'm hungry" complaints are about two hours away.</p>
-                <p>Nomology is the thing I couldn't find, so I built it. It learns what actually works for you, not what's trending, not what works for everyone else, but your specific tastes and your family's.</p>
-                <p>That confidence of peering into the future has unlocked a new kind of joy for me in my cooking. The experiment that actually lands, the new flavour you'd never have tried, the family meal where we get to enjoy the food, and one another, without whining.</p>
-                <p>I hope it brings some of that joy to your kitchen and dinner table.</p>
+                <p>I built Nomology because I was tired of the 5pm panic. Three kids, no plan, and the same rotation of "safe" meals that nobody was excited about anymore.</p>
+                <p>I wanted something that actually understood what my family likes - not what's trending, not what an algorithm thinks everyone wants, but what genuinely works for us.</p>
+                <p>This is that thing. And I hope it brings as much joy to your kitchen as it has to mine.</p>
                 <p class="founder-signature">Dave</p>
-                <p class="founder-title">Founder</p>
+                <p class="founder-title">Founder, Nomology</p>
             </div>
         </div>
     </section>
