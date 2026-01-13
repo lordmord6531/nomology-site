@@ -279,11 +279,17 @@
         .secret-blend {
             background: var(--nomology-dark);
             color: white;
-            text-align: center;
         }
 
         .secret-blend .container {
-            max-width: 800px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: center;
+        }
+
+        .secret-blend-content {
+            text-align: left;
         }
 
         .secret-blend h2 {
@@ -292,24 +298,31 @@
 
         .secret-blend p {
             color: rgba(255,255,255,0.8);
-            margin-bottom: 32px;
+            margin-bottom: 24px;
         }
 
         .dimension-badge {
             display: inline-block;
             background: rgba(193, 39, 45, 0.25);
             color: var(--nomology-red);
-            padding: 16px 32px;
+            padding: 12px 24px;
             border-radius: 40px;
-            font-size: 24px;
+            font-size: 20px;
             font-weight: 700;
-            margin: 32px 0 48px;
+            margin: 24px 0 32px;
             font-family: 'Judson', serif;
         }
 
         .secret-blend .highlight {
             color: var(--nomology-red);
             font-weight: 700;
+        }
+
+        .secret-blend-image img {
+            width: 100%;
+            max-width: 360px;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
         }
 
         /* Joy Contexts */
@@ -656,6 +669,24 @@
                 aspect-ratio: 16/9;
             }
 
+            .secret-blend .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .secret-blend-content {
+                text-align: center;
+            }
+
+            .secret-blend-image {
+                order: -1;
+            }
+
+            .secret-blend-image img {
+                max-width: 280px;
+                margin: 0 auto;
+            }
+
             .founder-footer {
                 justify-content: center;
             }
@@ -777,11 +808,16 @@
     <!-- Secret Blend -->
     <section class="secret-blend">
         <div class="container">
-            <h2>Our <span class="accent">secret blend.</span></h2>
-            <p class="lead">You know how KFC guards their 11 herbs and spices?<br>We guard something different.</p>
-            <div class="dimension-badge">158 dimensions of flavour and texture</div>
-            <p>This isn't generic AI suggesting popular recipes. This is proprietary taste-matching that models the nuanced relationship between you and food - umami depth, textural contrast, spice tolerance, ingredient combinations, and dozens of factors you've never consciously considered.</p>
-            <p>Every swipe, every rating teaches our algorithm more about your unique palate. Over time, Nomology doesn't just know what you might like.<br><span class="highlight">It knows what you'll love.</span></p>
+            <div class="secret-blend-content">
+                <h2>Our <span class="accent">secret blend.</span></h2>
+                <p class="lead">You know how KFC guards their 11 herbs and spices?<br>We guard something different.</p>
+                <div class="dimension-badge">158 dimensions of flavour and texture</div>
+                <p>This isn't generic AI suggesting popular recipes. This is proprietary taste-matching that models the nuanced relationship between you and food - umami depth, textural contrast, spice tolerance, ingredient combinations, and dozens of factors you've never consciously considered.</p>
+                <p>Every swipe, every rating teaches our algorithm more about your unique palate. Over time, Nomology doesn't just know what you might like.<br><span class="highlight">It knows what you'll love.</span></p>
+            </div>
+            <div class="secret-blend-image">
+                <img src="/images/158_dimensions.png" alt="Nomology flavour wheel showing taste dimensions for a recipe">
+            </div>
         </div>
     </section>
 
