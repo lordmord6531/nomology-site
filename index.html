@@ -942,5 +942,142 @@
         </div>
         <p class="footer-tagline">Made with love for people who love food.</p>
     </footer>
+
+    <!-- Error Modal for Auth Redirects -->
+    <div id="error-modal" class="error-modal" style="display: none;">
+        <div class="error-modal-backdrop"></div>
+        <div class="error-modal-content">
+            <div class="error-modal-icon">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="12" y1="8" x2="12" y2="12"/>
+                    <line x1="12" y1="16" x2="12.01" y2="16"/>
+                </svg>
+            </div>
+            <h3 id="error-title">Link Expired</h3>
+            <p id="error-message">This link has expired or is no longer valid.</p>
+            <p class="error-hint">Please return to the app and request a new link.</p>
+            <button class="error-modal-button" onclick="closeErrorModal()">Got it</button>
+        </div>
+    </div>
+
+    <style>
+        .error-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .error-modal-backdrop {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        .error-modal-content {
+            position: relative;
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 400px;
+            margin: 20px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        .error-modal-icon {
+            color: var(--nomology-red);
+            margin-bottom: 20px;
+        }
+        .error-modal-content h3 {
+            font-family: 'Judson', Georgia, serif;
+            font-size: 28px;
+            color: var(--nomology-dark);
+            margin-bottom: 12px;
+        }
+        .error-modal-content p {
+            font-size: 16px;
+            color: var(--nomology-brown);
+            margin-bottom: 8px;
+        }
+        .error-hint {
+            font-size: 14px !important;
+            color: #888 !important;
+            margin-top: 16px !important;
+        }
+        .error-modal-button {
+            margin-top: 24px;
+            background: var(--nomology-red);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .error-modal-button:hover {
+            background: #a82228;
+        }
+    </style>
+
+    <script>
+        // Handle Supabase auth error redirects
+        (function() {
+            const params = new URLSearchParams(window.location.search);
+            const hash = window.location.hash;
+
+            // Check for error in query params or hash
+            const error = params.get('error') || (hash && new URLSearchParams(hash.substring(1)).get('error'));
+            const errorCode = params.get('error_code') || (hash && new URLSearchParams(hash.substring(1)).get('error_code'));
+            const errorDescription = params.get('error_description') || (hash && new URLSearchParams(hash.substring(1)).get('error_description'));
+
+            if (error || errorCode) {
+                const modal = document.getElementById('error-modal');
+                const titleEl = document.getElementById('error-title');
+                const messageEl = document.getElementById('error-message');
+
+                // Set user-friendly messages based on error code
+                const errorMessages = {
+                    'otp_expired': {
+                        title: 'Link Expired',
+                        message: 'This link has expired. Please request a new one from the app.'
+                    },
+                    'access_denied': {
+                        title: 'Access Denied',
+                        message: 'This link is no longer valid. Please request a new one from the app.'
+                    },
+                    'invalid_request': {
+                        title: 'Invalid Link',
+                        message: 'This link appears to be invalid. Please request a new one from the app.'
+                    }
+                };
+
+                const errorInfo = errorMessages[errorCode] || {
+                    title: 'Something Went Wrong',
+                    message: errorDescription ? decodeURIComponent(errorDescription.replace(/\+/g, ' ')) : 'Please try again or request a new link from the app.'
+                };
+
+                titleEl.textContent = errorInfo.title;
+                messageEl.textContent = errorInfo.message;
+                modal.style.display = 'flex';
+
+                // Clean the URL
+                window.history.replaceState({}, document.title, window.location.pathname);
+            }
+        })();
+
+        function closeErrorModal() {
+            document.getElementById('error-modal').style.display = 'none';
+        }
+    </script>
 </body>
 </html>
