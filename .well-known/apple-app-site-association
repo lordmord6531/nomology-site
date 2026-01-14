@@ -1,0 +1,20 @@
+{
+  "webcredentials": {
+    "apps": [
+      "54RRGRY7R7.com.nomology.nomology"
+    ]
+  },
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "54RRGRY7R7.com.nomology.nomology",
+        "paths": [
+          "/reset-password/*",
+          "/verify-email/*",
+          "/login-callback/*"
+        ]
+      }
+    ]
+  }
+}

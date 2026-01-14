@@ -1,0 +1,3 @@
+# Include .well-known directory for Apple App Site Association
+include:
+  - .well-known
