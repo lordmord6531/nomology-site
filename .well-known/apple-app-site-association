@@ -1,14 +1,14 @@
 {
   "webcredentials": {
     "apps": [
-      "54RRGRY7R7.com.nomology.nomology"
+      "54RRGRY7R7.food.nomology"
     ]
   },
   "applinks": {
     "apps": [],
     "details": [
       {
-        "appID": "54RRGRY7R7.com.nomology.nomology",
+        "appID": "54RRGRY7R7.food.nomology",
         "paths": [
           "/reset-password/*",
           "/verify-email/*",
