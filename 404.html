@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nomology</title>
+
+    <!-- Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src 'self';
+                   script-src 'self' 'unsafe-inline';
+                   style-src 'self' 'unsafe-inline';
+                   connect-src 'self' https://nomology-be.onrender.com;
+                   img-src 'self' https://nomology.food data:;">
+
+    <!-- Preconnect to API for faster requests -->
+    <link rel="preconnect" href="https://nomology-be.onrender.com">
+
+    <!-- OG Meta Tags for Social Sharing Previews -->
+    <meta property="og:title" content="Your friend shared something on Nomology" />
+    <meta property="og:description" content="Discover recipes matched to your taste" />
+    <meta property="og:image" content="https://nomology.food/images/hero_image.png" />
+    <meta property="og:url" content="https://nomology.food/s/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Nomology" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Your friend shared something on Nomology" />
+    <meta name="twitter:description" content="Discover recipes matched to your taste" />
+    <meta name="twitter:image" content="https://nomology.food/images/hero_image.png" />
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #F5F1F1 0%, #E8E4E4 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: #33281C;
+        }
+
+        .container {
+            max-width: 400px;
+            text-align: center;
+            background: white;
+            border-radius: 24px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 24px;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #33281C;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 32px;
+            line-height: 1.5;
+        }
+
+        .loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid #E8E4E4;
+            border-top-color: #BD4527;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            will-change: transform;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .btn {
+            display: none;
+            width: 100%;
+            padding: 16px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            color: white;
+            background: #BD4527;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(189, 69, 39, 0.3);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            display: none;
+            width: 100%;
+            padding: 12px 24px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #BD4527;
+            background: transparent;
+            border: 2px solid #BD4527;
+            border-radius: 12px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-top: 12px;
+            transition: background 0.2s;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(189, 69, 39, 0.05);
+        }
+
+        .error {
+            display: none;
+            color: #BD4527;
+            margin-top: 16px;
+            font-size: 14px;
+        }
+
+        .copy-feedback {
+            display: none;
+            color: #4CAF50;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+
+        .privacy-notice {
+            margin-top: 24px;
+            font-size: 12px;
+            color: #999;
+        }
+
+        .privacy-notice a {
+            color: #BD4527;
+            text-decoration: none;
+        }
+
+        .privacy-notice a:hover {
+            text-decoration: underline;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* 404 page specific styles */
+        .not-found-content {
+            display: none;
+        }
+
+        .share-link-content {
+            display: block;
+        }
+
+        .home-link {
+            display: inline-block;
+            margin-top: 24px;
+            color: #BD4527;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .home-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Logo -->
+        <svg class="logo" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="40" cy="40" r="38" stroke="#BD4527" stroke-width="4"/>
+            <path d="M25 40C25 31.716 31.716 25 40 25C48.284 25 55 31.716 55 40C55 48.284 48.284 55 40 55" stroke="#BD4527" stroke-width="4" stroke-linecap="round"/>
+            <circle cx="40" cy="40" r="8" fill="#BD4527"/>
+        </svg>
+
+        <!-- Share Link Content (shown for /s/* paths) -->
+        <div id="share-link-content" class="share-link-content">
+            <h1 id="title">Opening Nomology...</h1>
+            <p class="subtitle" id="subtitle">Discover recipes matched to your taste</p>
+
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <span class="loading-text">Redirecting to app...</span>
+            </div>
+
+            <!-- iOS App Store Button -->
+            <a href="#" class="btn" id="app-store-btn">
+                Get on App Store
+            </a>
+            <span class="copy-feedback" id="copy-feedback">Link copied to clipboard!</span>
+
+            <!-- Android Play Store Button -->
+            <a href="#" class="btn" id="play-store-btn">
+                Get on Google Play
+            </a>
+
+            <!-- Manual code entry fallback -->
+            <button class="btn-secondary" id="manual-entry-btn">
+                Enter invite code manually
+            </button>
+
+            <p class="error" id="error"></p>
+
+            <p class="privacy-notice" id="privacy-notice">
+                We collect device signals to connect you to <span id="creator-name">your friend</span>'s invitation. This data is deleted within 24 hours. <a href="/privacy.html">Privacy Policy</a>
+            </p>
+        </div>
+
+        <!-- 404 Not Found Content (shown for other paths) -->
+        <div id="not-found-content" class="not-found-content">
+            <h1>Page Not Found</h1>
+            <p class="subtitle">The page you're looking for doesn't exist.</p>
+            <a href="/" class="home-link">Go to Homepage</a>
+        </div>
+    </div>
+
+    <script>
+        // ===========================================
+        // Path Detection - Is this a share link?
+        // ===========================================
+        const path = window.location.pathname;
+        const isShareLink = path.startsWith('/s/') && path.length > 3;
+
+        if (!isShareLink) {
+            // Show 404 content for non-share-link paths
+            document.getElementById('share-link-content').style.display = 'none';
+            document.getElementById('not-found-content').style.display = 'block';
+        } else {
+            // Run share link logic
+            initShareLink();
+        }
+
+        function initShareLink() {
+            // ===========================================
+            // Configuration Constants
+            // ===========================================
+            const CONFIG = {
+                API_BASE: 'https://nomology-be.onrender.com',
+                APP_STORE_URL: 'https://apps.apple.com/app/id6736435209',
+                PLAY_STORE_BASE: 'https://play.google.com/store/apps/details',
+                PACKAGE_NAME: 'com.nomology.nomology',
+                HOST: 'nomology.food',
+
+                // Share code must be exactly 10 alphanumeric characters
+                SHARE_CODE_PATTERN: /^[a-zA-Z0-9]{10}$/,
+
+                // Timing constants
+                APP_OPEN_DETECT_DELAY_MS: 1500,
+                FALLBACK_SHOW_DELAY_MS: 2000,
+                FETCH_TIMEOUT_MS: 5000
+            };
+
+            // ===========================================
+            // DOM Element Cache
+            // ===========================================
+            const DOM = {};
+
+            function cacheDOMElements() {
+                DOM.loading = document.getElementById('loading');
+                DOM.error = document.getElementById('error');
+                DOM.title = document.getElementById('title');
+                DOM.subtitle = document.getElementById('subtitle');
+                DOM.appStoreBtn = document.getElementById('app-store-btn');
+                DOM.playStoreBtn = document.getElementById('play-store-btn');
+                DOM.manualEntryBtn = document.getElementById('manual-entry-btn');
+                DOM.copyFeedback = document.getElementById('copy-feedback');
+                DOM.creatorName = document.getElementById('creator-name');
+            }
+
+            // ===========================================
+            // Share Code Parsing and Validation
+            // ===========================================
+            function parseShareCode() {
+                const pathParts = window.location.pathname.split('/');
+                const rawCode = pathParts[pathParts.length - 1] || pathParts[pathParts.length - 2];
+                return rawCode || '';
+            }
+
+            function isValidShareCode(code) {
+                return code && CONFIG.SHARE_CODE_PATTERN.test(code);
+            }
+
+            const rawShareCode = parseShareCode();
+            const shareCode = isValidShareCode(rawShareCode) ? rawShareCode : null;
+            const fullUrl = window.location.href;
+
+            // ===========================================
+            // Platform Detection
+            // ===========================================
+            const isAndroid = /Android/i.test(navigator.userAgent);
+            const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+            // ===========================================
+            // Fingerprint Collection
+            // ===========================================
+            function parseDeviceModel(ua) {
+                if (/iPhone/.test(ua)) return 'iPhone';
+                if (/iPad/.test(ua)) return 'iPad';
+                if (/Android/.test(ua)) {
+                    const match = ua.match(/Android[^;]*;\s*([^)]+)/);
+                    return match ? match[1].trim() : 'Android';
+                }
+                return 'Desktop';
+            }
+
+            function parseBrowserFamily(ua) {
+                if (/Safari/.test(ua) && !/Chrome/.test(ua)) return 'Safari';
+                if (/Chrome/.test(ua)) return 'Chrome';
+                if (/Firefox/.test(ua)) return 'Firefox';
+                return 'Other';
+            }
+
+            function getTimezone() {
+                try {
+                    return Intl.DateTimeFormat().resolvedOptions().timeZone;
+                } catch (e) {
+                    return undefined;
+                }
+            }
+
+            function collectSignals() {
+                return {
+                    share_code: shareCode,
+                    device_model: parseDeviceModel(navigator.userAgent),
+                    screen_resolution: `${screen.width}x${screen.height}`,
+                    pixel_ratio: window.devicePixelRatio,
+                    timezone: getTimezone(),
+                    language: navigator.language,
+                    browser_family: parseBrowserFamily(navigator.userAgent)
+                };
+            }
+
+            function recordFingerprint() {
+                if (!shareCode) return;
+
+                const signals = collectSignals();
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), CONFIG.FETCH_TIMEOUT_MS);
+
+                fetch(`${CONFIG.API_BASE}/api/v3/social/fingerprint`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(signals),
+                    signal: controller.signal
+                })
+                .catch(() => {})
+                .finally(() => clearTimeout(timeoutId));
+            }
+
+            // ===========================================
+            // Clipboard Handling
+            // ===========================================
+            async function copyToClipboard(text) {
+                if (navigator.clipboard) {
+                    try {
+                        await navigator.clipboard.writeText(text);
+                        return true;
+                    } catch (e) {
+                        // Fall through to fallback
+                    }
+                }
+
+                try {
+                    const textarea = document.createElement('textarea');
+                    textarea.value = text;
+                    textarea.style.position = 'fixed';
+                    textarea.style.opacity = '0';
+                    document.body.appendChild(textarea);
+                    textarea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textarea);
+                    return true;
+                } catch (e) {
+                    return false;
+                }
+            }
+
+            function showCopyFeedback(success) {
+                if (DOM.copyFeedback) {
+                    DOM.copyFeedback.textContent = success
+                        ? 'Link copied to clipboard!'
+                        : 'Could not copy link';
+                    DOM.copyFeedback.style.color = success ? '#4CAF50' : '#BD4527';
+                    DOM.copyFeedback.style.display = 'block';
+                }
+            }
+
+            // ===========================================
+            // UI Updates
+            // ===========================================
+            function showError(message) {
+                DOM.loading.style.display = 'none';
+                DOM.error.textContent = message;
+                DOM.error.style.display = 'block';
+                DOM.manualEntryBtn.style.display = 'block';
+            }
+
+            function updateTitleForShareType(data) {
+                const creatorName = sanitizeDisplayName(data.creator_display_name);
+
+                if (DOM.creatorName) {
+                    DOM.creatorName.textContent = creatorName;
+                }
+
+                if (data.type === 'taste_buds') {
+                    DOM.title.textContent = `${creatorName} wants to find your Taste Match!`;
+                    DOM.subtitle.textContent = 'See which recipe you\'ll both love';
+                } else if (data.type === 'recipe') {
+                    DOM.title.textContent = `${creatorName} shared a recipe with you!`;
+                    DOM.subtitle.textContent = 'Open in Nomology to see the recipe';
+                } else if (data.type === 'profile') {
+                    DOM.title.textContent = `Check out ${creatorName}'s flavor profile!`;
+                    DOM.subtitle.textContent = 'Discover your own taste profile';
+                }
+            }
+
+            function sanitizeDisplayName(name) {
+                if (!name || typeof name !== 'string') return 'A friend';
+                const cleaned = name.replace(/<[^>]*>/g, '').trim();
+                if (cleaned.length === 0) return 'A friend';
+                if (cleaned.length > 50) return cleaned.substring(0, 47) + '...';
+                return cleaned;
+            }
+
+            function showManualEntry() {
+                if (!shareCode) {
+                    alert('No invite code found in this link.\n\nPlease ask your friend to share their invite code with you.');
+                    return;
+                }
+                alert(`Your invite code is: ${shareCode}\n\nCopy this code and enter it in the app after signing up.`);
+            }
+
+            // ===========================================
+            // iOS App Store Handler
+            // ===========================================
+            function openAppStore(e) {
+                e.preventDefault();
+                recordFingerprint();
+
+                copyToClipboard(fullUrl).then((success) => {
+                    showCopyFeedback(success);
+                    setTimeout(() => {
+                        window.location.href = CONFIG.APP_STORE_URL;
+                    }, 300);
+                });
+            }
+
+            // ===========================================
+            // API Validation
+            // ===========================================
+            async function validateShareLink() {
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), CONFIG.FETCH_TIMEOUT_MS);
+
+                try {
+                    const response = await fetch(
+                        `${CONFIG.API_BASE}/api/v3/social/share-link/${shareCode}`,
+                        { signal: controller.signal }
+                    );
+                    clearTimeout(timeoutId);
+
+                    if (!response.ok) {
+                        if (response.status === 404 || response.status === 410) {
+                            showError('This share link is invalid or has expired');
+                        } else {
+                            showError('Could not validate share link');
+                        }
+                        return null;
+                    }
+
+                    const data = await response.json();
+
+                    if (!data || typeof data.type !== 'string') {
+                        showError('Invalid share link data');
+                        return null;
+                    }
+
+                    return data;
+                } catch (e) {
+                    clearTimeout(timeoutId);
+                    return {};
+                }
+            }
+
+            // ===========================================
+            // Platform-Specific Redirect Handlers
+            // ===========================================
+            function handleAndroidRedirect() {
+                recordFingerprint();
+
+                const encodedShareCode = encodeURIComponent(shareCode);
+                const playIntent = `intent://s/${encodedShareCode}#Intent;` +
+                    `scheme=https;` +
+                    `host=${CONFIG.HOST};` +
+                    `package=${CONFIG.PACKAGE_NAME};` +
+                    `S.browser_fallback_url=${CONFIG.PLAY_STORE_BASE}` +
+                    `?id=${CONFIG.PACKAGE_NAME}&referrer=${encodeURIComponent(fullUrl)};end`;
+
+                window.location.href = playIntent;
+
+                setTimeout(() => {
+                    DOM.loading.style.display = 'none';
+                    DOM.playStoreBtn.style.display = 'block';
+                    DOM.playStoreBtn.href =
+                        `${CONFIG.PLAY_STORE_BASE}?id=${CONFIG.PACKAGE_NAME}&referrer=${encodeURIComponent(fullUrl)}`;
+                    DOM.manualEntryBtn.style.display = 'block';
+                }, CONFIG.FALLBACK_SHOW_DELAY_MS);
+            }
+
+            function handleiOSRedirect() {
+                const encodedShareCode = encodeURIComponent(shareCode);
+                const universalLink = `https://${CONFIG.HOST}/s/${encodedShareCode}`;
+
+                recordFingerprint();
+
+                const start = Date.now();
+                window.location.href = universalLink;
+
+                setTimeout(() => {
+                    const elapsed = Date.now() - start;
+                    if (elapsed < CONFIG.FALLBACK_SHOW_DELAY_MS) {
+                        DOM.loading.style.display = 'none';
+                        DOM.appStoreBtn.style.display = 'block';
+                        DOM.manualEntryBtn.style.display = 'block';
+                    }
+                }, CONFIG.APP_OPEN_DETECT_DELAY_MS);
+            }
+
+            function handleDesktopDisplay() {
+                DOM.loading.style.display = 'none';
+                DOM.title.textContent = 'Get Nomology on your phone';
+                DOM.subtitle.textContent = 'Scan this QR code or visit on your mobile device';
+
+                DOM.appStoreBtn.style.display = 'block';
+                DOM.appStoreBtn.onclick = function(e) {
+                    e.preventDefault();
+                    window.open(CONFIG.APP_STORE_URL, '_blank');
+                };
+
+                DOM.playStoreBtn.style.display = 'block';
+                DOM.playStoreBtn.style.marginTop = '12px';
+                DOM.playStoreBtn.href =
+                    `${CONFIG.PLAY_STORE_BASE}?id=${CONFIG.PACKAGE_NAME}&referrer=${encodeURIComponent(fullUrl)}`;
+            }
+
+            // ===========================================
+            // Main Initialization
+            // ===========================================
+            async function init() {
+                cacheDOMElements();
+
+                DOM.appStoreBtn.onclick = openAppStore;
+                DOM.manualEntryBtn.onclick = showManualEntry;
+
+                if (!shareCode) {
+                    showError('Invalid share link');
+                    return;
+                }
+
+                const shareData = await validateShareLink();
+                if (shareData === null) {
+                    return;
+                }
+
+                if (shareData.type) {
+                    updateTitleForShareType(shareData);
+                }
+
+                if (isAndroid) {
+                    handleAndroidRedirect();
+                } else if (isIOS) {
+                    handleiOSRedirect();
+                } else {
+                    handleDesktopDisplay();
+                }
+            }
+
+            init();
+        }
+    </script>
+</body>
+</html>
