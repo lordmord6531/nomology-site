@@ -547,22 +547,14 @@
             }
 
             function handleiOSRedirect() {
-                const encodedShareCode = encodeURIComponent(shareCode);
-                const universalLink = `https://${CONFIG.HOST}/s/${encodedShareCode}`;
-
+                // On iOS, Universal Links only work when iOS intercepts the link
+                // BEFORE it reaches Safari. Since we're already in Safari at this URL,
+                // we can't trigger the Universal Link - just show the App Store button.
                 recordFingerprint();
 
-                const start = Date.now();
-                window.location.href = universalLink;
-
-                setTimeout(() => {
-                    const elapsed = Date.now() - start;
-                    if (elapsed < CONFIG.FALLBACK_SHOW_DELAY_MS) {
-                        DOM.loading.style.display = 'none';
-                        DOM.appStoreBtn.style.display = 'block';
-                        DOM.manualEntryBtn.style.display = 'block';
-                    }
-                }, CONFIG.APP_OPEN_DETECT_DELAY_MS);
+                DOM.loading.style.display = 'none';
+                DOM.appStoreBtn.style.display = 'block';
+                DOM.manualEntryBtn.style.display = 'block';
             }
 
             function handleDesktopDisplay() {
