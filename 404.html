@@ -479,7 +479,13 @@
                 copyToClipboard(fullUrl).then((success) => {
                     showCopyFeedback(success);
                     setTimeout(() => {
-                        window.location.href = CONFIG.APP_STORE_URL;
+                        // Use itms-apps:// scheme for iOS to properly open App Store app
+                        // Falls back to web URL on desktop or if scheme fails
+                        if (isIOS) {
+                            window.location.href = `itms-apps://itunes.apple.com/app/id6736435209`;
+                        } else {
+                            window.location.href = CONFIG.APP_STORE_URL;
+                        }
                     }, 300);
                 });
             }
