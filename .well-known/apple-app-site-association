@@ -12,7 +12,8 @@
         "paths": [
           "/reset-password/*",
           "/verify-email/*",
-          "/login-callback/*"
+          "/login-callback/*",
+          "/s/*"
         ]
       }
     ]

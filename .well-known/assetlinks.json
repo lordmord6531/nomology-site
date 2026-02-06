@@ -1,0 +1,10 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.nomology.nomology",
+    "sha256_cert_fingerprints": [
+      "BLOCKER_REPLACE_BEFORE_DEPLOY:run_keytool_-list_-v_-keystore_your.keystore_to_get_SHA256"
+    ]
+  }
+}]

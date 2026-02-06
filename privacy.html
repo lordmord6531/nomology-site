@@ -225,7 +225,7 @@
 
     <div class="content">
         <h1>Privacy Policy</h1>
-        <p class="effective-date">Effective date: 11 January 2025</p>
+        <p class="effective-date">Effective date: 17 February 2026</p>
 
         <div class="summary-box">
             <p><strong>In brief:</strong> Nomology is a recipe app that learns your food preferences. We collect the information you give us and use it to recommend recipes you'll enjoy. We don't sell your personal data. You can delete your account and data at any time.</p>
@@ -251,10 +251,15 @@
         <p>If you use our premium features, we store recipes you create or import, recipe collections, meal plans, shopping lists, and notes you add to recipes. If you join or create a Circle (a shared group), we store content you share within that group.</p>
 
         <h3>Usage information</h3>
-        <p>We collect information about how you use the app, including which features you access, recipes you view, and technical information such as your device type, operating system version, and app version. We also collect crash logs to help us fix problems.</p>
+        <p>We collect information about how you use the app, including which features you access, recipes you view, and actions you take (such as swiping, bookmarking, or starting a cooking session). We also collect technical information such as your device type, operating system version, app version, and general location (city-level, derived from your IP address). We do not track your search queries or the specific ingredients you exclude.</p>
+        <p>We use crash reporting to identify and fix problems. Crash reports include technical information about your device and what happened before the crash, but are sanitised to remove any personal information such as authentication tokens.</p>
+        <p>To link your activity across sessions (for example, to understand your journey from signing up to subscribing), we associate analytics data with your account. This is used solely for internal product improvement and is not shared for advertising purposes.</p>
 
         <h3>Subscription information</h3>
         <p>If you subscribe to a paid plan, we track your subscription status and AI feature usage (to enforce usage limits). We do not see or store your payment card details—payments are handled entirely by Apple or Google.</p>
+
+        <h3>Share link attribution</h3>
+        <p>When you click a share link from a friend (e.g., an invitation to join their Circle), we collect device signals to connect you to that invitation after you install the app. This includes your device type, screen resolution, timezone, browser language, browser type, and a partial network identifier (not your full IP address). This data is used solely to complete the referral you initiated, is stored for a maximum of 24 hours, and is automatically deleted after a successful match or when the 24-hour period expires—whichever comes first. We do not use this data for advertising or cross-site tracking.</p>
 
         <h2>3. How we use your data</h2>
         <p>We use your information to provide and improve Nomology, including to give you personalised recipe recommendations based on your taste profile, to enable features you've chosen to use (meal planning, shopping lists, Circles), to process your subscription and enforce usage limits, to send you important service messages (such as password resets or subscription confirmations), to fix bugs and improve the app, and to prevent fraud and abuse.</p>
@@ -302,6 +307,10 @@
                     <td>Anonymised analytics</td>
                     <td>Legitimate interests</td>
                 </tr>
+                <tr>
+                    <td>Share link attribution</td>
+                    <td>Legitimate interests (completing user-initiated referrals)</td>
+                </tr>
             </tbody>
         </table>
 
@@ -321,6 +330,11 @@
                     <td>Supabase</td>
                     <td>Database and authentication</td>
                     <td>All account and preference data (encrypted, stored in EU)</td>
+                </tr>
+                <tr>
+                    <td>Render</td>
+                    <td>Backend hosting</td>
+                    <td>Data processed by our backend services (hosted in EU)</td>
                 </tr>
                 <tr>
                     <td>RevenueCat</td>
@@ -347,6 +361,21 @@
                     <td>Push notifications</td>
                     <td>Device tokens</td>
                 </tr>
+                <tr>
+                    <td>Firebase Analytics</td>
+                    <td>App analytics</td>
+                    <td>Usage events, device info, city-level location, user ID</td>
+                </tr>
+                <tr>
+                    <td>Firebase Crashlytics</td>
+                    <td>Crash reporting</td>
+                    <td>Crash logs, device info, user ID (for correlation)</td>
+                </tr>
+                <tr>
+                    <td>Resend</td>
+                    <td>Email delivery</td>
+                    <td>Email address, email content</td>
+                </tr>
             </tbody>
         </table>
 
@@ -359,6 +388,7 @@
 
         <h2>7. How long we keep your data</h2>
         <p>We retain your personal data for as long as your account is active. If you delete your account, we will delete your personal data within 30 days. Some data may be retained for longer if required by law (for example, financial records for tax purposes) or if anonymised for analytics.</p>
+        <p>Share link attribution data is retained for a maximum of 24 hours and is automatically deleted after a successful match or when the period expires.</p>
 
         <h2>8. Your rights</h2>
         <p>Under UK data protection law, you have the following rights:</p>
