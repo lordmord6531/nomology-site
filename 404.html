@@ -128,24 +128,8 @@
             transform: translateY(0);
         }
 
-        .btn-secondary {
-            display: none;
-            width: 100%;
-            padding: 12px 24px;
-            font-size: 14px;
-            font-weight: 500;
-            color: #BD4527;
-            background: transparent;
-            border: 2px solid #BD4527;
-            border-radius: 12px;
-            cursor: pointer;
-            text-decoration: none;
+        .btn + .btn {
             margin-top: 12px;
-            transition: background 0.2s;
-        }
-
-        .btn-secondary:hover {
-            background: rgba(189, 69, 39, 0.05);
         }
 
         .error {
@@ -233,10 +217,10 @@
                 Get on Google Play
             </a>
 
-            <!-- Manual code entry fallback -->
-            <button class="btn-secondary" id="manual-entry-btn">
-                Enter invite code manually
-            </button>
+            <!-- Open in app (for in-app browsers that suppress Universal Links) -->
+            <a href="#" class="btn" id="open-app-btn">
+                Open in Nomology
+            </a>
 
             <p class="error" id="error"></p>
 
@@ -301,7 +285,7 @@
                 DOM.subtitle = document.getElementById('subtitle');
                 DOM.appStoreBtn = document.getElementById('app-store-btn');
                 DOM.playStoreBtn = document.getElementById('play-store-btn');
-                DOM.manualEntryBtn = document.getElementById('manual-entry-btn');
+                DOM.openAppBtn = document.getElementById('open-app-btn');
                 DOM.copyFeedback = document.getElementById('copy-feedback');
                 DOM.creatorName = document.getElementById('creator-name');
             }
@@ -328,6 +312,7 @@
             // ===========================================
             const isAndroid = /Android/i.test(navigator.userAgent);
             const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+            const isInAppBrowser = /FBAN|FBAV|Instagram|BytedanceWebview|musical_ly|Twitter|LinkedInApp/i.test(navigator.userAgent);
 
             // ===========================================
             // Fingerprint Collection
@@ -431,7 +416,6 @@
                 DOM.loading.style.display = 'none';
                 DOM.error.textContent = message;
                 DOM.error.style.display = 'block';
-                DOM.manualEntryBtn.style.display = 'block';
             }
 
             function updateTitleForShareType(data) {
@@ -459,14 +443,6 @@
                 if (cleaned.length === 0) return 'A friend';
                 if (cleaned.length > 50) return cleaned.substring(0, 47) + '...';
                 return cleaned;
-            }
-
-            function showManualEntry() {
-                if (!shareCode) {
-                    alert('No invite code found in this link.\n\nPlease ask your friend to share their invite code with you.');
-                    return;
-                }
-                alert(`Your invite code is: ${shareCode}\n\nCopy this code and enter it in the app after signing up.`);
             }
 
             // ===========================================
@@ -534,6 +510,19 @@
                 recordFingerprint();
 
                 const encodedShareCode = encodeURIComponent(shareCode);
+
+                if (isInAppBrowser) {
+                    // In-app browsers (Facebook, Instagram, etc.) block intent URLs.
+                    // Show "Open in Nomology" button with custom scheme + Play Store fallback.
+                    DOM.loading.style.display = 'none';
+                    DOM.openAppBtn.href = `food.nomology://s/${encodedShareCode}`;
+                    DOM.openAppBtn.style.display = 'block';
+                    DOM.playStoreBtn.style.display = 'block';
+                    DOM.playStoreBtn.href =
+                        `${CONFIG.PLAY_STORE_BASE}?id=${CONFIG.PACKAGE_NAME}&referrer=${encodeURIComponent(fullUrl)}`;
+                    return;
+                }
+
                 const playIntent = `intent://s/${encodedShareCode}#Intent;` +
                     `scheme=https;` +
                     `host=${CONFIG.HOST};` +
@@ -548,19 +537,30 @@
                     DOM.playStoreBtn.style.display = 'block';
                     DOM.playStoreBtn.href =
                         `${CONFIG.PLAY_STORE_BASE}?id=${CONFIG.PACKAGE_NAME}&referrer=${encodeURIComponent(fullUrl)}`;
-                    DOM.manualEntryBtn.style.display = 'block';
                 }, CONFIG.FALLBACK_SHOW_DELAY_MS);
             }
 
             function handleiOSRedirect() {
+                recordFingerprint();
+
+                const encodedShareCode = encodeURIComponent(shareCode);
+
+                if (isInAppBrowser) {
+                    // In-app browsers (Facebook, Instagram, etc.) suppress Universal Links.
+                    // Show "Open in Nomology" button with custom scheme to bypass the WebView,
+                    // plus App Store button as fallback if app isn't installed.
+                    DOM.loading.style.display = 'none';
+                    DOM.openAppBtn.href = `food.nomology://s/${encodedShareCode}`;
+                    DOM.openAppBtn.style.display = 'block';
+                    DOM.appStoreBtn.style.display = 'block';
+                    return;
+                }
+
                 // On iOS, Universal Links only work when iOS intercepts the link
                 // BEFORE it reaches Safari. Since we're already in Safari at this URL,
                 // we can't trigger the Universal Link - just show the App Store button.
-                recordFingerprint();
-
                 DOM.loading.style.display = 'none';
                 DOM.appStoreBtn.style.display = 'block';
-                DOM.manualEntryBtn.style.display = 'block';
             }
 
             function handleDesktopDisplay() {
@@ -587,7 +587,6 @@
                 cacheDOMElements();
 
                 DOM.appStoreBtn.onclick = openAppStore;
-                DOM.manualEntryBtn.onclick = showManualEntry;
 
                 if (!shareCode) {
                     showError('Invalid share link');
