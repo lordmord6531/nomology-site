@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nomology - Find Food You'll Actually Love</title>
     <meta name="description" content="Nomology learns what you love - the textures, the flavours, the combinations - and finds recipes that match. Discover food joy through personalised taste-matching.">
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src 'self';
+                   script-src 'self' 'unsafe-inline';
+                   style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+                   font-src 'self' https://fonts.gstatic.com;
+                   img-src 'self' data:;">
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" href="/images/nomology_logo.svg" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -746,7 +752,10 @@
                 <p class="lead">Nomology learns what you love - the textures, the flavours, the combinations that make you reach for seconds - and finds recipes that match. No more endless scrolling. No more "that was just okay."</p>
             </div>
             <div class="hero-image">
-                <img src="/images/hero_image.png" alt="Beautiful home-cooked dinner spread on a rustic table with warm lighting">
+                <picture>
+                    <source srcset="/images/hero_image.webp" type="image/webp">
+                    <img src="/images/hero_image.png" alt="Beautiful home-cooked dinner spread on a rustic table with warm lighting" width="928" height="1152">
+                </picture>
                 <div class="floating-badge">
                     <div class="number">158</div>
                     <div class="label">taste dimensions</div>
@@ -765,7 +774,10 @@
                 <p>We built Nomology to dig it back out.</p>
             </div>
             <div class="problem-image">
-                <img src="/images/problem_image.png" alt="Person looking overwhelmed while standing at open refrigerator">
+                <picture>
+                    <source srcset="/images/problem_image.webp" type="image/webp">
+                    <img src="/images/problem_image.png" alt="Person looking overwhelmed while standing at open refrigerator" width="1024" height="1024" loading="lazy">
+                </picture>
             </div>
         </div>
     </section>
@@ -780,7 +792,10 @@
             <div class="steps">
                 <div class="step">
                     <div class="step-image">
-                        <img src="/images/how_it_works-swipe.png" alt="Hand swiping on phone through recipe cards">
+                        <picture>
+                            <source srcset="/images/how_it_works-swipe.webp" type="image/webp">
+                            <img src="/images/how_it_works-swipe.png" alt="Hand swiping on phone through recipe cards" width="1024" height="1024" loading="lazy">
+                        </picture>
                     </div>
                     <span class="step-number">1</span>
                     <h3>Swipe</h3>
@@ -788,7 +803,10 @@
                 </div>
                 <div class="step">
                     <div class="step-image">
-                        <img src="/images/how_it_works-rate.png" alt="Person enjoying a bite of delicious food">
+                        <picture>
+                            <source srcset="/images/how_it_works-rate.webp" type="image/webp">
+                            <img src="/images/how_it_works-rate.png" alt="Person enjoying a bite of delicious food" width="1024" height="1024" loading="lazy">
+                        </picture>
                     </div>
                     <span class="step-number">2</span>
                     <h3>Rate</h3>
@@ -796,7 +814,10 @@
                 </div>
                 <div class="step">
                     <div class="step-image">
-                        <img src="/images/how_it_works-discover.png" alt="Person delighted by a perfectly matched meal">
+                        <picture>
+                            <source srcset="/images/how_it_works-discover.webp" type="image/webp">
+                            <img src="/images/how_it_works-discover.png" alt="Person delighted by a perfectly matched meal" width="1024" height="1024" loading="lazy">
+                        </picture>
                     </div>
                     <span class="step-number">3</span>
                     <h3>Discover</h3>
@@ -817,7 +838,10 @@
                 <p>Every swipe, every rating teaches our algorithm more about your unique palate. Over time, Nomology doesn't just know what you might like.<br><span class="highlight">It knows what you'll love.</span></p>
             </div>
             <div class="secret-blend-image">
-                <img src="/images/158_dimensions.png" alt="Nomology flavour wheel showing taste dimensions for a recipe">
+                <picture>
+                    <source srcset="/images/158_dimensions.webp" type="image/webp">
+                    <img src="/images/158_dimensions.png" alt="Nomology flavour wheel showing taste dimensions for a recipe" width="600" height="1301" loading="lazy">
+                </picture>
             </div>
         </div>
     </section>
@@ -832,7 +856,10 @@
             <div class="context-grid">
                 <div class="context-card">
                     <div class="context-card-image">
-                        <img src="/images/for_the_explorer.png" alt="Vibrant exotic dish with colorful ingredients">
+                        <picture>
+                            <source srcset="/images/for_the_explorer.webp" type="image/webp">
+                            <img src="/images/for_the_explorer.png" alt="Vibrant exotic dish with colorful ingredients" width="1024" height="1024" loading="lazy">
+                        </picture>
                     </div>
                     <div class="context-card-content">
                         <span class="context-card-label">For the Explorer</span>
@@ -842,7 +869,10 @@
                 </div>
                 <div class="context-card reverse">
                     <div class="context-card-image">
-                        <img src="/images/for_the_family.png" alt="Happy family enjoying dinner together">
+                        <picture>
+                            <source srcset="/images/for_the_family.webp" type="image/webp">
+                            <img src="/images/for_the_family.png" alt="Happy family enjoying dinner together" width="1024" height="1024" loading="lazy">
+                        </picture>
                     </div>
                     <div class="context-card-content">
                         <span class="context-card-label">For the Family</span>
@@ -852,7 +882,10 @@
                 </div>
                 <div class="context-card">
                     <div class="context-card-image">
-                        <img src="/images/for_the_circle.png" alt="Friends gathered around dinner table sharing food">
+                        <picture>
+                            <source srcset="/images/for_the_circle.webp" type="image/webp">
+                            <img src="/images/for_the_circle.png" alt="Friends gathered around dinner table sharing food" width="1024" height="1024" loading="lazy">
+                        </picture>
                     </div>
                     <div class="context-card-content">
                         <span class="context-card-label">For the Circle</span>
@@ -862,7 +895,10 @@
                 </div>
                 <div class="context-card reverse">
                     <div class="context-card-image">
-                        <img src="/images/for_the_cook.png" alt="Hands actively cooking, chopping fresh ingredients">
+                        <picture>
+                            <source srcset="/images/for_the_cook.webp" type="image/webp">
+                            <img src="/images/for_the_cook.png" alt="Hands actively cooking, chopping fresh ingredients" width="1024" height="1024" loading="lazy">
+                        </picture>
                     </div>
                     <div class="context-card-content">
                         <span class="context-card-label">For the Cook</span>
@@ -923,7 +959,10 @@
                 <p>I hope it brings some of that joy to your kitchen and dinner table.</p>
                 <div class="founder-footer">
                     <div class="founder-image">
-                        <img src="/images/founder.jpg" alt="Dave, Founder of Nomology">
+                        <picture>
+                            <source srcset="/images/founder.webp" type="image/webp">
+                            <img src="/images/founder.jpg" alt="Dave, Founder of Nomology" width="800" height="800" loading="lazy">
+                        </picture>
                     </div>
                     <div class="founder-meta">
                         <span class="founder-signature">Dave</span>

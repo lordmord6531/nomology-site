@@ -4,7 +4,7 @@
     "namespace": "android_app",
     "package_name": "food.nomology",
     "sha256_cert_fingerprints": [
-      "BLOCKER_REPLACE_BEFORE_DEPLOY:run_keytool_-list_-v_-keystore_your.keystore_to_get_SHA256"
+      "21:70:88:59:30:0A:2C:AB:99:31:9B:96:AA:E1:B0:C8:47:AF:A7:07:90:F0:DA:F8:A6:F8:45:74:69:29:74:80"
     ]
   }
 }]
