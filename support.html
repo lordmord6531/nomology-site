@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support - Nomology</title>
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src 'self';
+                   script-src 'none';
+                   style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+                   font-src 'self' https://fonts.gstatic.com;
+                   img-src 'self';">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="/images/nomology_logo.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Judson:wght@400;700&family=Nunito+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --nomology-red: #BD4527;
+            --nomology-brown: #6B5B4F;
+            --nomology-light: #FAF7F2;
+            --nomology-dark: #1a1a1a;
+            --border-color: #e0d8d0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Nunito Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.7;
+            color: var(--nomology-dark);
+            background: var(--nomology-light);
+            min-height: 100vh;
+        }
+
+        .header {
+            background: white;
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header a {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+        }
+
+        .header-title {
+            font-family: 'Judson', Georgia, serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--nomology-dark);
+        }
+
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px 80px;
+        }
+
+        h1 {
+            font-family: 'Judson', Georgia, serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--nomology-dark);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        h2 {
+            font-family: 'Judson', Georgia, serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--nomology-dark);
+            letter-spacing: -0.3px;
+        }
+
+        h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--nomology-dark);
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--nomology-dark);
+        }
+
+        .summary-box {
+            background: white;
+            border-left: 4px solid var(--nomology-red);
+            padding: 1.25rem 1.5rem;
+            margin: 1.5rem 0 2rem;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .summary-box p {
+            margin: 0.25rem 0;
+            font-size: 0.95rem;
+        }
+
+        ul, ol {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        a {
+            color: var(--nomology-red);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .contact-box {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .contact-box p {
+            margin: 0.25rem 0;
+        }
+
+        .footer-links {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.95rem;
+            color: var(--nomology-brown);
+        }
+
+        .footer-links a {
+            color: var(--nomology-brown);
+            margin-right: 1rem;
+        }
+
+        @media (max-width: 600px) {
+            .content {
+                padding: 24px 16px 60px;
+            }
+
+            h1 {
+                font-size: 1.75rem;
+            }
+
+            h2 {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <a href="/">
+                <img class="logo" src="/images/nomology_logo.svg" alt="Nomology" width="36" height="36">
+                <span class="header-title">Nomology</span>
+            </a>
+        </div>
+    </div>
+
+    <!--email_off-->
+    <div class="content">
+        <h1>Support</h1>
+
+        <div class="summary-box">
+            <p>Need help? Email <a href="mailto:support@nomology.food">support@nomology.food</a>.</p>
+            <p>Nomology is a personal project, built by a team of one in spare time.<br>Please be patient — responses are typically sent within 2&ndash;3 days.</p>
+        </div>
+
+        <h2>How to cancel your subscription</h2>
+        <p>Your Nomology subscription is managed through your Apple ID or Google account. To cancel:</p>
+        <ul>
+            <li><strong>iPhone or iPad:</strong> Settings &rarr; Apple ID (your name at the top) &rarr; Subscriptions &rarr; Nomology &rarr; Cancel Subscription.</li>
+            <li><strong>Android:</strong> Google Play Store app &rarr; Profile icon &rarr; Payments &amp; subscriptions &rarr; Subscriptions &rarr; Nomology &rarr; Cancel subscription.</li>
+        </ul>
+        <p>You can also reach Subscription settings directly from inside the app: open Nomology &rarr; Me &rarr; Manage Subscription.</p>
+        <p>Cancelling stops future renewals. You keep access to premium features until the end of the current billing period.</p>
+
+        <h2>How to delete your account</h2>
+        <p>You can permanently delete your Nomology account and all associated personal data from inside the app:</p>
+        <ol>
+            <li>Open Nomology and go to the <strong>Me</strong> tab.</li>
+            <li>Tap <strong>Account</strong>.</li>
+            <li>Tap <strong>Delete Account</strong> and confirm.</li>
+        </ol>
+        <p>Deletion is immediate from your point of view; the data is permanently removed from our systems within 30 days. Cancelling an active subscription is a separate action — please cancel your subscription <em>before</em> deleting your account if you want to stop future renewals.</p>
+        <p>If you can't access the app for any reason, email <a href="mailto:support@nomology.food">support@nomology.food</a> from the address you registered with and we'll process the deletion for you.</p>
+
+        <h2>Common questions</h2>
+
+        <h3>How do I reset my taste profile?</h3>
+        <p>Open Nomology &rarr; Me &rarr; Account &rarr; Reset Taste Profile. You'll go through the onboarding flow again and your recommendations will be retuned from scratch.</p>
+
+        <h3>Why don't I see only recipes I would like?</h3>
+        <p>Two reasons. First, the more recipes you swipe and rate, the more accurate your recommendations become — early on the app has very little signal to work with, and predictions improve sharply over the first few dozen ratings.</p>
+        <p>Second, like any preference prediction, the app will sometimes suggest recipes at the edge of what we think you'll enjoy. Some of those won't land for you, and some will surprise you. Trying the edge cases is how you discover dishes you didn't know you'd love, and how the app learns the boundaries of your taste rather than just the centre. If something genuinely doesn't appeal, swipe to hide it — that's a strong signal and the app uses it.</p>
+
+        <h3>How do I exclude ingredients I don't want?</h3>
+        <p>Open Nomology &rarr; Me &rarr; Dietary Preferences. You can add ingredients under three categories, depending on how strict the exclusion is:</p>
+        <ul>
+            <li><strong>Can't Eat</strong> — for allergies and medical avoidances. Recipes containing these ingredients are never shown.</li>
+            <li><strong>Don't Eat</strong> — for ingredients you've chosen never to eat (e.g. religious, ethical, or firm personal reasons). Also never shown.</li>
+            <li><strong>Won't Eat</strong> — for things you'd prefer to skip but can tolerate. Recipes may still be shown with a warning so you can decide for yourself.</li>
+        </ul>
+        <p>You can change or remove an exclusion at any time from the same screen. Exclusions are taken into account both for the recipes we recommend and for AI-generated recipes you create.</p>
+
+        <h3>I was charged but my subscription isn't active.</h3>
+        <p>Force-quit and reopen Nomology — the app re-syncs your subscription on launch. If it's still not showing, email <a href="mailto:support@nomology.food">support@nomology.food</a> with the date of purchase and the email address on your account, and we'll fix it for you.</p>
+
+        <h3>How do I report a bug or suggest a feature?</h3>
+        <p>Email <a href="mailto:support@nomology.food">support@nomology.food</a>. Every message is read personally and bug reports go straight onto the fix list.</p>
+
+        <h3>Is my data private?</h3>
+        <p>Yes. We don't sell your personal data and we don't use it for advertising. The full details are in our <a href="/privacy">Privacy Policy</a>.</p>
+
+        <h2>Contact</h2>
+        <div class="contact-box">
+            <p><strong>General support:</strong> <a href="mailto:support@nomology.food">support@nomology.food</a></p>
+            <p><strong>Privacy enquiries:</strong> <a href="mailto:privacy@nomology.food">privacy@nomology.food</a></p>
+            <p><strong>Post:</strong> Nomology Ltd, 19 Albion Street, Hull, HU1 3TG, England</p>
+        </div>
+
+        <div class="footer-links">
+            <a href="/privacy">Privacy Policy</a>
+            <a href="/terms">Terms of Use</a>
+        </div>
+    </div>
+    <!--/email_off-->
+</body>
+</html>
