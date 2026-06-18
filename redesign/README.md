@@ -35,9 +35,14 @@ cd /path/to/nomology-site && python3 -m http.server 8000
 ## Status / next steps
 
 - ✅ Faithful static rebuild complete and visually verified.
-- ⏳ **Next: thorough production-readiness gauntlet** — SEO, WCAG 2.2 AA, performance /
-  Core Web Vitals, markup correctness, cross-browser/responsive, functional parity,
-  security, + a design-fidelity guard. (Multi-agent review pass.)
+- ✅ Production-readiness gauntlet done: **0 blockers**, 29 design-safe fixes confirmed.
+- ✅ **v4 design refinements accepted & folded in** — WCAG-AA small-label contrast
+  (eyebrows `#E45F3A`, "MOST LOVED" `#8B3219`, loop label brighter), the hero headline paints
+  immediately (best LCP — entrance fade dropped), and footer legal links hit the 44px iOS
+  tap-target minimum on mobile. (v3 baseline retained in git history.)
+- ⏳ **Next: apply the 29 queued design-safe fixes** (canonical, JSON-LD, aria-hidden the demo,
+  rAF idle-on-hidden, font slimming, decode guard, dead-code removal, etc.) to this build.
+- 🅿️ Parked: home `og:image` + the share-image pipeline re-eval; apple-touch-icon asset.
 - 🚫 Do not merge / promote to root until **Ask Nom** ships.
 
 ## Known issue to fix separately (pre-existing, not introduced here)
