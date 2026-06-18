@@ -1,56 +1,51 @@
 # Homepage redesign — staging area (DO NOT MERGE yet)
 
-This folder holds the **approved new homepage design (v3)**. It is **not live**, and
-this PR is **not to be merged** until the **"Ask Nom"** feature ships — the new site
-releases together with it.
+The approved new homepage (v3). **Not live**; this PR is **not to be merged** until the
+**"Ask Nom"** feature ships — the new site releases together with it.
 
 ## What's here
 
-A **Claude Design Composer export** (multi-file, not the old self-contained bundle):
+**`production/index.html`** — the build that will actually ship. A faithful, **static,
+self-contained** reproduction of the design: semantic HTML/CSS + vanilla JS, **no
+Design Composer / `_ds` runtime dependency**. Verified pixel-identical to the design
+reference (headless render diff). At release it promotes to the repo root `index.html`
+(it already uses root-absolute `/images/…` paths, so the move is clean).
 
-- **`nomology-home-v3.dc.html`** — the page (Design Composer document using custom
-  `<x-dc>` elements).
-- **`support.js`**, **`image-slot.js`** — the runtime scripts the page loads.
-- **`_ds/nomology-design-system-…/`** — the design-system tokens + styles + bundle
-  (fonts, colours, typography, spacing, themes). ~196 KB.
-- **`assets/nomology_logo.svg`** — the logo.
-- Photos are **not duplicated** here — image refs point at the repo's existing
-  `../images/*.webp` (hero, founder, for-the-family/circle/cook/explorer).
+What the production build carries:
+- The wheel generator, match badges, founder code-typer and the whole scroll engine
+  **ported 1:1** to vanilla JS; the Circle radar reproduced from its real values.
+- **No-regression items** from the live site: the auth-redirect **error modal**, the
+  exact live **CSP**, `lang="en-GB"`, favicons, footer → `/privacy` `/terms` `/support`.
+- **Production additions** (no visual change): real `<title>` + meta + **OpenGraph/
+  Twitter**, `<main>`/semantic landmarks, skip-link, ARIA on the modal, full
+  `prefers-reduced-motion` support.
 
-It includes the **Ask Nom** section and uses the correct `/gb/` App Store link.
+**Design reference (not shipped):** `nomology-home-v3.dc.html` + `support.js` +
+`image-slot.js` + `_ds/…` + `assets/` — the original Claude Design Composer export.
+Kept as the visual source of truth to diff against; renders only via its JS runtime.
 
 ## How to view
 
-It needs its JS runtime + relative paths, so serve the repo (don't just double-click):
-
 ```bash
 cd /path/to/nomology-site && python3 -m http.server 8000
-# then open http://localhost:8000/redesign/nomology-home-v3.dc.html
+# production build : http://localhost:8000/redesign/production/index.html
+# design reference : http://localhost:8000/redesign/nomology-home-v3.dc.html
 ```
 
-## One change from the raw export
+## Status / next steps
 
-Image paths were rewritten from `images/…` → `../images/…` so the preview uses the
-repo's existing photos instead of duplicating them. (A fresh Design Composer
-re-export will use `images/…` again — just re-apply if you re-export.)
+- ✅ Faithful static rebuild complete and visually verified.
+- ⏳ **Next: thorough production-readiness gauntlet** — SEO, WCAG 2.2 AA, performance /
+  Core Web Vitals, markup correctness, cross-browser/responsive, functional parity,
+  security, + a design-fidelity guard. (Multi-agent review pass.)
+- 🚫 Do not merge / promote to root until **Ask Nom** ships.
 
-## Before release — refinement checklist
+## Known issue to fix separately (pre-existing, not introduced here)
 
-This is a Design Composer document (renders via JS); the rest of `nomology-site` is
-hand-built **semantic static HTML/CSS** — fast, crawlable, no JS dependency. Ship the
-*design*, not the tool format:
-
-1. **Produce production static HTML/CSS** matching this design (or a final static
-   export) — don't ship the JS-runtime Design Composer doc as the live homepage.
-2. **Real SEO/meta:** proper `<title>`, meta description, **OpenGraph tags** (the
-   export has none; the site's link-preview pipeline depends on them).
-3. **Restore behaviour the live `index.html` has:** the auth-redirect **error modal**
-   (`#error-modal` script) and footer links to **Privacy / Terms / Support**.
-4. **Accessibility:** real `alt` text, contrast, keyboard nav, honour
-   `prefers-reduced-motion`.
-5. **Confirm the Ask Nom section** is final — this release is gated on that feature.
-6. **Image optimisation** — confirm `images/` assets are sized/WebP/lazy-loaded
-   (the current site already does this).
+The share-link redirect in `../404.html` and `../s/index.html` points iOS users at
+`apps.apple.com/app/id6736435209`, but the live app is **`id6757445966`**. Looks like a
+stale ID mis-routing share links. Out of scope for the homepage rebuild (those files are
+preserved as-is) — flag for a separate fix.
 
 ## References
 

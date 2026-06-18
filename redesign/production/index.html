@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nomology — Find Food You'll Actually Love</title>
+<meta name="description" content="Nomology learns the flavours, textures and combinations that make you reach for seconds — then finds the recipes that match. Personalised taste-matching, on iPhone.">
+
+<!-- Social / crawler preview (production addition; text content is in the HTML, so it's crawlable) -->
+<meta property="og:title" content="Nomology — Find Food You'll Actually Love">
+<meta property="og:description" content="A personalised recipe app that learns your taste across 158 dimensions and finds food you'll genuinely love. On the App Store — iPhone, UK.">
+<meta property="og:image" content="https://nomology.food/images/hero_image.png">
+<meta property="og:url" content="https://nomology.food/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Nomology">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Nomology — Find Food You'll Actually Love">
+<meta name="twitter:description" content="A personalised recipe app that learns your taste and finds food you'll genuinely love.">
+<meta name="twitter:image" content="https://nomology.food/images/hero_image.png">
+
+<!-- CSP: identical policy to the live homepage. Covers Google Fonts (incl. Material Symbols),
+     inline styles/scripts (the page + ported engine + auth handler), and data: (grain SVG). -->
+<meta http-equiv="Content-Security-Policy"
+      content="default-src 'self';
+               script-src 'self' 'unsafe-inline';
+               style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+               font-src 'self' https://fonts.gstatic.com;
+               img-src 'self' data:;">
+
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/images/nomology_logo.svg" type="image/svg+xml">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Judson:ital,wght@0,400;0,700;1,400&family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,500;0,6..12,600;0,6..12,700;0,6..12,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
+
+<style>
+  /* ====== COLOUR TOKENS (from _ds/tokens/colors.css) ====== */
+  :root{
+    --nom-red:#BD4527; --nom-red-dark:#8B3219; --nom-dark:#33281C; --nom-brown:#633C37;
+    --nom-light:#F5F1F1; --nom-blue:#276DBD; --nom-beige:#E5C5C0; --nom-card:#E8DFDE;
+    --nom-ink:#181818; --nom-ink-raised:#222222; --nom-ink-border:#302E2E; --nom-ink-black:#0F0E0E;
+    --nom-teal:#007E89; --nom-teal-light:#4DB6AC; --nom-teal-dark:#005F66;
+    --nom-error:#B3261E; --nom-success:#2E7D32; --nom-warning:#B26A00; --nom-info:#276DBD;
+    --flavor-red:#DC2626; --flavor-orange:#EA580C; --flavor-amber:#D97706; --flavor-lime:#65A30D; --flavor-cyan:#0891B2;
+    --ai-gold:#FEB712; --ai-orange:#FB6B35; --ai-pink-hot:#F70157; --ai-pink:#EC4E8F; --ai-purple:#AC52FC; --ai-blue:#299BFE;
+    --ai-shimmer-gradient:linear-gradient(90deg,var(--ai-gold),var(--ai-orange),var(--ai-pink-hot),var(--ai-pink),var(--ai-purple),var(--ai-blue),var(--ai-gold));
+    --text-dark-strong:#FFFFFF; --text-dark-body:rgba(255,255,255,0.7); --text-dark-muted:rgba(255,255,255,0.5); --text-dark-faint:rgba(255,255,255,0.3);
+    --fill-dark-subtle:rgba(255,255,255,0.06);
+    --border-subtle:rgba(51,40,28,0.10);
+  }
+  /* ====== TYPOGRAPHY TOKENS (from _ds/tokens/typography.css) ====== */
+  :root{
+    --font-display:'Judson', Georgia, 'Times New Roman', serif;
+    --font-body:'Nunito Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --fw-light:300; --fw-regular:400; --fw-medium:500; --fw-semibold:600; --fw-bold:700; --fw-extra:800;
+  }
+  /* ====== THEME LAYER (from _ds/tokens/themes.css) ====== */
+  :root,[data-nom-theme="light"]{
+    --nom-surface-sunken:#E8DFDE; --nom-surface-base:#F5F1F1; --nom-surface-raised:#FFFFFF; --nom-surface-raised-2:#FBF8F8; --nom-surface-bridge:#FBF6F4;
+    --nom-border:rgba(51,40,28,0.30); --nom-border-strong:rgba(51,40,28,0.45); --nom-border-subtle:rgba(51,40,28,0.10);
+    --nom-on-1:#33281C; --nom-on-2:#633C37; --nom-on-3:rgba(51,40,28,0.55); --nom-on-4:rgba(51,40,28,0.32);
+    --nom-fill-1:rgba(51,40,28,0.04); --nom-fill-2:rgba(51,40,28,0.07); --nom-fill-3:rgba(51,40,28,0.12);
+    --nom-brand:#BD4527; --nom-brand-pressed:#8B3219; --nom-brand-hover:#A93C22; --nom-brand-tint:rgba(189,69,39,0.10); --nom-brand-tint-2:rgba(189,69,39,0.18); --nom-on-brand:#FFFFFF;
+    --nom-mode-describe:var(--nom-brand); --nom-mode-tweak:#B26A00; --nom-mode-import:#276DBD;
+    --nom-pop:0 12px 40px rgba(51,40,28,0.18); --nom-card-lift:0 2px 10px rgba(51,40,28,0.10);
+    --surface-app:var(--nom-surface-base); --surface-raised:var(--nom-surface-raised);
+    --text-strong:var(--nom-on-1); --text-body:var(--nom-on-2); --text-muted:var(--nom-on-3); --text-faint:var(--nom-on-4);
+    --border:var(--nom-border); --border-subtle:var(--nom-border-subtle);
+    --shadow-card:var(--nom-card-lift); --shadow-pop:var(--nom-pop); --focus-ring:var(--nom-brand);
+  }
+  [data-nom-theme="dark"]{
+    --nom-surface-sunken:#0F0E0E; --nom-surface-base:#181818; --nom-surface-raised:#222222; --nom-surface-raised-2:#2A2A2A; --nom-surface-bridge:#262626;
+    --nom-border:#302E2E; --nom-border-strong:#3C3A3A; --nom-border-subtle:rgba(255,255,255,0.08);
+    --nom-on-1:#FFFFFF; --nom-on-2:rgba(255,255,255,0.72); --nom-on-3:rgba(255,255,255,0.50); --nom-on-4:rgba(255,255,255,0.30);
+    --nom-fill-1:rgba(255,255,255,0.05); --nom-fill-2:rgba(255,255,255,0.09); --nom-fill-3:rgba(255,255,255,0.14);
+    --nom-brand:#E45F3A; --nom-brand-pressed:#C24A2C; --nom-brand-hover:#ED6F4B; --nom-brand-tint:rgba(228,95,58,0.16); --nom-brand-tint-2:rgba(228,95,58,0.28); --nom-on-brand:#FFF7F3;
+    --nom-mode-describe:var(--nom-brand); --nom-mode-tweak:#E0992F; --nom-mode-import:#5C97D6;
+    --nom-pop:0 12px 40px rgba(0,0,0,0.50); --nom-card-lift:0 2px 10px rgba(0,0,0,0.30);
+    --surface-app:var(--nom-surface-base); --surface-raised:var(--nom-surface-raised);
+    --text-strong:var(--nom-on-1); --text-body:var(--nom-on-2); --text-muted:var(--nom-on-3); --text-faint:var(--nom-on-4);
+    --border:var(--nom-border); --border-subtle:var(--nom-border-subtle);
+    --shadow-card:var(--nom-card-lift); --shadow-pop:var(--nom-pop); --focus-ring:var(--nom-brand);
+  }
+  :root{
+    --nom-ai-gold:#FEB712; --nom-ai-orange:#FB6B35; --nom-ai-pink-hot:#F70157; --nom-ai-pink:#EC4E8F; --nom-ai-purple:#AC52FC; --nom-ai-blue:#299BFE;
+    --nom-ai-gradient:conic-gradient(from 0deg,var(--nom-ai-gold),var(--nom-ai-orange),var(--nom-ai-pink-hot),var(--nom-ai-pink),var(--nom-ai-purple),var(--nom-ai-blue),var(--nom-ai-gold));
+    --nom-ai-sweep:linear-gradient(90deg,var(--nom-ai-gold),var(--nom-ai-orange),var(--nom-ai-pink-hot),var(--nom-ai-pink),var(--nom-ai-purple),var(--nom-ai-blue),var(--nom-ai-gold));
+  }
+
+  /* ====== BASE / RESET ====== */
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:#111010}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--font-body);color:#fff;background:#111010;overflow-x:clip;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  img{display:block;max-width:100%}
+  .skip-link{position:absolute;left:12px;top:-60px;z-index:1000;background:#fff;color:#161616;padding:10px 16px;border-radius:8px;font-weight:600;transition:top .2s ease}
+  .skip-link:focus{top:12px}
+  :focus-visible{outline:3px solid var(--nom-blue);outline-offset:2px;border-radius:3px}
+
+  /* ====== ICON FONT (from _ds/tokens/fonts.css) ====== */
+  .material-symbols-rounded{font-family:'Material Symbols Rounded';font-weight:normal;font-style:normal;font-size:24px;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';-webkit-font-smoothing:antialiased;font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24}
+  .material-symbols-rounded.fill{font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24}
+
+  /* ====== MOTION / COMPONENT CLASSES (from the design's helmet block) ====== */
+  .reveal{opacity:0;transform:translateY(34px);transition:transform .9s cubic-bezier(.2,0,0,1)}
+  .reveal.in{opacity:1;transform:none}
+  .riseline{display:block;overflow:hidden;padding:0 .08em}
+  .word{display:inline-block;transform:translateY(116%);opacity:0;transition:transform 1.05s cubic-bezier(.16,1,.3,1),opacity 1.05s cubic-bezier(.16,1,.3,1);will-change:transform}
+  .word.lit{transform:translateY(0);opacity:1}
+  @keyframes nomSpin{to{transform:rotate(360deg)}}
+  @keyframes nomSpinR{to{transform:rotate(-360deg)}}
+  @keyframes nomMarquee{to{transform:translateX(-50%)}}
+  @keyframes nomPulse{0%,100%{opacity:.5}50%{opacity:1}}
+  @keyframes nomBuild{from{opacity:0;transform:scale(.78)}to{opacity:1;transform:scale(1)}}
+  @keyframes nomCaret{0%,48%{opacity:1}52%,100%{opacity:0}}
+  @keyframes nomShimmer{to{background-position:220% center}}
+  @keyframes nomGrain{0%{transform:translate(0,0)}20%{transform:translate(-3%,-3%)}40%{transform:translate(2%,-2%)}60%{transform:translate(-2%,2%)}80%{transform:translate(3%,1%)}100%{transform:translate(0,0)}}
+  @keyframes nomAiSpin{to{transform:rotate(1turn)}}
+  @keyframes nomAiSweep{0%{background-position:0% 50%}100%{background-position:200% 50%}}
+  @keyframes nomBarSlide{0%{margin-left:-40%}100%{margin-left:100%}}
+  .cta-mag{transition:transform .25s cubic-bezier(.2,0,0,1),box-shadow .25s ease}
+  .cta-mag:hover{transform:translateY(-3px) scale(1.015)}
+  .rcard{transition:transform .4s cubic-bezier(.2,0,0,1)}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    .reveal,.reveal.in{opacity:1!important;transform:none!important;transition:none!important}
+    .word{opacity:1!important;transform:none!important;animation:none!important}
+    [data-spin],[data-hero-build]{animation:none!important}
+    [data-ask-shimmer]{animation:none!important}
+    [data-ask-userrow],[data-ask-thinking],[data-ask-result]{opacity:1!important;transform:none!important}
+    [data-ask-caret]{display:none!important}
+    [data-grain]{display:none!important}
+    .nom-ai-rim>*{animation:none!important}
+  }
+
+  /* ====== AUTH ERROR MODAL (behaviour ported verbatim from live index.html) ====== */
+  .error-modal{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center}
+  .error-modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,0.5)}
+  .error-modal-content{position:relative;background:#fff;border-radius:16px;padding:40px;max-width:400px;margin:20px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.3)}
+  .error-modal-icon{color:var(--nom-red);margin-bottom:20px;display:flex;justify-content:center}
+  .error-modal-content h3{font-family:var(--font-display);font-size:28px;color:var(--nom-dark);margin-bottom:12px}
+  .error-modal-content p{font-size:16px;color:var(--nom-brown);margin-bottom:8px}
+  .error-hint{font-size:14px!important;color:#888!important;margin-top:16px!important}
+  .error-modal-button{margin-top:24px;background:var(--nom-red);color:#fff;border:none;padding:14px 32px;border-radius:8px;font-family:var(--font-body);font-size:16px;font-weight:600;cursor:pointer;transition:background .2s}
+  .error-modal-button:hover{background:#a82228}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<div data-grain aria-hidden="true" style="position:fixed;inset:-40%;z-index:3;pointer-events:none;opacity:0.05;mix-blend-mode:overlay;background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E&quot;);background-size:200px 200px;animation:nomGrain 7s steps(6) infinite"></div>
+
+<!-- ===== NAV ===== -->
+<nav data-nav style="position:fixed;top:0;left:0;right:0;z-index:60;background:transparent;border-bottom:1px solid transparent;transition:background .4s ease,border-color .4s ease,backdrop-filter .4s ease">
+  <div style="max-width:1280px;margin:0 auto;padding:16px 44px;display:flex;align-items:center;gap:20px">
+    <a href="#top" style="display:flex;align-items:center;gap:11px;text-decoration:none" aria-label="Nomology home">
+      <img src="/images/nomology_logo.svg" alt="" width="34" height="34" style="display:block;border-radius:9px">
+      <span style="font-family:var(--font-display);font-weight:700;font-size:23px;letter-spacing:-0.5px;color:#fff">Nomology</span>
+    </a>
+    <div style="margin-left:auto;display:flex;align-items:center;gap:18px">
+      <span style="display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:600;letter-spacing:0.3px;color:rgba(255,255,255,0.6)">
+        <span style="width:6px;height:6px;border-radius:50%;background:var(--nom-success)"></span>iPhone · UK
+      </span>
+      <a class="cta-mag" href="https://apps.apple.com/gb/app/nomology/id6757445966" target="_blank" rel="noopener" aria-label="Download Nomology on the App Store" style="display:inline-flex;align-items:center;gap:10px;background:#fff;color:#161616;padding:9px 16px;border-radius:12px;text-decoration:none">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M17.05 12.04c-.03-2.6 2.12-3.85 2.22-3.91-1.21-1.77-3.09-2.01-3.76-2.04-1.6-.16-3.12.94-3.93.94-.81 0-2.06-.92-3.39-.9-1.74.03-3.35 1.01-4.25 2.57-1.81 3.14-.46 7.78 1.3 10.32.86 1.24 1.88 2.64 3.22 2.59 1.29-.05 1.78-.83 3.34-.83 1.56 0 2 .83 3.37.81 1.39-.03 2.27-1.27 3.12-2.51.98-1.44 1.39-2.83 1.41-2.9-.03-.01-2.71-1.04-2.74-4.14M14.53 4.5c.71-.86 1.19-2.06 1.06-3.25-1.02.04-2.26.68-2.99 1.54-.66.76-1.23 1.98-1.08 3.15 1.14.09 2.3-.58 3.01-1.44"></path></svg>
+        <span style="display:flex;flex-direction:column;line-height:1.05;text-align:left">
+          <span style="font-size:9px;font-weight:500;opacity:0.7;letter-spacing:0.2px">Download on the</span>
+          <span style="font-size:15px;font-weight:600;letter-spacing:-0.2px">App Store</span>
+        </span>
+      </a>
+    </div>
+  </div>
+</nav>
+<a id="top"></a>
+
+<main id="main">
+<!-- ===== HERO ===== -->
+<section style="position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;background:radial-gradient(130% 90% at 8% -20%, rgba(189,69,39,0.30), transparent 50%), radial-gradient(80% 80% at 100% 110%, rgba(39,109,189,0.14), transparent 55%), #111010">
+  <div data-hero-wheel style="position:absolute;top:50%;left:91%;transform:translate(-50%,-50%);z-index:0;opacity:0.55;pointer-events:none;-webkit-mask:radial-gradient(closest-side,#000 60%,transparent 100%);mask:radial-gradient(closest-side,#000 60%,transparent 100%)" aria-hidden="true">
+    <div data-hero-build style="opacity:0">
+      <div data-spin style="animation:nomSpin 120s linear infinite">
+        <div data-wheel="hero"></div>
+      </div>
+    </div>
+  </div>
+  <div data-hero-content style="position:relative;z-index:1;max-width:1280px;margin:0 auto;padding:0 44px;width:100%">
+    <span class="reveal" style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.16);color:rgba(255,255,255,0.84);padding:8px 16px;border-radius:100px;font-size:12px;font-weight:600;letter-spacing:0.4px;margin-bottom:34px;transition-delay:.02s">
+      <span style="width:7px;height:7px;border-radius:50%;background:var(--nom-success);box-shadow:0 0 0 3px rgba(46,125,50,0.22)"></span>Now on the App Store · iPhone · UK
+    </span>
+    <h1 class="reveal" style="font-family:var(--font-display);font-weight:700;font-size:clamp(56px,10.5vw,168px);line-height:0.92;letter-spacing:-0.04em;margin:0 0 30px;color:#fff;transition-delay:.1s">Find food you'll <em style="font-style:italic;color:var(--nom-red)">actually</em> love.</h1>
+    <p class="reveal" style="font-size:clamp(17px,1.5vw,21px);line-height:1.6;color:var(--text-dark-body);margin:0 0 38px;max-width:520px;transition-delay:.2s">Nomology learns the flavours, textures and combinations that make <em>you</em> reach for seconds — then finds the recipes that match.</p>
+    <div class="reveal" style="display:flex;align-items:center;gap:22px;flex-wrap:wrap;transition-delay:.3s">
+      <a class="cta-mag" href="https://apps.apple.com/gb/app/nomology/id6757445966" target="_blank" rel="noopener" aria-label="Download Nomology on the App Store" style="display:inline-flex;align-items:center;gap:12px;background:#fff;color:#161616;padding:16px 28px;border-radius:15px;text-decoration:none;box-shadow:0 20px 50px -16px rgba(0,0,0,0.7)">
+        <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M17.05 12.04c-.03-2.6 2.12-3.85 2.22-3.91-1.21-1.77-3.09-2.01-3.76-2.04-1.6-.16-3.12.94-3.93.94-.81 0-2.06-.92-3.39-.9-1.74.03-3.35 1.01-4.25 2.57-1.81 3.14-.46 7.78 1.3 10.32.86 1.24 1.88 2.64 3.22 2.59 1.29-.05 1.78-.83 3.34-.83 1.56 0 2 .83 3.37.81 1.39-.03 2.27-1.27 3.12-2.51.98-1.44 1.39-2.83 1.41-2.9-.03-.01-2.71-1.04-2.74-4.14M14.53 4.5c.71-.86 1.19-2.06 1.06-3.25-1.02.04-2.26.68-2.99 1.54-.66.76-1.23 1.98-1.08 3.15 1.14.09 2.3-.58 3.01-1.44"></path></svg>
+        <span style="display:flex;flex-direction:column;line-height:1.05;text-align:left"><span style="font-size:11px;font-weight:500;opacity:0.7">Download on the</span><span style="font-size:21px;font-weight:600;letter-spacing:-0.3px">App Store</span></span>
+      </a>
+      <span style="font-size:14px;color:var(--text-dark-muted);max-width:230px;line-height:1.45">Free to try — start swiping and it learns as you go.</span>
+    </div>
+  </div>
+  <div data-hero-scroll style="position:absolute;bottom:30px;left:50%;transform:translateX(-50%);z-index:1;display:flex;flex-direction:column;align-items:center;gap:8px;color:rgba(255,255,255,0.45)" aria-hidden="true">
+    <span style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase">Scroll</span>
+    <span style="width:1px;height:42px;background:linear-gradient(rgba(255,255,255,0.5),transparent)"></span>
+  </div>
+</section>
+
+<!-- ===== MARQUEE ===== -->
+<div aria-hidden="true" style="border-top:1px solid rgba(255,255,255,0.08);border-bottom:1px solid rgba(255,255,255,0.08);padding:26px 0;overflow:hidden;white-space:nowrap;background:#0d0c0c">
+  <div data-spin style="display:inline-block;animation:nomMarquee 32s linear infinite;font-family:var(--font-display);font-size:clamp(30px,4vw,58px);font-weight:700;letter-spacing:-0.02em;line-height:1">
+    <span style="color:#fff">Smoky</span><span style="color:var(--nom-red);padding:0 .35em">·</span><span style="color:rgba(255,255,255,0.55)">Umami</span><span style="color:var(--nom-red);padding:0 .35em">·</span><span style="color:#fff">Charred</span><span style="color:var(--nom-red);padding:0 .35em">·</span><span style="color:rgba(255,255,255,0.55)">Bright acidity</span><span style="color:var(--nom-red);padding:0 .35em">·</span><span style="color:#fff">158 dimensions</span><span style="color:var(--nom-red);padding:0 .35em">·</span><span style="color:rgba(255,255,255,0.55)">Tender</span><span style="color:var(--nom-red);padding:0 .35em">·</span><span style="color:#fff">Roasted</span><span style="color:var(--nom-red);padding:0 .35em">·</span><span style="color:rgba(255,255,255,0.55)">Caramelised</span><span style="color:var(--nom-red);padding:0 .35em">·</span><span style="color:#fff">Smoky</span><span style="color:var(--nom-red);padding:0 .35em">·</span><span style="color:rgba(255,255,255,0.55)">Umami</span><span style="color:var(--nom-red);padding:0 .35em">·</span><span style="color:#fff">Charred</span><span style="color:var(--nom-red);padding:0 .35em">·</span><span style="color:rgba(255,255,255,0.55)">Bright acidity</span><span style="color:var(--nom-red);padding:0 .35em">·</span><span style="color:#fff">158 dimensions</span><span style="color:var(--nom-red);padding:0 .35em">·</span><span style="color:rgba(255,255,255,0.55)">Tender</span><span style="color:var(--nom-red);padding:0 .35em">·</span><span style="color:#fff">Roasted</span><span style="color:var(--nom-red);padding:0 .35em">·</span><span style="color:rgba(255,255,255,0.55)">Caramelised</span><span style="color:var(--nom-red);padding:0 .35em">·</span>
+  </div>
+</div>
+
+<!-- ===== PINNED TASTE-LOOP STORY ===== -->
+<section data-loop style="position:relative;height:330vh;background:#111010">
+  <div style="position:sticky;top:0;height:100vh;overflow:hidden;display:flex;align-items:center;justify-content:center">
+    <div style="position:absolute;top:0;left:0;right:0;height:3px;background:rgba(255,255,255,0.07);z-index:5"><div data-loop-progress style="height:100%;width:0%;background:var(--nom-red)"></div></div>
+    <div style="position:absolute;top:38px;left:50%;transform:translateX(-50%);font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);z-index:5">How Nomology learns</div>
+
+    <div data-beat="0" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px;padding:24px">
+      <div style="position:relative;width:min(280px,72vw)">
+        <div style="position:absolute;inset:0;transform:rotate(6deg) translateY(10px);background:#262223;border-radius:24px"></div>
+        <div style="position:relative;border-radius:24px;overflow:hidden;background:#fff;box-shadow:0 30px 70px -20px rgba(0,0,0,0.7);transform:rotate(-5deg)">
+          <div style="height:200px;background:linear-gradient(150deg,#E8C9A0,#C26B3C 58%,#9A3620)"></div>
+          <div style="padding:16px 18px 20px"><div style="font-family:var(--font-display);font-size:23px;letter-spacing:-0.5px;color:var(--nom-dark)">Smoky paprika chicken</div><div style="font-size:13px;color:var(--text-muted);margin-top:4px">35 min · Easy</div></div>
+          <div style="position:absolute;top:16px;right:16px;width:48px;height:48px;border-radius:50%;background:var(--nom-success);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(0,0,0,0.4)"><span class="material-symbols-rounded fill" style="font-size:26px;color:#fff">thumb_up</span></div>
+        </div>
+      </div>
+      <div style="text-align:center"><div style="font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--nom-red);margin-bottom:10px">01 — Swipe</div><div style="font-family:var(--font-display);font-size:clamp(28px,3.6vw,48px);letter-spacing:-0.02em;color:#fff">Swipe what looks good.</div></div>
+    </div>
+
+    <div data-beat="1" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;padding:24px;opacity:0">
+      <div data-loop-wheel style="width:min(370px,76vw);aspect-ratio:1;filter:drop-shadow(0 30px 60px rgba(0,0,0,0.5))"><div data-wheel="loop" style="width:100%;height:100%"></div></div>
+      <div style="text-align:center"><div style="font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--nom-red);margin-bottom:10px">02 — Learn</div><div style="font-family:var(--font-display);font-size:clamp(28px,3.6vw,48px);letter-spacing:-0.02em;color:#fff">We map your taste in <span style="color:var(--nom-red)">158 dimensions</span>.</div></div>
+    </div>
+
+    <div data-beat="2" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;padding:24px;opacity:0">
+      <div data-match-badge style="width:min(330px,78vw);aspect-ratio:1;filter:drop-shadow(0 30px 60px rgba(0,0,0,0.55))"></div>
+      <div style="text-align:center"><div style="font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--nom-red);margin-bottom:10px">03 — Match</div><div style="font-family:var(--font-display);font-size:clamp(28px,3.6vw,48px);letter-spacing:-0.02em;color:#fff">We score every recipe for <em>you</em>.</div></div>
+    </div>
+
+    <div data-beat="3" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:30px;padding:24px;opacity:0">
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;width:min(760px,90vw)">
+        <div style="border-radius:16px;overflow:hidden;background:#19181a;border:1px solid #2a2829;position:relative"><div style="height:96px;background:linear-gradient(150deg,#E8C9A0,#C26B3C)"></div><div style="padding:10px 12px 14px"><div style="font-family:var(--font-display);font-size:15px;color:#fff;line-height:1.1">Miso aubergine</div></div><span style="position:absolute;top:8px;right:8px;background:var(--nom-red);color:#fff;font-size:11px;font-weight:800;padding:3px 7px;border-radius:7px">94</span></div>
+        <div style="border-radius:16px;overflow:hidden;background:#19181a;border:1px solid #2a2829;position:relative"><div style="height:96px;background:linear-gradient(150deg,#D9B38C,#A85a36)"></div><div style="padding:10px 12px 14px"><div style="font-family:var(--font-display);font-size:15px;color:#fff;line-height:1.1">Charred corn</div></div><span style="position:absolute;top:8px;right:8px;background:var(--nom-red);color:#fff;font-size:11px;font-weight:800;padding:3px 7px;border-radius:7px">91</span></div>
+        <div style="border-radius:16px;overflow:hidden;background:#19181a;border:1px solid #2a2829;position:relative"><div style="height:96px;background:linear-gradient(150deg,#E3C39E,#B86A3E)"></div><div style="padding:10px 12px 14px"><div style="font-family:var(--font-display);font-size:15px;color:#fff;line-height:1.1">Harissa lamb</div></div><span style="position:absolute;top:8px;right:8px;background:var(--nom-red);color:#fff;font-size:11px;font-weight:800;padding:3px 7px;border-radius:7px">96</span></div>
+        <div style="border-radius:16px;overflow:hidden;background:#19181a;border:1px solid #2a2829;position:relative"><div style="height:96px;background:linear-gradient(150deg,#E8CBA6,#9A5A38)"></div><div style="padding:10px 12px 14px"><div style="font-family:var(--font-display);font-size:15px;color:#fff;line-height:1.1">Sticky tofu</div></div><span style="position:absolute;top:8px;right:8px;background:var(--nom-red);color:#fff;font-size:11px;font-weight:800;padding:3px 7px;border-radius:7px">89</span></div>
+      </div>
+      <div style="text-align:center"><div style="font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--nom-red);margin-bottom:10px">04 — Discover</div><div style="font-family:var(--font-display);font-size:clamp(28px,3.6vw,48px);letter-spacing:-0.02em;color:#fff">Food you'll <span style="color:var(--nom-red)">actually</span> love.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 158 MOMENT ===== -->
+<section style="position:relative;padding:140px 0;overflow:hidden;background:radial-gradient(70% 60% at 80% 30%, rgba(189,69,39,0.16), transparent 60%), #0d0c0c">
+  <div style="max-width:1100px;margin:0 auto;padding:0 44px;text-align:center;position:relative;z-index:1">
+    <div class="reveal" style="font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--text-dark-muted);margin-bottom:8px">The secret blend</div>
+    <div class="reveal" data-count158 style="font-family:var(--font-display);font-weight:700;font-size:clamp(140px,30vw,420px);line-height:0.86;letter-spacing:-0.05em;color:#fff;margin:0">158</div>
+    <div class="reveal" style="font-family:var(--font-display);font-size:clamp(22px,3vw,40px);letter-spacing:-0.02em;color:var(--nom-red);margin:6px 0 30px">dimensions of flavour &amp; texture</div>
+    <p class="reveal" style="font-size:clamp(16px,1.4vw,19px);line-height:1.7;color:var(--text-dark-body);max-width:680px;margin:0 auto 18px">You know how KFC guards their 11 herbs and spices? I guard something different — proprietary taste-matching learned one swipe at a time. And it doesn't keep one profile, it keeps <strong style="color:#fff">eight</strong> — your dessert tastes aren't your dinner tastes.</p>
+    <p class="reveal" style="font-family:var(--font-display);font-size:clamp(20px,2.2vw,30px);letter-spacing:-0.02em;color:#fff;margin:24px 0 0">It doesn't just know what you might like.<br><span style="color:var(--nom-red)">It knows what you'll love.</span></p>
+  </div>
+</section>
+
+<!-- ===== ASK NOM ===== -->
+<section style="position:relative;padding:130px 0 140px;overflow:hidden;background:radial-gradient(58% 48% at 80% 16%, rgba(172,82,252,0.10), transparent 62%), radial-gradient(48% 48% at 10% 92%, rgba(41,155,254,0.08), transparent 60%), #111010">
+  <div style="max-width:1180px;margin:0 auto;padding:0 44px;position:relative;z-index:1">
+
+    <div style="max-width:800px;margin:0 auto 64px;text-align:center">
+      <div class="reveal" style="display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--text-dark-muted);margin-bottom:16px"><span class="material-symbols-rounded" data-ask-shimmer style="font-size:18px;background:var(--ai-shimmer-gradient);background-size:220% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:nomShimmer 6s linear infinite">auto_awesome</span>Create with Nom</div>
+      <h2 class="reveal" style="font-family:var(--font-display);font-weight:700;font-size:clamp(54px,10vw,150px);line-height:0.92;letter-spacing:-0.04em;margin:0;color:#fff">Just ask.</h2>
+      <p class="reveal" style="font-family:var(--font-display);font-size:clamp(22px,2.6vw,36px);letter-spacing:-0.02em;color:var(--nom-red);margin:10px 0 22px">Cook anything you can describe.</p>
+      <p class="reveal" style="font-size:clamp(16px,1.45vw,19px);line-height:1.65;color:var(--text-dark-body);max-width:660px;margin:0 auto">Most AI will happily invent a recipe that doesn't work. Nom knows your taste, knows what you can't eat, and actually knows how to cook — so what you get is something you'll genuinely want to make.</p>
+    </div>
+
+    <div data-ask-demo class="reveal" data-nom-theme="dark" style="max-width:540px;margin:0 auto;background:var(--nom-surface-base);border:1px solid var(--nom-border);border-radius:26px;overflow:hidden;box-shadow:0 50px 100px -38px rgba(0,0,0,0.92)">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:15px 18px;border-bottom:1px solid var(--nom-border-subtle)">
+        <span style="display:inline-flex;align-items:baseline;gap:1px">
+          <span style="font-family:var(--font-display);font-weight:700;font-size:22px;letter-spacing:-0.5px;color:var(--nom-on-1);line-height:1">Nom</span>
+          <span style="width:3px;height:11px;border-radius:4px;background:var(--nom-brand);display:inline-block;margin-left:2px;transform:skewX(-12deg)"></span>
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 11px 0 9px;border-radius:100px;background:var(--nom-fill-2);border:1px solid var(--nom-border-subtle)">
+          <span data-ask-mode-dot style="width:7px;height:7px;border-radius:100px;background:var(--nom-mode-describe);transition:background .35s ease"></span>
+          <span data-ask-mode-label style="font-family:var(--font-body);font-size:12px;font-weight:600;color:var(--nom-on-2);letter-spacing:0.1px">Describe</span>
+        </span>
+      </div>
+
+      <div style="padding:20px 18px;display:flex;flex-direction:column;gap:15px;min-height:312px">
+        <div data-ask-userrow style="display:flex;justify-content:flex-end;opacity:0;transform:translateY(8px)">
+          <div style="max-width:84%;background:var(--nom-fill-3);color:var(--nom-on-1);font-family:var(--font-body);font-size:15px;line-height:1.45;padding:11px 15px;border-radius:16px;border-bottom-right-radius:5px"><span data-ask-sent></span></div>
+        </div>
+
+        <div data-ask-thinking style="opacity:0;display:flex;flex-direction:column;gap:11px;max-width:90%;background:var(--nom-surface-raised);border:1px solid var(--nom-border);border-radius:16px;border-bottom-left-radius:5px;padding:13px 15px">
+          <div style="display:flex;align-items:center;gap:11px">
+            <span style="position:relative;width:26px;height:26px;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center">
+              <span class="nom-ai-rim" style="position:absolute;inset:0;border-radius:50%;overflow:hidden;filter:blur(5px);opacity:0.75"><span style="position:absolute;inset:-30%;background:var(--nom-ai-gradient);animation:nomAiSpin 3s linear infinite"></span></span>
+              <span style="position:absolute;inset:3px;border-radius:50%;background:var(--nom-surface-raised)"></span>
+              <span style="position:relative;font-family:var(--font-display);font-weight:700;font-size:14px;color:var(--nom-on-1);line-height:1">N</span>
+            </span>
+            <span data-ask-think-msg style="font-family:var(--font-body);font-size:14.5px;line-height:1.4;color:var(--nom-on-2)">Reading your taste profile…</span>
+          </div>
+          <div style="height:3px;border-radius:3px;background:var(--nom-fill-2);overflow:hidden">
+            <div style="width:40%;height:100%;border-radius:3px;background:var(--nom-ai-sweep);background-size:200% 100%;animation:nomBarSlide 1.6s cubic-bezier(.2,0,0,1) infinite,nomAiSweep 3s linear infinite"></div>
+          </div>
+        </div>
+
+        <div data-ask-result style="opacity:0;transform:translateY(14px)">
+          <div style="display:flex;align-items:center;gap:7px;margin-bottom:12px">
+            <span style="font-family:var(--font-display);font-weight:700;font-size:15px;letter-spacing:-0.4px;color:var(--nom-on-1)">Nom</span>
+            <span style="font-family:var(--font-body);font-size:13px;font-weight:500;color:var(--nom-on-3)">found your match</span>
+          </div>
+          <div style="background:var(--nom-surface-raised);border:1px solid var(--nom-border);border-radius:12px;overflow:hidden">
+            <div style="padding:13px 15px 14px">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:9px;color:var(--nom-on-3);font-family:var(--font-body);font-size:12px;font-weight:600">
+                <span style="display:inline-flex;align-items:center;gap:4px"><span class="material-symbols-rounded" style="font-size:14px">schedule</span>30 min</span>
+                <span style="width:3px;height:3px;border-radius:3px;background:var(--nom-on-4)"></span>Easy
+                <span style="width:3px;height:3px;border-radius:3px;background:var(--nom-on-4)"></span>One pan
+              </div>
+              <h3 style="margin:0 0 9px;font-family:var(--font-display);font-weight:700;font-size:18px;line-height:1.15;letter-spacing:-0.4px;color:var(--nom-on-1);text-wrap:pretty">Lemony chicken &amp; spinach skillet</h3>
+              <div style="background:linear-gradient(90deg, color-mix(in srgb, var(--nom-brand) 16%, transparent), transparent 60%), var(--nom-fill-2);border-radius:10px;padding:9px 11px">
+                <p style="margin:0;font-family:var(--font-body);font-size:13.5px;line-height:1.5;color:var(--nom-on-1);font-weight:500;text-wrap:pretty">Leans into the <span style="display:inline;padding:1px 7px;margin:0 1px;border-radius:6px;background:color-mix(in srgb, var(--nom-brand) 18%, transparent);color:var(--nom-brand);font-weight:700;white-space:nowrap;-webkit-box-decoration-break:clone;box-decoration-break:clone">bright, citrusy</span> notes you swipe right on, makes the most of what's in your fridge, and skips the <span style="display:inline;padding:1px 7px;margin:0 1px;border-radius:6px;background:color-mix(in srgb, var(--nom-brand) 18%, transparent);color:var(--nom-brand);font-weight:700;white-space:nowrap;-webkit-box-decoration-break:clone;box-decoration-break:clone">garlic</span> you can't eat.</p>
+              </div>
+              <div style="display:flex;align-items:center;gap:6px;margin-top:13px">
+                <span class="material-symbols-rounded" data-ask-shimmer style="font-size:15px;background:var(--nom-ai-sweep);background-size:220% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:nomAiSweep 6s linear infinite">auto_awesome</span>
+                <span style="font-family:var(--font-body);font-size:10.5px;font-weight:700;letter-spacing:0.4px;text-transform:uppercase;color:var(--nom-on-3)">Created by Nom</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div data-ask-userrow2 style="display:flex;justify-content:flex-end;opacity:0;transform:translateY(8px)">
+          <div style="max-width:84%;background:var(--nom-fill-3);color:var(--nom-on-1);font-family:var(--font-body);font-size:15px;line-height:1.45;padding:11px 15px;border-radius:16px;border-bottom-right-radius:5px"><span data-ask-sent2></span></div>
+        </div>
+
+        <div data-ask-thinking2 style="opacity:0;display:none;flex-direction:column;gap:11px;max-width:90%;background:var(--nom-surface-raised);border:1px solid var(--nom-border);border-radius:16px;border-bottom-left-radius:5px;padding:13px 15px">
+          <div style="display:flex;align-items:center;gap:11px">
+            <span style="position:relative;width:26px;height:26px;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center">
+              <span class="nom-ai-rim" style="position:absolute;inset:0;border-radius:50%;overflow:hidden;filter:blur(5px);opacity:0.75"><span style="position:absolute;inset:-30%;background:var(--nom-ai-gradient);animation:nomAiSpin 3s linear infinite"></span></span>
+              <span style="position:absolute;inset:3px;border-radius:50%;background:var(--nom-surface-raised)"></span>
+              <span style="position:relative;font-family:var(--font-display);font-weight:700;font-size:14px;color:var(--nom-on-1);line-height:1">N</span>
+            </span>
+            <span data-ask-think-msg2 style="font-family:var(--font-body);font-size:14.5px;line-height:1.4;color:var(--nom-on-2)">Looking at your last recipe…</span>
+          </div>
+          <div style="height:3px;border-radius:3px;background:var(--nom-fill-2);overflow:hidden">
+            <div style="width:40%;height:100%;border-radius:3px;background:var(--nom-ai-sweep);background-size:200% 100%;animation:nomBarSlide 1.6s cubic-bezier(.2,0,0,1) infinite,nomAiSweep 3s linear infinite"></div>
+          </div>
+        </div>
+
+        <div data-ask-result2 style="opacity:0;transform:translateY(14px);display:none">
+          <div style="display:flex;align-items:center;gap:7px;margin-bottom:12px">
+            <span style="font-family:var(--font-display);font-weight:700;font-size:15px;letter-spacing:-0.4px;color:var(--nom-on-1)">Nom</span>
+            <span style="font-family:var(--font-body);font-size:13px;font-weight:500;color:var(--nom-on-3)">made it a one-pot</span>
+          </div>
+          <div style="background:var(--nom-surface-raised);border:1px solid var(--nom-border);border-radius:12px;overflow:hidden">
+            <div style="padding:13px 15px 14px">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:9px;color:var(--nom-on-3);font-family:var(--font-body);font-size:12px;font-weight:600">
+                <span style="display:inline-flex;align-items:center;gap:4px"><span class="material-symbols-rounded" style="font-size:14px">schedule</span>35 min</span>
+                <span style="width:3px;height:3px;border-radius:3px;background:var(--nom-on-4)"></span>One pot
+                <span style="width:3px;height:3px;border-radius:3px;background:var(--nom-on-4)"></span>Serves 4
+              </div>
+              <h3 style="margin:0 0 9px;font-family:var(--font-display);font-weight:700;font-size:18px;line-height:1.15;letter-spacing:-0.4px;color:var(--nom-on-1);text-wrap:pretty">Lemony chicken, orzo &amp; spinach one-pot</h3>
+              <div style="background:linear-gradient(90deg, color-mix(in srgb, var(--nom-brand) 16%, transparent), transparent 60%), var(--nom-fill-2);border-radius:10px;padding:9px 11px">
+                <p style="margin:0;font-family:var(--font-body);font-size:13.5px;line-height:1.5;color:var(--nom-on-1);font-weight:500;text-wrap:pretty">Stirs <span style="display:inline;padding:1px 7px;margin:0 1px;border-radius:6px;background:color-mix(in srgb, var(--nom-brand) 18%, transparent);color:var(--nom-brand);font-weight:700;white-space:nowrap;-webkit-box-decoration-break:clone;box-decoration-break:clone">orzo</span> straight into the pan so it soaks up the lemony stock — one pot, no extra washing up — and still skips the <span style="display:inline;padding:1px 7px;margin:0 1px;border-radius:6px;background:color-mix(in srgb, var(--nom-brand) 18%, transparent);color:var(--nom-brand);font-weight:700;white-space:nowrap;-webkit-box-decoration-break:clone;box-decoration-break:clone">garlic</span> you can't eat.</p>
+              </div>
+              <div style="display:flex;align-items:center;gap:6px;margin-top:13px">
+                <span class="material-symbols-rounded" style="font-size:15px;color:var(--nom-mode-tweak)">tune</span>
+                <span style="font-family:var(--font-body);font-size:11.5px;color:var(--nom-on-3)">Adapted from&nbsp;<span style="color:var(--nom-on-2);font-weight:600">your lemony chicken skillet</span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="padding:12px 16px 18px;border-top:1px solid var(--nom-border-subtle);background:var(--nom-surface-base)">
+        <div style="display:flex;align-items:center;gap:10px;background:var(--nom-surface-raised);border:1.5px solid var(--nom-border);border-radius:100px;padding:8px 8px 8px 18px">
+          <div style="flex:1;position:relative;min-width:0">
+            <div data-ask-ph style="position:absolute;left:0;top:6px;right:0;pointer-events:none;font-family:var(--font-body);font-size:15px;line-height:1.45;color:var(--nom-on-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Tell <span style="font-family:var(--font-display);font-style:italic">Nom</span> what you're after</div>
+            <div style="font-family:var(--font-body);font-size:15px;line-height:1.45;color:var(--nom-on-1);padding:6px 0;min-height:27px"><span data-ask-compose></span><span data-ask-caret style="display:none;width:2px;height:1.05em;background:var(--nom-brand);margin-left:1px;vertical-align:-3px;animation:nomCaret 1s steps(1) infinite"></span></div>
+          </div>
+          <span style="position:relative;flex-shrink:0;display:inline-block">
+            <span data-ask-send-rim class="nom-ai-rim" style="position:absolute;inset:-3px;border-radius:100px;overflow:hidden;filter:blur(7px);opacity:0;transition:opacity .3s ease"><span style="position:absolute;inset:-30%;background:var(--nom-ai-gradient);animation:nomAiSpin 3s linear infinite"></span></span>
+            <button data-ask-send type="button" aria-label="Send" style="position:relative;width:40px;height:40px;border-radius:100px;border:none;background:var(--nom-fill-2);color:var(--nom-on-4);display:inline-flex;align-items:center;justify-content:center;transition:background .25s ease,color .25s ease"><span class="material-symbols-rounded" style="font-size:22px">arrow_upward</span></button>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal" style="display:grid;grid-template-columns:repeat(3,1fr);gap:38px;max-width:1020px;margin:70px auto 0">
+      <div>
+        <span class="material-symbols-rounded" style="font-size:26px;color:var(--nom-red)">fingerprint</span>
+        <div style="font-family:var(--font-display);font-size:21px;letter-spacing:-0.4px;color:#fff;margin:12px 0 7px">It knows your taste</div>
+        <div style="font-size:14.5px;line-height:1.6;color:var(--text-dark-body)">Every recipe is tuned to your 158-point flavour profile — your version, not a generic one.</div>
+      </div>
+      <div>
+        <span class="material-symbols-rounded" style="font-size:26px;color:var(--nom-red)">verified_user</span>
+        <div style="font-family:var(--font-display);font-size:21px;letter-spacing:-0.4px;color:#fff;margin:12px 0 7px">It respects what you can't eat</div>
+        <div style="font-size:14.5px;line-height:1.6;color:var(--text-dark-body)">Your allergies and dietary exclusions are baked in — so it simply never suggests them.</div>
+      </div>
+      <div>
+        <span class="material-symbols-rounded" style="font-size:26px;color:var(--nom-red)">cooking</span>
+        <div style="font-family:var(--font-display);font-size:21px;letter-spacing:-0.4px;color:#fff;margin:12px 0 7px">It actually knows how to cook</div>
+        <div style="font-size:14.5px;line-height:1.6;color:var(--text-dark-body)">Real techniques, classic pairings, smart substitutions and make-ahead tricks — so the recipes genuinely work.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== HORIZONTAL RECIPE RAIL ===== -->
+<section data-rail style="position:relative;height:200vh;background:#111010">
+  <div style="position:sticky;top:0;height:100vh;overflow:hidden;display:flex;flex-direction:column;justify-content:center">
+    <div style="max-width:1280px;margin:0 auto 38px;padding:0 44px;width:100%">
+      <div class="reveal" style="font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--nom-red);margin-bottom:14px">Your feed, not everyone's</div>
+      <h2 class="reveal" style="font-family:var(--font-display);font-weight:700;font-size:clamp(34px,5vw,68px);line-height:1.02;letter-spacing:-0.03em;margin:0;color:#fff;max-width:760px">Recipes that fit <span style="color:var(--nom-red)">your</span> taste.</h2>
+    </div>
+    <div data-rail-track style="display:flex;gap:26px;padding:0 44px;will-change:transform">
+      <div class="rcard" style="flex:none;width:330px;position:relative"><div style="border-radius:22px;overflow:hidden;background:#19181a;border:1px solid #2a2829;box-shadow:0 30px 60px -28px rgba(0,0,0,0.8)"><div style="height:300px;position:relative;background:center/cover no-repeat url('/images/hero_image.webp')"><div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 56%,rgba(15,14,14,0.5))"></div></div><div style="padding:18px 20px 22px"><div style="font-family:var(--font-display);font-size:24px;letter-spacing:-0.5px;color:#fff">Sunday roast traybake</div><div style="font-size:13px;color:rgba(255,255,255,0.5);margin-top:6px">55 min · Easy</div></div></div><div data-rail-badge data-score="96" style="position:absolute;top:-22px;right:22px;width:76px;height:76px;z-index:4;filter:drop-shadow(0 10px 22px rgba(0,0,0,0.55))"></div></div>
+      <div class="rcard" style="flex:none;width:330px;position:relative"><div style="border-radius:22px;overflow:hidden;background:#19181a;border:1px solid #2a2829;box-shadow:0 30px 60px -28px rgba(0,0,0,0.8)"><div style="height:300px;position:relative;background:center/cover no-repeat url('/images/for_the_explorer.webp')"><div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 56%,rgba(15,14,14,0.5))"></div></div><div style="padding:18px 20px 22px"><div style="font-family:var(--font-display);font-size:24px;letter-spacing:-0.5px;color:#fff">Thai-style prawn curry</div><div style="font-size:13px;color:rgba(255,255,255,0.5);margin-top:6px">35 min · Medium</div></div></div><div data-rail-badge data-score="94" style="position:absolute;top:-22px;right:22px;width:76px;height:76px;z-index:4;filter:drop-shadow(0 10px 22px rgba(0,0,0,0.55))"></div></div>
+      <div class="rcard" style="flex:none;width:330px;position:relative"><div style="border-radius:22px;overflow:hidden;background:#19181a;border:1px solid #2a2829;box-shadow:0 30px 60px -28px rgba(0,0,0,0.8)"><div style="height:300px;position:relative;background:center/cover no-repeat url('/images/for_the_cook.webp')"><div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 56%,rgba(15,14,14,0.5))"></div></div><div style="padding:18px 20px 22px"><div style="font-family:var(--font-display);font-size:24px;letter-spacing:-0.5px;color:#fff">Tomato &amp; basil rigatoni</div><div style="font-size:13px;color:rgba(255,255,255,0.5);margin-top:6px">30 min · Easy</div></div></div><div data-rail-badge data-score="92" style="position:absolute;top:-22px;right:22px;width:76px;height:76px;z-index:4;filter:drop-shadow(0 10px 22px rgba(0,0,0,0.55))"></div></div>
+      <div class="rcard" style="flex:none;width:330px;position:relative"><div style="border-radius:22px;overflow:hidden;background:#19181a;border:1px solid #2a2829;box-shadow:0 30px 60px -28px rgba(0,0,0,0.8)"><div style="height:300px;position:relative;background:center/cover no-repeat url('/images/for_the_circle.webp')"><div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 56%,rgba(15,14,14,0.5))"></div></div><div style="padding:18px 20px 22px"><div style="font-family:var(--font-display);font-size:24px;letter-spacing:-0.5px;color:#fff">Mezze sharing feast</div><div style="font-size:13px;color:rgba(255,255,255,0.5);margin-top:6px">1 hr · Medium</div></div></div><div data-rail-badge data-score="90" style="position:absolute;top:-22px;right:22px;width:76px;height:76px;z-index:4;filter:drop-shadow(0 10px 22px rgba(0,0,0,0.55))"></div></div>
+      <div class="rcard" style="flex:none;width:330px;display:flex;align-items:center"><div style="padding:0 20px"><div style="font-family:var(--font-display);font-size:30px;letter-spacing:-0.02em;color:#fff;line-height:1.1">4,000+ recipes,<br><span style="color:var(--nom-red)">ranked for you.</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CIRCLES (warm interlude) ===== -->
+<section style="background:var(--surface-app);color:var(--nom-dark);padding:128px 0">
+  <div style="max-width:1180px;margin:0 auto;padding:0 44px">
+    <div class="reveal" style="max-width:720px;margin:0 0 56px">
+      <div style="font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--nom-teal);margin-bottom:16px">Circles</div>
+      <h2 style="font-family:var(--font-display);font-weight:700;font-size:clamp(34px,4.6vw,60px);line-height:1.04;letter-spacing:-0.03em;margin:0 0 18px;color:var(--nom-dark)">Three kids, three opinions, <span style="color:var(--nom-red)">zero patience at 6pm.</span></h2>
+      <p style="font-size:18px;line-height:1.7;color:var(--text-body);margin:0">Build taste profiles for the whole household — including the kids and the people who don't have the app — and find recipes everyone actually likes.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:0.95fr 1.05fr;gap:48px;align-items:center">
+      <div class="reveal" style="border-radius:28px;overflow:hidden;box-shadow:var(--shadow-pop)">
+        <img src="/images/for_the_family.webp" alt="A family sharing a meal together at the table" style="display:block;width:100%;aspect-ratio:4/3;object-fit:cover">
+      </div>
+      <div class="reveal" style="transition-delay:.1s;background:#fff;border:1px solid var(--border-subtle);border-radius:24px;padding:28px;box-shadow:var(--shadow-card)">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+          <div><div style="font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--nom-teal)">Our Circle</div><div style="font-family:var(--font-display);font-size:22px;letter-spacing:-0.5px;color:var(--nom-dark);margin-top:2px">The whole table</div></div>
+          <span style="width:42px;height:42px;border-radius:12px;background:rgba(0,126,137,0.12);display:inline-flex;align-items:center;justify-content:center"><span class="material-symbols-rounded" style="font-size:24px;color:var(--nom-teal)">groups</span></span>
+        </div>
+        <div style="display:flex;gap:18px;align-items:center;margin-bottom:22px">
+          <div data-circle-radar style="width:124px;height:124px;flex:none" aria-hidden="true"></div>
+          <div style="display:flex;flex-direction:column;gap:9px;flex:1">
+            <div style="display:flex;align-items:center;gap:9px"><span style="width:26px;height:26px;border-radius:50%;background:var(--nom-red);color:#fff;font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center">Y</span><span style="font-size:13px;color:var(--text-body)">You</span></div>
+            <div style="display:flex;align-items:center;gap:9px"><span style="width:26px;height:26px;border-radius:50%;background:var(--nom-blue);color:#fff;font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center">P</span><span style="font-size:13px;color:var(--text-body)">Your partner</span></div>
+            <div style="display:flex;align-items:center;gap:9px"><span style="width:26px;height:26px;border-radius:50%;background:var(--flavor-amber);color:#fff;font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center">9</span><span style="font-size:13px;color:var(--text-body)">Kid, age 9 <span style="color:var(--text-faint)">· no app</span></span></div>
+            <div style="display:flex;align-items:center;gap:9px"><span style="width:26px;height:26px;border-radius:50%;background:var(--nom-brown);color:#fff;font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center">G</span><span style="font-size:13px;color:var(--text-body)">Gran <span style="color:var(--text-faint)">· no app</span></span></div>
+          </div>
+        </div>
+        <div style="background:var(--surface-app);border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:14px">
+          <span style="background:rgba(0,126,137,0.12);color:var(--nom-teal);font-size:11px;font-weight:800;padding:5px 9px;border-radius:8px;white-space:nowrap">88% all</span>
+          <div><div style="font-family:var(--font-display);font-size:16px;letter-spacing:-0.4px;color:var(--nom-dark);line-height:1.15">Tonight: honey-soy traybake</div><div style="font-size:12px;color:var(--text-muted);margin-top:2px">Everyone at this table will happily eat it.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOUNDER (code-editor, scroll-typed) ===== -->
+<section data-founder style="position:relative;background:radial-gradient(70% 60% at 50% 112%,rgba(189,69,39,0.16),transparent 62%),#0d0c0c;height:280vh">
+  <div style="position:sticky;top:0;height:100vh;display:flex;align-items:center;overflow:hidden">
+    <div style="width:100%;max-width:880px;margin:0 auto;padding:0 44px">
+      <div class="reveal" style="font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--nom-red);margin-bottom:22px">From the maker</div>
+      <div class="reveal" style="transition-delay:.06s;border-radius:16px;overflow:hidden;border:1px solid #2c2724;background:#161312;box-shadow:0 50px 110px -36px rgba(0,0,0,0.85),0 0 0 1px rgba(255,255,255,0.02) inset">
+        <div style="display:flex;align-items:center;gap:8px;padding:13px 16px;background:#211b19;border-bottom:1px solid #2c2724">
+          <span style="width:12px;height:12px;border-radius:50%;background:#e0623f;flex:none"></span>
+          <span style="width:12px;height:12px;border-radius:50%;background:#e6b95c;flex:none"></span>
+          <span style="width:12px;height:12px;border-radius:50%;background:#8fa86a;flex:none"></span>
+          <span style="margin-left:12px;font-family:'Courier Prime','Courier New',monospace;font-size:12.5px;color:#b8ada3">the_nomology_origin_story.js</span>
+          <span style="margin-left:auto;font-family:'Courier Prime','Courier New',monospace;font-size:11px;color:#5f574f">~/nomology/founder</span>
+        </div>
+        <div data-codebody style="background:#161312;padding:24px 0;height:clamp(300px,44vh,440px);overflow:hidden">
+          <div data-code style="display:flex;flex-direction:column;font-family:'Courier Prime','Courier New',monospace;font-size:clamp(13px,1.18vw,15.5px);line-height:1.95;transition:transform .3s cubic-bezier(.2,0,0,1);will-change:transform"></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px;padding:9px 16px;background:#211b19;border-top:1px solid #2c2724;font-family:'Courier Prime','Courier New',monospace;font-size:11px;color:#6f665d">
+          <span style="color:#8fa86a">● built with love</span>
+          <span style="color:#5f574f">no committee</span>
+          <span style="margin-left:auto">UTF-8 · JavaScript · 16 ln</span>
+        </div>
+      </div>
+      <div class="reveal" style="transition-delay:.12s;display:flex;align-items:center;gap:18px;margin-top:30px">
+        <img src="/images/founder.webp" alt="Dave, founder of Nomology" width="64" height="64" style="display:block;width:64px;height:64px;flex:none;border-radius:50%;object-fit:cover">
+        <div style="display:flex;flex-direction:column"><span style="font-family:var(--font-display);font-style:italic;font-weight:700;font-size:28px;letter-spacing:-0.5px;color:#fff;line-height:1">Dave</span><span style="font-size:13px;color:rgba(255,255,255,0.5);letter-spacing:0.3px;margin-top:5px">Founder · building Nomology one swipe at a time</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRICING (compact, dark) ===== -->
+<section style="background:#0d0c0c;padding:120px 0">
+  <div style="max-width:1100px;margin:0 auto;padding:0 44px">
+    <div class="reveal" style="text-align:center;max-width:640px;margin:0 auto 52px">
+      <h2 style="font-family:var(--font-display);font-weight:700;font-size:clamp(32px,4.4vw,56px);line-height:1.05;letter-spacing:-0.03em;margin:0 0 16px;color:#fff">Built with love. <span style="color:var(--nom-red)">Sustained by you.</span></h2>
+      <p style="font-size:17px;line-height:1.6;color:var(--text-dark-body);margin:0">No venture capital, no ads, no data deals. Just one person — your subscription covers the real costs.</p>
+    </div>
+    <div class="reveal" style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
+      <div style="background:#19181a;border:1px solid #2a2829;border-radius:18px;padding:26px 22px"><div style="font-family:var(--font-display);font-weight:700;font-size:22px;color:#fff;margin-bottom:2px">Free</div><div style="font-size:12px;font-style:italic;color:var(--text-dark-muted);margin-bottom:14px">"Just getting started"</div><div style="font-family:var(--font-display);font-weight:700;font-size:34px;letter-spacing:-1px;color:#fff">£0</div></div>
+      <div style="background:#19181a;border:1px solid #2a2829;border-radius:18px;padding:26px 22px"><div style="font-family:var(--font-display);font-weight:700;font-size:22px;color:#fff;margin-bottom:2px">Creator</div><div style="font-size:12px;font-style:italic;color:var(--text-dark-muted);margin-bottom:14px">"Keep the lights on"</div><div style="font-family:var(--font-display);font-weight:700;font-size:34px;letter-spacing:-1px;color:#fff">£3.99<span style="font-size:13px;font-weight:400;color:var(--text-dark-muted)">/mo</span></div></div>
+      <div style="position:relative;background:linear-gradient(160deg,#BD4527,#8B3219);border:1px solid rgba(255,255,255,0.12);border-radius:18px;padding:26px 22px;box-shadow:0 30px 60px -24px rgba(189,69,39,0.6)"><span style="position:absolute;top:-11px;left:22px;background:#fff;color:var(--nom-red);font-size:10px;font-weight:800;letter-spacing:0.4px;padding:4px 10px;border-radius:100px">MOST LOVED</span><div style="font-family:var(--font-display);font-weight:700;font-size:22px;color:#fff;margin-bottom:2px">Circles</div><div style="font-size:12px;font-style:italic;color:rgba(255,255,255,0.8);margin-bottom:14px">"Fund the future"</div><div style="font-family:var(--font-display);font-weight:700;font-size:34px;letter-spacing:-1px;color:#fff">£5.99<span style="font-size:13px;font-weight:400;color:rgba(255,255,255,0.75)">/mo</span></div></div>
+      <div style="background:#19181a;border:1px solid #2a2829;border-radius:18px;padding:26px 22px"><div style="font-family:var(--font-display);font-weight:700;font-size:22px;color:#fff;margin-bottom:2px">Pro</div><div style="font-size:12px;font-style:italic;color:var(--text-dark-muted);margin-bottom:14px">"All in"</div><div style="font-family:var(--font-display);font-weight:700;font-size:34px;letter-spacing:-1px;color:#fff">£12.99<span style="font-size:13px;font-weight:400;color:var(--text-dark-muted)">/mo</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FINAL CTA ===== -->
+<section style="position:relative;overflow:hidden;background:radial-gradient(80% 100% at 50% 120%, rgba(189,69,39,0.28), transparent 60%), #111010;padding:150px 0 130px">
+  <div class="reveal" style="max-width:900px;margin:0 auto;padding:0 44px;text-align:center;position:relative;z-index:1">
+    <h2 style="font-family:var(--font-display);font-weight:700;font-size:clamp(48px,8vw,120px);line-height:0.95;letter-spacing:-0.04em;margin:0 0 26px;color:#fff">Stop scrolling.<br><span style="color:var(--nom-red)">Start cooking.</span></h2>
+    <p style="font-size:18px;line-height:1.6;color:var(--text-dark-body);margin:0 0 38px">Free to try — no questionnaire. The more you swipe, the sharper it gets.</p>
+    <a class="cta-mag" href="https://apps.apple.com/gb/app/nomology/id6757445966" target="_blank" rel="noopener" aria-label="Download Nomology on the App Store" style="display:inline-flex;align-items:center;gap:12px;background:#fff;color:#161616;padding:18px 34px;border-radius:16px;text-decoration:none;box-shadow:0 26px 60px -18px rgba(0,0,0,0.7)">
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor" aria-hidden="true"><path d="M17.05 12.04c-.03-2.6 2.12-3.85 2.22-3.91-1.21-1.77-3.09-2.01-3.76-2.04-1.6-.16-3.12.94-3.93.94-.81 0-2.06-.92-3.39-.9-1.74.03-3.35 1.01-4.25 2.57-1.81 3.14-.46 7.78 1.3 10.32.86 1.24 1.88 2.64 3.22 2.59 1.29-.05 1.78-.83 3.34-.83 1.56 0 2 .83 3.37.81 1.39-.03 2.27-1.27 3.12-2.51.98-1.44 1.39-2.83 1.41-2.9-.03-.01-2.71-1.04-2.74-4.14M14.53 4.5c.71-.86 1.19-2.06 1.06-3.25-1.02.04-2.26.68-2.99 1.54-.66.76-1.23 1.98-1.08 3.15 1.14.09 2.3-.58 3.01-1.44"></path></svg>
+      <span style="display:flex;flex-direction:column;line-height:1.05;text-align:left"><span style="font-size:11px;font-weight:500;opacity:0.7">Download on the</span><span style="font-size:22px;font-weight:600;letter-spacing:-0.3px">App Store</span></span>
+    </a>
+  </div>
+</section>
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer style="background:#0d0c0c;border-top:1px solid rgba(255,255,255,0.07);color:var(--text-dark-body);padding:50px 0 60px">
+  <div style="max-width:1180px;margin:0 auto;padding:0 44px;text-align:center">
+    <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:20px"><img src="/images/nomology_logo.svg" alt="" width="30" height="30" style="border-radius:8px"><span style="font-family:var(--font-display);font-weight:700;font-size:20px;letter-spacing:-0.5px;color:#fff">Nomology</span></div>
+    <nav aria-label="Footer" style="display:flex;flex-wrap:wrap;gap:8px 26px;justify-content:center;margin-bottom:22px;font-size:14px;font-weight:500"><a href="/privacy" style="color:var(--text-dark-muted);text-decoration:none">Privacy</a><a href="/terms" style="color:var(--text-dark-muted);text-decoration:none">Terms</a><a href="/support" style="color:var(--text-dark-muted);text-decoration:none">Support</a></nav>
+    <p style="font-size:13px;color:var(--text-dark-faint);margin:0">Made by Dave · iPhone · UK · independent and unfunded</p>
+  </div>
+</footer>
+
+<!-- ===== AUTH ERROR MODAL (ported verbatim from live index.html) ===== -->
+<div id="error-modal" class="error-modal" style="display:none" role="alertdialog" aria-modal="true" aria-labelledby="error-title" aria-describedby="error-message">
+  <div class="error-modal-backdrop"></div>
+  <div class="error-modal-content">
+    <div class="error-modal-icon">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    <h3 id="error-title">Link Expired</h3>
+    <p id="error-message">This link has expired or is no longer valid.</p>
+    <p class="error-hint">Please return to the app and request a new link.</p>
+    <button class="error-modal-button" onclick="closeErrorModal()">Got it</button>
+  </div>
+</div>
+
+<script>
+/* ============================================================================
+   Nomology home — interactive layer.
+   Ported 1:1 from the Design Composer document's component logic to plain
+   vanilla JS (no runtime). The sunburst wheel, match badge, founder code-typer
+   and the scroll engine are the original methods, unchanged. The Circle radar
+   (previously a bundle component) is reproduced here from its 5-axis values.
+   ============================================================================ */
+(function () {
+  class NomHome {
+    constructor() { this.state = { navSolid: false }; }
+
+    mount() {
+      this._reduced = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+      this._askPrompt = "I've got chicken thighs, half a lemon and a bag of spinach. What can I make tonight?";
+      this._askPrompt2 = "I have some orzo too, let's add carbs to this";
+      this._thinkMsgs = ['Reading your taste profile…', 'Weighing what you’ll actually cook…', 'Balancing the salt for the batch size…', 'Checking it against your exclusions…'];
+      this._thinkMsgs2 = ['Looking at your last recipe…', 'Finding a carb that fits…', 'Keeping it to one pan…', 'Rebalancing the liquid…'];
+      this._askMsgI = -1;
+      this._askMsgI2 = -1;
+      this._navSolid = false;
+      this._cache = {};
+      this._lerpY = window.pageYOffset || 0;
+      this._t0 = performance.now();
+      this._mx = 0; this._my = 0; this._tmx = 0; this._tmy = 0;
+
+      if (!this._reduced) {
+        this._onMove = (e) => {
+          this._tmx = (e.clientX / (window.innerWidth || 1)) * 2 - 1;
+          this._tmy = (e.clientY / (window.innerHeight || 1)) * 2 - 1;
+        };
+        window.addEventListener('pointermove', this._onMove, { passive: true });
+      }
+
+      this._clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+      this._buildFounder();
+      this._buildWheels();
+      this._loop = () => { this.frame(); this._rafId = requestAnimationFrame(this._loop); };
+      this._loop();
+    }
+
+    _sunburst(size, opts) {
+      opts = opts || {};
+      const NS = 'http://www.w3.org/2000/svg';
+      const svg = document.createElementNS(NS, 'svg');
+      svg.setAttribute('viewBox', '0 0 ' + size + ' ' + size);
+      svg.setAttribute('width', size); svg.setAttribute('height', size);
+      svg.style.display = 'block';
+      const c = size / 2, R = size / 2;
+      const BG = opts.bg || [13, 12, 12], RED = [189, 69, 39], BLUE = [43, 110, 205];
+      const BGc = 'rgb(' + BG[0] + ',' + BG[1] + ',' + BG[2] + ')';
+      let s = (opts.seed || 7) >>> 0;
+      const rnd = () => { s |= 0; s = s + 0x6D2B79F5 | 0; let t = Math.imul(s ^ s >>> 15, 1 | s); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+      const n1 = () => rnd() * 2 - 1;
+      const cl = (v, a, b) => Math.max(a, Math.min(b, v));
+      const TAU = Math.PI * 2;
+      const angD = (a, b) => { let d = Math.abs(a - b) % TAU; return d > Math.PI ? TAU - d : d; };
+      const col = (v) => {
+        const m = Math.pow(Math.min(1, Math.abs(v)), 0.82);
+        const t = v >= 0 ? RED : BLUE;
+        return 'rgb(' + Math.round(BG[0] + (t[0] - BG[0]) * m) + ',' + Math.round(BG[1] + (t[1] - BG[1]) * m) + ',' + Math.round(BG[2] + (t[2] - BG[2]) * m) + ')';
+      };
+      const P = (r, a) => (c + r * Math.cos(a)).toFixed(2) + ',' + (c + r * Math.sin(a)).toFixed(2);
+      const arc = (r0, r1, a0, a1) => {
+        const lg = (a1 - a0) > Math.PI ? 1 : 0;
+        return 'M' + P(r1, a0) + ' A' + r1.toFixed(2) + ',' + r1.toFixed(2) + ' 0 ' + lg + ' 1 ' + P(r1, a1) + ' L' + P(r0, a1) + ' A' + r0.toFixed(2) + ',' + r0.toFixed(2) + ' 0 ' + lg + ' 0 ' + P(r0, a0) + ' Z';
+      };
+      const sw = Math.max(0.5, size / 520);
+      const RR = [0.16, 0.40, 0.64, 0.88, 0.98].map((f) => f * R);
+      const seg = (r0, r1, a0, a1, v) => {
+        if (a1 - a0 < 1e-4) return;
+        const p = document.createElementNS(NS, 'path');
+        p.setAttribute('d', arc(r0, r1, a0, a1));
+        p.setAttribute('fill', col(v));
+        p.setAttribute('stroke', BGc);
+        p.setAttribute('stroke-width', sw);
+        p.setAttribute('stroke-linejoin', 'round');
+        svg.appendChild(p);
+      };
+      const TAX = [
+        { cats: [ {subs:[5,5,4,5,4]}, {subs:[7,6,2]}, {subs:[3,4]},
+                  {l:5},{l:4},{l:4},{l:4},{l:4},{l:4},{l:4},{l:4},{l:4},{l:4} ] },
+        { cats: [ {l:5},{l:4},{l:3},{l:4},{l:4} ] },
+        { cats: [ {l:3},{l:3},{l:3},{l:3},{l:3},{l:3} ] },
+        { cats: [ {l:3},{l:3},{l:3},{l:4} ] },
+      ];
+      const catLeaves = (cat) => cat.subs ? cat.subs.reduce((s, x) => s + x, 0) : cat.l;
+      const domLeaves = (dom) => dom.cats.reduce((s, cc) => s + catLeaves(cc), 0);
+      const total = TAX.reduce((s, d) => s + domLeaves(d), 0);
+      const BASE = TAU / total;
+      const RB = (b, spread) => cl(b + n1() * spread, -1, 1);
+      let a = -Math.PI / 2;
+      for (const dom of TAX) {
+        const da0 = a, da1 = a + domLeaves(dom) * BASE;
+        const dB = cl(0.56 + n1() * 0.26, 0.12, 1);
+        seg(RR[0], RR[1], da0, da1, dB);
+        let ca = da0;
+        for (const cat of dom.cats) {
+          const ca0 = ca, ca1 = ca + catLeaves(cat) * BASE;
+          const cB = RB(dB, 0.66);
+          seg(RR[1], RR[2], ca0, ca1, cB);
+          if (cat.subs) {
+            let sa = ca0;
+            for (const sl of cat.subs) {
+              const sa0 = sa, sa1 = sa + sl * BASE;
+              const sB = RB(cB, 0.4);
+              seg(RR[2], RR[3], sa0, sa1, sB);
+              let la = sa0;
+              for (let i = 0; i < sl; i++) { seg(RR[3], RR[4], la, la + BASE, RB(sB, 0.46)); la += BASE; }
+              sa = sa1;
+            }
+          } else {
+            let la = ca0;
+            for (let i = 0; i < cat.l; i++) { seg(RR[2], RR[3], la, la + BASE, RB(cB, 0.44)); la += BASE; }
+          }
+          ca = ca1;
+        }
+        a = da1;
+      }
+      const hub = document.createElementNS(NS, 'circle');
+      hub.setAttribute('cx', c); hub.setAttribute('cy', c); hub.setAttribute('r', (R * 0.14).toFixed(2));
+      hub.setAttribute('fill', BGc); hub.setAttribute('stroke', 'rgba(255,255,255,0.16)'); hub.setAttribute('stroke-width', sw * 1.6);
+      svg.appendChild(hub);
+      if (opts.label) {
+        const mk = (txt, dy) => {
+          const t = document.createElementNS(NS, 'text');
+          t.setAttribute('x', c); t.setAttribute('y', c + dy); t.setAttribute('text-anchor', 'middle');
+          t.setAttribute('fill', 'rgba(255,255,255,0.5)'); t.setAttribute('font-size', (size * 0.024).toFixed(1));
+          t.setAttribute('font-weight', '700'); t.setAttribute('letter-spacing', '0.5');
+          t.setAttribute('font-family', 'Nunito Sans, sans-serif'); t.textContent = txt;
+          svg.appendChild(t);
+        };
+        mk('FLAVOR', -size * 0.0035); mk('WHEEL', size * 0.0235);
+      }
+      return svg;
+    }
+
+    _matchBadgeSVG(score) {
+      const c = 50, r = 47, RED = 'var(--nom-red)';
+      const poly = (n, rad) => {
+        let pts = [];
+        for (let i = 0; i < n; i++) { const a = -Math.PI / 2 + i * 2 * Math.PI / n; pts.push((c + rad * Math.cos(a)).toFixed(2) + ',' + (c + rad * Math.sin(a)).toFixed(2)); }
+        return pts.join(' ');
+      };
+      const shield = (rad) => {
+        const top = c - rad, bottom = c + rad, shY = c - rad * 0.8, shW = rad * 0.88, curveY = c + rad * 0.1;
+        return `M${c},${top} L${c + shW},${shY} L${c + shW},${curveY} Q${c + shW},${bottom} ${c},${bottom} Q${c - shW},${bottom} ${c - shW},${curveY} L${c - shW},${shY} Z`;
+      };
+      const star = (cx, cy, ro) => {
+        const ri = ro * 0.42; let pts = [];
+        for (let i = 0; i < 10; i++) { const rad = i % 2 ? ri : ro; const a = -Math.PI / 2 + i * Math.PI / 5; pts.push((cx + rad * Math.cos(a)).toFixed(2) + ',' + (cy + rad * Math.sin(a)).toFixed(2)); }
+        return pts.join(' ');
+      };
+      const level = score >= 90 ? 'perfect' : score >= 70 ? 'great' : score >= 45 ? 'good' : 'fair';
+      let shape;
+      if (level === 'good') {
+        shape = `<path d="${shield(r)}" fill="none" stroke="${RED}" stroke-width="2"/><path d="${shield(r * 0.92)}" fill="${RED}" stroke="#fff" stroke-width="1.4"/>`;
+      } else if (level === 'fair') {
+        shape = `<polygon points="${poly(8, r)}" fill="${RED}"/><polygon points="${poly(8, r * 0.88)}" fill="none" stroke="#fff" stroke-width="1.4"/>`;
+      } else {
+        shape = `<polygon points="${poly(6, r)}" fill="${RED}"/><polygon points="${poly(6, r * 0.88)}" fill="none" stroke="#fff" stroke-width="1.4"/>`;
+      }
+      const hasBar = level === 'perfect' || level === 'great';
+      const numY = level === 'perfect' ? 43 : (hasBar ? 51 : 47);
+      let extras = `<text x="50" y="${numY}" text-anchor="middle" dominant-baseline="central" fill="#fff" font-family="var(--font-body)" font-weight="800" font-size="34" letter-spacing="-1">${score}</text>`;
+      if (level === 'perfect') {
+        extras += `<polygon points="${star(38, 63, 5.5)}" fill="#fff"/><polygon points="${star(50, 63, 5.5)}" fill="#fff"/><polygon points="${star(62, 63, 5.5)}" fill="#fff"/>`;
+      }
+      if (hasBar) {
+        extras += `<rect x="20" y="76" width="60" height="18" rx="1.5" fill="${RED}"/><text x="50" y="85.5" text-anchor="middle" dominant-baseline="central" fill="#fff" font-family="var(--font-body)" font-weight="800" font-size="11" letter-spacing="0.3">MATCH</text>`;
+      } else {
+        extras += `<text x="50" y="74" text-anchor="middle" dominant-baseline="central" fill="#fff" font-family="var(--font-body)" font-weight="800" font-size="11" letter-spacing="0.3">MATCH</text>`;
+      }
+      return `<svg viewBox="0 0 100 100" width="100%" height="100%" style="overflow:visible">${shape}${extras}</svg>`;
+    }
+
+    // Circle radar — reproduced from the FlavorRadarChart values (renderVals().circleRadar),
+    // using the flavour accent palette. Lives on the light Circles card.
+    _radar(vals, size) {
+      const NS = 'http://www.w3.org/2000/svg';
+      const keys = Object.keys(vals), n = keys.length;
+      const c = size / 2, R = size / 2 * 0.84;
+      const PAL = ['#DC2626', '#EA580C', '#D97706', '#65A30D', '#0891B2'];
+      const svg = document.createElementNS(NS, 'svg');
+      svg.setAttribute('viewBox', '0 0 ' + size + ' ' + size);
+      svg.setAttribute('width', size); svg.setAttribute('height', size); svg.style.display = 'block';
+      const pt = (rad, i) => { const a = -Math.PI / 2 + i * 2 * Math.PI / n; return [c + rad * Math.cos(a), c + rad * Math.sin(a)]; };
+      const ring = (rad, stroke) => {
+        let d = '';
+        for (let i = 0; i < n; i++) { const [x, y] = pt(rad, i); d += (i ? 'L' : 'M') + x.toFixed(1) + ',' + y.toFixed(1); }
+        d += 'Z';
+        const p = document.createElementNS(NS, 'path'); p.setAttribute('d', d);
+        p.setAttribute('fill', 'none'); p.setAttribute('stroke', stroke); p.setAttribute('stroke-width', '1'); svg.appendChild(p);
+      };
+      for (let g = 1; g <= 4; g++) ring(R * g / 4, 'rgba(51,40,28,0.12)');
+      for (let i = 0; i < n; i++) { const [x, y] = pt(R, i); const l = document.createElementNS(NS, 'line'); l.setAttribute('x1', c); l.setAttribute('y1', c); l.setAttribute('x2', x.toFixed(1)); l.setAttribute('y2', y.toFixed(1)); l.setAttribute('stroke', 'rgba(51,40,28,0.10)'); l.setAttribute('stroke-width', '1'); svg.appendChild(l); }
+      let dd = ''; const verts = [];
+      for (let i = 0; i < n; i++) { const v = Math.max(0, Math.min(1, vals[keys[i]])); const [x, y] = pt(R * v, i); verts.push([x, y]); dd += (i ? 'L' : 'M') + x.toFixed(1) + ',' + y.toFixed(1); }
+      dd += 'Z';
+      const poly = document.createElementNS(NS, 'path'); poly.setAttribute('d', dd);
+      poly.setAttribute('fill', 'rgba(189,69,39,0.18)'); poly.setAttribute('stroke', '#BD4527'); poly.setAttribute('stroke-width', '2'); poly.setAttribute('stroke-linejoin', 'round'); svg.appendChild(poly);
+      verts.forEach((v, i) => { const dot = document.createElementNS(NS, 'circle'); dot.setAttribute('cx', v[0].toFixed(1)); dot.setAttribute('cy', v[1].toFixed(1)); dot.setAttribute('r', '3'); dot.setAttribute('fill', PAL[i % PAL.length]); svg.appendChild(dot); });
+      return svg;
+    }
+
+    _buildWheels() {
+      const hero = document.querySelector('[data-wheel="hero"]');
+      if (hero && !hero._done) { hero._done = 1; hero.appendChild(this._sunburst(800, { seed: 7, bg: [26, 20, 18] })); }
+      const loop = document.querySelector('[data-wheel="loop"]');
+      if (loop && !loop._done) { loop._done = 1; const s = this._sunburst(360, { seed: 7, label: true, bg: [17, 16, 16] }); s.setAttribute('width', '100%'); s.setAttribute('height', '100%'); loop.appendChild(s); }
+      document.querySelectorAll('[data-rail-badge]').forEach((el) => { if (!el._done) { el._done = 1; el.innerHTML = this._matchBadgeSVG(+el.dataset.score); } });
+      const cr = document.querySelector('[data-circle-radar]');
+      if (cr && !cr._done) { cr._done = 1; cr.appendChild(this._radar(this.renderVals().circleRadar, 124)); }
+    }
+
+    _buildFounder() {
+      const host = document.querySelector('[data-code]');
+      if (!host) return;
+      const C = { cm: '#857c72', kw: '#d98a59', vr: '#6fb6c6', op: '#9a8f86', bt: '#8fa86a', st: '#ded3c7', hl: '#ef6a44' };
+      const p1 = "I'm the kind of cook who reads four recipes before making one. I love the creative part of combining ideas, tweaking flavours, timing multiple dishes to land together. But there's always that moment of doubt: is this going to work, or have I just wasted an evening?";
+      const p2 = "The truth is, I've always wanted to be more adventurous with food. But I hate the uncertainty of trying something new and not liking it. For years I've wished I could somehow taste-test the future, to know before I commit that the risk is actually worth taking.";
+      const p3 = "Add three kids with three different palates, and cooking became less joy, more negotiation. There's a particular kind of defeat in clearing plates that still have food on them, knowing the \"I'm hungry\" complaints are about two hours away.";
+      const p4 = "Nomology is the thing I couldn't find, so I built it. It learns what actually works for you, not what's trending, not what works for everyone else, but your specific tastes and your family's.";
+      const p5 = "That confidence of peering into the future has unlocked a new kind of joy for me in my cooking. The experiment that actually lands, the new flavour you'd never have tried, the family meal where we get to enjoy the food, and one another, without whining.";
+      const p6 = "I hope it brings some of that joy to your kitchen and dinner table.";
+      const k = (n, str, scol) => [[C.kw, 'const '], [C.vr, n], [C.op, ' = '], [C.bt, '`'], [scol || C.st, str], [C.bt, '`']];
+      const lines = [
+        [[C.cm, '/**']],
+        [[C.cm, ' * the_nomology_origin_story.js']],
+        [[C.cm, ' * @author  Dave — founder, chief dishwasher']],
+        [[C.cm, ' */']],
+        [],
+        k('origin', p1),
+        [],
+        k('wish', p2),
+        [],
+        k('dinnerTable', p3),
+        [],
+        [[C.cm, '// the thing I couldn’t find, so I built it']],
+        k('nomology', p4, C.hl),
+        [],
+        k('joy', p5),
+        [],
+        [[C.kw, 'export default '], [C.bt, '`'], [C.st, p6], [C.bt, '`']],
+      ];
+      this._chars = [];
+      const frag = document.createDocumentFragment();
+      lines.forEach((toks, li) => {
+        const row = document.createElement('div');
+        row.style.cssText = 'display:flex;gap:18px;align-items:flex-start';
+        const gut = document.createElement('span');
+        gut.textContent = String(li + 1).padStart(2, '0');
+        gut.style.cssText = 'flex:none;width:26px;text-align:right;color:#4e463f;user-select:none';
+        const content = document.createElement('span');
+        content.style.cssText = 'flex:1;min-width:0;white-space:pre-wrap;overflow-wrap:break-word';
+        if (toks.length === 0) {
+          const sp = document.createElement('span');
+          sp.textContent = ' ';
+          sp.style.opacity = '0';
+          content.appendChild(sp);
+          this._chars.push(sp);
+        } else {
+          toks.forEach(([col, text]) => {
+            for (const ch of text) {
+              const sp = document.createElement('span');
+              sp.textContent = ch;
+              sp.style.color = col;
+              sp.style.opacity = '0';
+              content.appendChild(sp);
+              this._chars.push(sp);
+            }
+          });
+        }
+        row.appendChild(gut);
+        row.appendChild(content);
+        frag.appendChild(row);
+        this._lastContent = content;
+      });
+      host.appendChild(frag);
+      this._caret = document.createElement('span');
+      this._caret.style.cssText = 'display:inline-block;width:8px;height:1.05em;vertical-align:-2px;background:#ef6a44;border-radius:1px;margin:0 1px;animation:nomCaret 1s step-end infinite';
+      this._fIdx = -1;
+      if (this._reduced) {
+        this._chars.forEach((s) => { s.style.opacity = '1'; });
+        this._lastContent.appendChild(this._caret);
+        this._fIdx = this._chars.length;
+      } else if (this._chars[0]) {
+        this._chars[0].parentNode.insertBefore(this._caret, this._chars[0]);
+        this._fIdx = 0;
+      }
+    }
+
+    q(sel) {
+      if (!this._cache[sel]) this._cache[sel] = document.querySelector(sel);
+      return this._cache[sel];
+    }
+
+    frame() {
+      const clamp = this._clamp;
+      const y = window.pageYOffset || document.documentElement.scrollTop || 0;
+      const vh = window.innerHeight || 800;
+
+      const askDemo = this.q('[data-ask-demo]');
+      if (askDemo) {
+        const full1 = this._askPrompt || '', full2 = this._askPrompt2 || '';
+        const compose = this.q('[data-ask-compose]'), ph = this.q('[data-ask-ph]'), caret = this.q('[data-ask-caret]');
+        const sendBtn = this.q('[data-ask-send]'), sendRim = this.q('[data-ask-send-rim]');
+        const sent1 = this.q('[data-ask-sent]'), userRow1 = this.q('[data-ask-userrow]');
+        const think1 = this.q('[data-ask-thinking]'), tmsg1 = this.q('[data-ask-think-msg]'), res1 = this.q('[data-ask-result]');
+        const sent2 = this.q('[data-ask-sent2]'), userRow2 = this.q('[data-ask-userrow2]');
+        const think2 = this.q('[data-ask-thinking2]'), tmsg2 = this.q('[data-ask-think-msg2]'), res2 = this.q('[data-ask-result2]');
+        const modeDot = this.q('[data-ask-mode-dot]'), modeLabel = this.q('[data-ask-mode-label]');
+        const showThink = (elm, el, a, b) => { if (!elm) return; const v = el >= a && el < b; elm.style.display = v ? 'flex' : 'none'; elm.style.opacity = v ? Math.min(clamp((el - a) / 280, 0, 1), clamp((b - el) / 220, 0, 1)) : 0; };
+        const reveal = (elm, el, at) => { if (!elm) return; elm.style.display = el >= at - 40 ? 'block' : 'none'; const e = 1 - Math.pow(1 - clamp((el - at) / 620, 0, 1), 3); elm.style.opacity = e; elm.style.transform = `translateY(${((1 - e) * 14).toFixed(1)}px)`; };
+        const bubble = (elm, el, at) => { if (!elm) return; const u = clamp((el - at) / 360, 0, 1); elm.style.opacity = u; elm.style.transform = `translateY(${((1 - u) * 8).toFixed(1)}px)`; };
+        if (this._reduced) {
+          if (sent1) sent1.textContent = full1;
+          if (sent2) sent2.textContent = full2;
+          if (compose) compose.textContent = '';
+          if (ph) ph.style.opacity = '1';
+          if (caret) caret.style.display = 'none';
+          [userRow1, userRow2].forEach((r) => { if (r) { r.style.opacity = '1'; r.style.transform = 'none'; } });
+          [think1, think2].forEach((t) => { if (t) t.style.display = 'none'; });
+          [res1, res2].forEach((r) => { if (r) { r.style.display = 'block'; r.style.opacity = '1'; r.style.transform = 'none'; } });
+          if (modeLabel) modeLabel.textContent = 'Tweak';
+          if (modeDot) modeDot.style.background = 'var(--nom-mode-tweak)';
+        } else {
+          if (!this._askStarted) { const r = askDemo.getBoundingClientRect(); if (r.top < vh * 0.72 && r.bottom > 0) this._askStarted = performance.now(); }
+          if (this._askStarted) {
+            const el = performance.now() - this._askStarted, CT = 34;
+            const send1 = full1.length * CT + 520, think1At = send1 + 260, res1At = think1At + 2000;
+            const turn2 = res1At + 2000;
+            const send2 = turn2 + full2.length * CT + 520, think2At = send2 + 260, res2At = think2At + 1900;
+            let composed = '';
+            const typing1 = el < send1, typing2 = el >= turn2 && el < send2;
+            if (typing1) composed = full1.slice(0, Math.min(full1.length, Math.floor(el / CT)));
+            else if (typing2) composed = full2.slice(0, Math.min(full2.length, Math.floor((el - turn2) / CT)));
+            if (compose && compose.textContent !== composed) compose.textContent = composed;
+            if (ph) ph.style.opacity = composed.length === 0 ? '1' : '0';
+            if (caret) caret.style.display = (typing1 || typing2) ? 'inline-block' : 'none';
+            const lit = composed.trim().length > 0;
+            if (sendBtn) { sendBtn.style.background = lit ? 'var(--nom-brand)' : 'var(--nom-fill-2)'; sendBtn.style.color = lit ? 'var(--nom-on-brand)' : 'var(--nom-on-4)'; }
+            if (sendRim) sendRim.style.opacity = lit ? '0.75' : '0';
+            if (modeLabel) modeLabel.textContent = el >= turn2 ? 'Tweak' : 'Describe';
+            if (modeDot) modeDot.style.background = el >= turn2 ? 'var(--nom-mode-tweak)' : 'var(--nom-mode-describe)';
+            if (sent1 && el >= send1 && sent1.textContent !== full1) sent1.textContent = full1;
+            bubble(userRow1, el, send1);
+            showThink(think1, el, think1At, res1At);
+            if (tmsg1 && el >= think1At && el < res1At) { const i = Math.floor((el - think1At) / 650) % this._thinkMsgs.length; if (i !== this._askMsgI) { this._askMsgI = i; tmsg1.textContent = this._thinkMsgs[i]; } }
+            reveal(res1, el, res1At);
+            if (sent2 && el >= send2 && sent2.textContent !== full2) sent2.textContent = full2;
+            bubble(userRow2, el, send2);
+            showThink(think2, el, think2At, res2At);
+            if (tmsg2 && el >= think2At && el < res2At) { const i = Math.floor((el - think2At) / 650) % this._thinkMsgs2.length; if (i !== this._askMsgI2) { this._askMsgI2 = i; tmsg2.textContent = this._thinkMsgs2[i]; } }
+            reveal(res2, el, res2At);
+          }
+        }
+      }
+
+      const solid = y > 80;
+      if (solid !== this._navSolid) {
+        this._navSolid = solid;
+        const navEl = this.q('[data-nav]');
+        if (navEl) {
+          navEl.style.background = solid ? 'rgba(15,14,14,0.72)' : 'transparent';
+          navEl.style.backdropFilter = solid ? 'saturate(150%) blur(16px)' : 'none';
+          navEl.style.webkitBackdropFilter = solid ? 'saturate(150%) blur(16px)' : 'none';
+          navEl.style.borderBottom = solid ? '1px solid rgba(255,255,255,0.08)' : '1px solid transparent';
+        }
+      }
+
+      document.querySelectorAll('.reveal:not(.in)').forEach((el) => {
+        if (el.getBoundingClientRect().top < vh * 0.88) el.classList.add('in');
+      });
+
+      this._lerpY += (y - this._lerpY) * 0.12;
+      const ly = this._reduced ? y : this._lerpY;
+
+      if (!this._reduced) {
+        this._mx += (this._tmx - this._mx) * 0.06;
+        this._my += (this._tmy - this._my) * 0.06;
+        document.querySelectorAll('.cta-mag').forEach((el) => {
+          if (el._mag) return; el._mag = 1;
+          el.addEventListener('pointermove', (ev) => {
+            const b = el.getBoundingClientRect();
+            el.style.transform = `translate(${((ev.clientX - (b.left + b.width / 2)) * 0.2).toFixed(1)}px, ${((ev.clientY - (b.top + b.height / 2)) * 0.34).toFixed(1)}px)`;
+          });
+          el.addEventListener('pointerleave', () => { el.style.transform = 'translate(0,0)'; });
+        });
+      }
+      const hw = this.q('[data-hero-wheel]');
+      if (hw) hw.style.transform = `translate(calc(-50% + ${(this._mx * 26).toFixed(1)}px), calc(-50% + ${(ly * 0.12 + this._my * 22).toFixed(1)}px))`;
+      const build = this.q('[data-hero-build]');
+      if (build) {
+        if (this._reduced) { build.style.opacity = 1; build.style.transform = 'none'; }
+        else {
+          const bp = clamp((performance.now() - this._t0) / 1700, 0, 1);
+          const be = 1 - Math.pow(1 - bp, 3);
+          build.style.opacity = be;
+          build.style.transform = `scale(${(0.78 + be * 0.22).toFixed(3)})`;
+        }
+      }
+      const hc = this.q('[data-hero-content]');
+      if (hc) {
+        const f = clamp(1 - y / (vh * 0.62), 0, 1);
+        hc.style.opacity = this._reduced ? 1 : f;
+        hc.style.transform = this._reduced ? 'none' : `translateY(${(1 - f) * -36}px)`;
+      }
+      const hs = this.q('[data-hero-scroll]');
+      if (hs) hs.style.opacity = clamp(1 - y / (vh * 0.35), 0, 1);
+
+      const loop = this.q('[data-loop]');
+      if (loop) {
+        const r = loop.getBoundingClientRect();
+        const total = r.height - vh;
+        const p = clamp((-r.top) / total, 0, 1);
+        const prog = this.q('[data-loop-progress]');
+        if (prog) prog.style.width = (p * 100).toFixed(2) + '%';
+        const centers = [0.1, 0.37, 0.63, 0.9];
+        for (let k = 0; k < 4; k++) {
+          const beat = this.q('[data-beat="' + k + '"]');
+          if (!beat) continue;
+          const d = Math.abs(p - centers[k]);
+          const op = clamp((0.2 - d) / 0.14, 0, 1);
+          beat.style.opacity = op;
+          beat.style.transform = `translateY(${(1 - op) * 26}px) scale(${0.955 + op * 0.045})`;
+          beat.style.pointerEvents = op > 0.5 ? 'auto' : 'none';
+        }
+        const lw = this.q('[data-loop-wheel]');
+        if (lw) { const wp = clamp((p - 0.2) / 0.16, 0, 1); lw.style.transform = `scale(${(0.66 + wp * 0.34).toFixed(3)}) rotate(${((1 - wp) * -40).toFixed(1)}deg)`; }
+        const mp = clamp((p - 0.46) / 0.15, 0, 1);
+        const e = 1 - Math.pow(1 - mp, 3);
+        const score = Math.round(e * 96);
+        const mb = this.q('[data-match-badge]');
+        if (mb && score !== this._lastBadgeScore) { this._lastBadgeScore = score; mb.innerHTML = this._matchBadgeSVG(score); }
+      }
+
+      const rail = this.q('[data-rail]');
+      if (rail) {
+        const r = rail.getBoundingClientRect();
+        const total = r.height - vh;
+        const p = clamp((-r.top) / total, 0, 1);
+        const track = this.q('[data-rail-track]');
+        if (track) {
+          const dist = Math.max(0, track.scrollWidth - (window.innerWidth || 1200) + 88);
+          track.style.transform = `translateX(${-(this._reduced ? p : this._ease(p)) * dist}px)`;
+        }
+      }
+
+      if (this._chars && !this._reduced) {
+        const fr = this.q('[data-founder]');
+        if (fr) {
+          const r = fr.getBoundingClientRect();
+          const span = r.height - vh;
+          const p = clamp((-r.top) / span, 0, 1);
+          const tp = clamp((p - 0.04) / 0.74, 0, 1);
+          const n = this._chars.length;
+          const idx = Math.min(n, Math.floor(tp * n));
+          if (idx !== this._fIdx) {
+            const lo = Math.min(idx, this._fIdx), hi = Math.max(idx, this._fIdx);
+            for (let i = lo; i < hi; i++) { if (this._chars[i]) this._chars[i].style.opacity = i < idx ? '1' : '0'; }
+            const cs = this._chars[idx];
+            if (cs && cs.parentNode) cs.parentNode.insertBefore(this._caret, cs);
+            else if (this._lastContent) this._lastContent.appendChild(this._caret);
+            this._fIdx = idx;
+            const code = this.q('[data-code]');
+            const body = this.q('[data-codebody]');
+            if (code && body) {
+              const ct = this._caret.offsetTop;
+              const off = Math.max(0, Math.min(code.scrollHeight - body.clientHeight, ct - body.clientHeight * 0.58));
+              code.style.transform = 'translateY(' + (-off).toFixed(1) + 'px)';
+            }
+          }
+        }
+      }
+    }
+
+    _ease(p) { return p; }
+
+    renderVals() {
+      return { circleRadar: { Umami: 0.72, Sweet: 0.45, Spicy: 0.8, Fresh: 0.5, Rich: 0.66 } };
+    }
+  }
+
+  function start() { new NomHome().mount(); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
+  else start();
+})();
+
+/* Auth error redirect handler — behaviour identical to live index.html */
+(function () {
+  var params = new URLSearchParams(window.location.search);
+  var hash = window.location.hash;
+  var hp = hash ? new URLSearchParams(hash.substring(1)) : null;
+  var error = params.get('error') || (hp && hp.get('error'));
+  var errorCode = params.get('error_code') || (hp && hp.get('error_code'));
+  var errorDescription = params.get('error_description') || (hp && hp.get('error_description'));
+  if (error || errorCode) {
+    var modal = document.getElementById('error-modal');
+    var titleEl = document.getElementById('error-title');
+    var messageEl = document.getElementById('error-message');
+    var errorMessages = {
+      'otp_expired': { title: 'Link Expired', message: 'This link has expired. Please request a new one from the app.' },
+      'access_denied': { title: 'Access Denied', message: 'This link is no longer valid. Please request a new one from the app.' },
+      'invalid_request': { title: 'Invalid Link', message: 'This link appears to be invalid. Please request a new one from the app.' }
+    };
+    var info = errorMessages[errorCode] || {
+      title: 'Something Went Wrong',
+      message: errorDescription ? decodeURIComponent(errorDescription.replace(/\+/g, ' ')) : 'Please try again or request a new link from the app.'
+    };
+    titleEl.textContent = info.title;
+    messageEl.textContent = info.message;
+    modal.style.display = 'flex';
+    window.history.replaceState({}, document.title, window.location.pathname);
+  }
+})();
+function closeErrorModal() { document.getElementById('error-modal').style.display = 'none'; }
+</script>
+</body>
+</html>
