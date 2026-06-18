@@ -1,0 +1,110 @@
+/* ============================================================
+   NOMOLOGY · COLOR TOKENS
+   Verified against lib/core/theme/app_theme.dart + flavor_colors.dart
+   The app ships light-mode-first, with a hand-rolled "crafted dark"
+   surface family used by the AI / Discover / Cooking flows.
+   ============================================================ */
+
+:root {
+  /* --- Brand core ----------------------------------------- */
+  --nom-red:        #BD4527; /* primary brand — CTAs, accents, match */
+  --nom-red-dark:   #8B3219; /* primaryGradient end (verified: gradientEnd) */
+  --nom-dark:       #33281C; /* primary text on light, headings */
+  --nom-brown:      #633C37; /* secondary text on light, outlines */
+  --nom-light:      #F5F1F1; /* warm off-white app surface */
+  --nom-blue:       #276DBD; /* secondary accent */
+  --nom-beige:      #E5C5C0; /* soft accent fills */
+  --nom-card:       #E8DFDE; /* warm-grey card backdrop */
+
+  /* --- Crafted dark family (AI / Discover / Cooking) ------- */
+  --nom-ink:        #181818; /* dark scaffold / sheet background */
+  --nom-ink-raised: #222222; /* input / chip / card fill on dark */
+  --nom-ink-border: #302E2E; /* border on filled dark surfaces */
+  --nom-ink-black:  #0F0E0E; /* near-black discover card */
+
+  /* --- Circle / household (teal family) ------------------- */
+  --nom-teal:       #007E89;
+  --nom-teal-light: #4DB6AC;
+  --nom-teal-dark:  #005F66;
+
+  /* --- Recipe source / social ----------------------------- */
+  --nom-source-gold: #8B6914;
+  --nom-source-web:  #2563EB;
+  --nom-facebook:    #1877F2;
+
+  /* --- Semantic ------------------------------------------- */
+  --nom-error:   #B3261E;
+  --nom-success: #2E7D32; /* warm-tuned, replaces raw Colors.green */
+  --nom-warning: #B26A00; /* warm-tuned, replaces raw Colors.amber */
+  --nom-info:    #276DBD; /* uses brand blue */
+
+  /* --- Flavor accent palette (radar, chips, wheel) -------- */
+  --flavor-red:    #DC2626;
+  --flavor-orange: #EA580C;
+  --flavor-amber:  #D97706;
+  --flavor-lime:   #65A30D;
+  --flavor-cyan:   #0891B2;
+
+  /* --- AI shimmer palette (signals "AI-powered" surfaces) - */
+  --ai-gold:    #FEB712;
+  --ai-orange:  #FB6B35;
+  --ai-pink-hot:#F70157;
+  --ai-pink:    #EC4E8F;
+  --ai-purple:  #AC52FC;
+  --ai-blue:    #299BFE;
+  --ai-shimmer-gradient: linear-gradient(
+    90deg,
+    var(--ai-gold), var(--ai-orange), var(--ai-pink-hot),
+    var(--ai-pink), var(--ai-purple), var(--ai-blue), var(--ai-gold)
+  );
+
+  /* ============================================================
+     SEMANTIC ALIASES — prefer these in components
+     ============================================================ */
+
+  /* Light surfaces (the runtime theme) */
+  --surface-app:        var(--nom-light);   /* page background */
+  --surface-card:       #FFFFFF;            /* white recipe card */
+  --surface-card-warm:  var(--nom-card);    /* warm-grey card */
+  --surface-raised:     #FFFFFF;
+  --surface-sunken:     var(--nom-card);
+
+  /* Dark surfaces (crafted-dark flows) */
+  --surface-dark:        var(--nom-ink);
+  --surface-dark-raised: var(--nom-ink-raised);
+  --surface-dark-card:   var(--nom-ink-black);
+
+  /* Text on light */
+  --text-strong:    var(--nom-dark);              /* headings */
+  --text-body:      var(--nom-brown);             /* secondary text */
+  --text-muted:     rgba(51, 40, 28, 0.7);        /* onSurfaceVariant */
+  --text-faint:     rgba(51, 40, 28, 0.45);
+  --text-on-brand:  #FFFFFF;
+
+  /* Text on dark — the named opacity ramp (was un-tokenised) */
+  --text-dark-strong: #FFFFFF;            /* primary */
+  --text-dark-body:   rgba(255,255,255,0.7);  /* secondary */
+  --text-dark-muted:  rgba(255,255,255,0.5);  /* tertiary / hint */
+  --text-dark-faint:  rgba(255,255,255,0.3);  /* disabled */
+  --fill-dark-subtle: rgba(255,255,255,0.06); /* chip / surface tint */
+
+  /* Brand roles */
+  --brand:          var(--nom-red);
+  --brand-pressed:  var(--nom-red-dark);
+  --brand-gradient: linear-gradient(135deg, var(--nom-red), var(--nom-red-dark)); /* topLeft→bottomRight */
+  --brand-tint:     rgba(189, 69, 39, 0.10);  /* primaryContainer */
+  /* secondary button fill — brown @ 15% on light, white @ 15% on dark (verified) */
+  --secondary-fill-light: rgba(99, 60, 55, 0.15);
+  --secondary-fill-dark:  rgba(255, 255, 255, 0.15);
+  --on-brand:       #FFFFFF;
+  --accent:         var(--nom-blue);
+
+  /* Borders / outlines on light */
+  --border:        rgba(51, 40, 28, 0.30);  /* outline */
+  --border-subtle: rgba(51, 40, 28, 0.10);  /* outlineVariant */
+  --border-dark:        var(--nom-ink-border);
+  --border-dark-subtle: rgba(255,255,255,0.08);
+
+  /* Focus */
+  --focus-ring: var(--nom-red);
+}
