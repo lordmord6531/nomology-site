@@ -40,8 +40,16 @@ cd /path/to/nomology-site && python3 -m http.server 8000
   (eyebrows `#E45F3A`, "MOST LOVED" `#8B3219`, loop label brighter), the hero headline paints
   immediately (best LCP — entrance fade dropped), and footer legal links hit the 44px iOS
   tap-target minimum on mobile. (v3 baseline retained in git history.)
-- ⏳ **Next: apply the 29 queued design-safe fixes** (canonical, JSON-LD, aria-hidden the demo,
-  rAF idle-on-hidden, font slimming, decode guard, dead-code removal, etc.) to this build.
+- ✅ **Design-safe gauntlet fixes applied** to `production/index.html`: `<link rel=canonical>`,
+  inline JSON-LD (`MobileApplication` + `Organization`), the two Google Fonts requests merged into
+  one `css2` call with Material Symbols axes pinned (`opsz,wght,FILL,GRAD@24,400,0..1,0`), CSP
+  hardened (`base-uri 'self'; object-src 'none'`), `<noscript>` reveal fallback, the fake Ask Nom
+  demo + editor chrome `aria-hidden`, rAF `document.hidden` guard + `visibilitychange` re-prime,
+  `decodeURIComponent` try/catch, reduced-motion-static founder caret, and dead CSS/JS removed.
+  Re-verified: headless render unchanged (13 SVGs, hero pixel-faithful).
+- ✅ **`robots.txt` + `sitemap.xml` added** under `production/`. ⚠️ Their URLs are root-absolute
+  (`https://nomology.food/sitemap.xml`), so they are **inert until promoted to repo root** — the
+  release/promote step MUST move `robots.txt` + `sitemap.xml` to root alongside `index.html`.
 - 🅿️ Parked: home `og:image` + the share-image pipeline re-eval; apple-touch-icon asset.
 - 🚫 Do not merge / promote to root until **Ask Nom** ships.
 
