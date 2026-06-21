@@ -353,7 +353,7 @@
                 <tr>
                     <td>Anthropic (Claude AI)</td>
                     <td>AI recipe features</td>
-                    <td>Recipe text and prompts you submit (no user identifiers)</td>
+                    <td>Recipe text, prompts you submit, and a coarse preference signal (no user identifiers)</td>
                 </tr>
                 <tr>
                     <td>Google Cloud (Imagen)</td>
@@ -384,7 +384,8 @@
         </table>
 
         <h3>AI features and your prompts</h3>
-        <p>When you use AI features (such as creating a recipe from a URL or refining a recipe), the text you provide is sent to our AI providers. We do not send your user ID or other personal identifiers with this data. However, please be aware that if you include personal information in your prompts (for example, "my husband John is allergic to..."), that text will be processed by the AI service.</p>
+        <p>When you use AI features (such as creating a recipe from a URL, refining a recipe, or describing a dish to our AI chef), the text you provide is sent to our AI providers. In addition to the text you type, we may send a coarse preference signal derived from your settings — for example, how adventurous you would like your recommendations to be (a simple "conservative", "balanced" or "bold" level) — so the AI can tailor its suggestions. We never send your user ID, name, or other personal identifiers with any of this data. Please be aware that if you include personal information in your prompts (for example, "my husband John is allergic to..."), that text will be processed by the AI service.</p>
+        <p>When you use our AI chef, the prompts you send and the recipe options it returns to you are also stored on our own servers (hosted by Supabase in the European Union), linked to your account, so that we can show you your past conversations. We keep this content while your account is active, and it is deleted when you delete your account (within 30 days).</p>
 
         <h2>6. International data transfers</h2>
         <p>Your main account data is stored by Supabase in the European Union (Stockholm, Sweden). Some of our other service providers are based in the United States, including Anthropic, RevenueCat, Firebase, and Google Cloud.</p>
