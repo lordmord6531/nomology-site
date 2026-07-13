@@ -1,0 +1,45 @@
+/* ============================================================
+   NOMOLOGY · SPACING, RADIUS, ELEVATION
+   De-facto 4/8/12/16/24/32/40 cadence distilled from inline
+   EdgeInsets / SizedBox usage. 24px is the standard screen
+   horizontal padding; 16–24px the standard between-section gap.
+   ============================================================ */
+
+:root {
+  /* Spacing scale */
+  --space-xs:   4px;
+  --space-sm:   8px;
+  --space-md:   12px;
+  --space-base: 16px;
+  --space-lg:   20px;
+  --space-xl:   24px;  /* screen horizontal padding */
+  --space-2xl:  32px;
+  --space-3xl:  40px;
+
+  /* Semantic spacing */
+  --pad-screen:  24px;
+  --gap-section: 24px;
+  --gap-row:     16px;
+
+  /* Border radius */
+  --radius-xs:   4px;  /* snackbar, premium badge */
+  --radius-sm:   8px;  /* small inputs, add-recipe pill */
+  --radius-md:   10px; /* recommendation card, chips */
+  --radius-base: 12px; /* DEFAULT surface / button radius */
+  --radius-lg:   16px; /* card theme default, tag chips */
+  --radius-xl:   20px; /* bottom-sheet top, close pill */
+  --radius-pill: 100px; /* flavor chips, fully-rounded */
+
+  /* Elevation / shadows (light surfaces) */
+  --shadow-card: 0 1px 3px rgba(51, 40, 28, 0.08), 0 1px 2px rgba(51, 40, 28, 0.04);
+  --shadow-pop:  0 4px 16px rgba(51, 40, 28, 0.12);
+  --shadow-nav:  0 -1px 8px rgba(51, 40, 28, 0.06); /* bottom nav bar */
+  --shadow-sheet: 0 -8px 32px rgba(0, 0, 0, 0.24);  /* dark sheet lift */
+
+  /* Motion */
+  --ease-out:    cubic-bezier(0.2, 0, 0, 1); /* @kind other */
+  --dur-fast:    120ms; /* @kind other */
+  --dur-base:    200ms; /* @kind other */
+  --dur-slow:    300ms; /* @kind other */
+  --press-scale: 0.98; /* @kind other */
+}

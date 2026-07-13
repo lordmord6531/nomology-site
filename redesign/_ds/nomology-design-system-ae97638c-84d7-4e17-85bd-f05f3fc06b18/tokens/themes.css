@@ -1,0 +1,179 @@
+/* ============================================================
+   NOMOLOGY · THEME LAYER  (folds in the Nom Kit token system)
+   ------------------------------------------------------------
+   One switch — `data-nom-theme` on any container — re-themes the
+   WHOLE design system. It re-points both:
+     • the Nom-Kit surface/text/brand tokens  (--nom-surface-*, --nom-on-*, …)
+     • the DS semantic aliases                 (--surface-app, --text-strong, --border, …)
+
+   The app ships light-first, so the unqualified :root IS the light
+   theme. Opt into dark on a wrapper:
+       <div data-nom-theme="dark">  neutral near-black (production AI flows)
+       <div data-nom-theme="light"> explicit light (for nesting inside dark)
+
+   Text ramps are verified AA+ on their base surface.
+   ============================================================ */
+
+/* ============================================================
+   LIGHT  (default) — warm cream
+   ============================================================ */
+:root,
+[data-nom-theme="light"] {
+  /* Nom-Kit surfaces */
+  --nom-surface-sunken:   #E8DFDE;
+  --nom-surface-base:     #F5F1F1;
+  --nom-surface-raised:   #FFFFFF;
+  --nom-surface-raised-2: #FBF8F8;
+  --nom-surface-bridge:   #FBF6F4;
+  --nom-border:           rgba(51,40,28,0.30);
+  --nom-border-strong:    rgba(51,40,28,0.45);
+  --nom-border-subtle:    rgba(51,40,28,0.10);
+
+  --nom-on-1: #33281C;
+  --nom-on-2: #633C37;
+  --nom-on-3: rgba(51,40,28,0.55);
+  --nom-on-4: rgba(51,40,28,0.32);
+
+  --nom-fill-1: rgba(51,40,28,0.04);
+  --nom-fill-2: rgba(51,40,28,0.07);
+  --nom-fill-3: rgba(51,40,28,0.12);
+
+  --nom-brand:         #BD4527;
+  --nom-brand-pressed: #8B3219;
+  --nom-brand-hover:   #A93C22;
+  --nom-brand-tint:    rgba(189,69,39,0.10);
+  --nom-brand-tint-2:  rgba(189,69,39,0.18);
+  --nom-brand-ref:     #BD4527;
+  --nom-on-brand:      #FFFFFF;
+
+  --nom-success: #2E7D32; --nom-success-tint: rgba(46,125,50,0.12);
+  --nom-warning: #B26A00; --nom-warning-tint: rgba(178,106,0,0.12);
+  --nom-error:   #B3261E; --nom-error-tint:   rgba(179,38,30,0.12);
+  --nom-info:    #276DBD; --nom-info-tint:    rgba(39,109,189,0.12);
+
+  --nom-flavor-red:#DC2626; --nom-flavor-orange:#EA580C; --nom-flavor-amber:#D97706;
+  --nom-flavor-lime:#65A30D; --nom-flavor-cyan:#0891B2;
+
+  --nom-mode-describe: var(--nom-brand);
+  --nom-mode-tweak:    #B26A00;
+  --nom-mode-import:   #276DBD;
+
+  --nom-sheet-lift: 0 -8px 32px rgba(51,40,28,0.18);
+  --nom-pop:        0 12px 40px rgba(51,40,28,0.18);
+  --nom-card-lift:  0 2px 10px rgba(51,40,28,0.10);
+  --nom-ai-glow:    0 0 40px rgba(189,69,39,0.22);
+
+  /* DS semantic aliases — light */
+  --surface-app:       var(--nom-surface-base);
+  --surface-card:      var(--nom-surface-raised);
+  --surface-card-warm: var(--nom-surface-sunken);
+  --surface-raised:    var(--nom-surface-raised);
+  --surface-sunken:    var(--nom-surface-sunken);
+  --text-strong:  var(--nom-on-1);
+  --text-body:    var(--nom-on-2);
+  --text-muted:   var(--nom-on-3);
+  --text-faint:   var(--nom-on-4);
+  --text-on-brand: var(--nom-on-brand);
+  --brand:        var(--nom-brand);
+  --brand-pressed: var(--nom-brand-pressed);
+  --brand-tint:   var(--nom-brand-tint);
+  --on-brand:     var(--nom-on-brand);
+  --border:        var(--nom-border);
+  --border-subtle: var(--nom-border-subtle);
+  --shadow-card:  var(--nom-card-lift);
+  --shadow-pop:   var(--nom-pop);
+  --focus-ring:   var(--nom-brand);
+}
+
+/* ============================================================
+   DARK  (production AI flows) — neutral near-black
+   Text ramp verified AA+ on #222222.
+   ============================================================ */
+[data-nom-theme="dark"] {
+  --nom-surface-sunken:   #0F0E0E;
+  --nom-surface-base:     #181818;
+  --nom-surface-raised:   #222222;
+  --nom-surface-raised-2: #2A2A2A;
+  --nom-surface-bridge:   #262626;
+  --nom-border:           #302E2E;
+  --nom-border-strong:    #3C3A3A;
+  --nom-border-subtle:    rgba(255,255,255,0.08);
+
+  --nom-on-1: #FFFFFF;
+  --nom-on-2: rgba(255,255,255,0.72);
+  --nom-on-3: rgba(255,255,255,0.50);
+  --nom-on-4: rgba(255,255,255,0.30);
+
+  --nom-fill-1: rgba(255,255,255,0.05);
+  --nom-fill-2: rgba(255,255,255,0.09);
+  --nom-fill-3: rgba(255,255,255,0.14);
+
+  --nom-brand:         #E45F3A;
+  --nom-brand-pressed: #C24A2C;
+  --nom-brand-hover:   #ED6F4B;
+  --nom-brand-tint:    rgba(228,95,58,0.16);
+  --nom-brand-tint-2:  rgba(228,95,58,0.28);
+  --nom-brand-ref:     #BD4527;
+  --nom-on-brand:      #FFF7F3;
+
+  --nom-success: #84B86A; --nom-success-tint: rgba(132,184,106,0.16);
+  --nom-warning: #E0992F; --nom-warning-tint: rgba(224,153,47,0.16);
+  --nom-error:   #E0594A; --nom-error-tint:   rgba(224,89,74,0.16);
+  --nom-info:    #5C97D6; --nom-info-tint:    rgba(92,151,214,0.16);
+
+  --nom-flavor-red:#EF5A52; --nom-flavor-orange:#FB7A43; --nom-flavor-amber:#F0B429;
+  --nom-flavor-lime:#9CCC52; --nom-flavor-cyan:#2BB8CE;
+
+  --nom-mode-describe: var(--nom-brand);
+  --nom-mode-tweak:    #E0992F;
+  --nom-mode-import:   #5C97D6;
+
+  --nom-sheet-lift: 0 -10px 40px rgba(0,0,0,0.45);
+  --nom-pop:        0 12px 40px rgba(0,0,0,0.50);
+  --nom-card-lift:  0 2px 10px rgba(0,0,0,0.30);
+  --nom-ai-glow:    0 0 48px rgba(228,95,58,0.30);
+
+  /* DS semantic aliases — dark */
+  --surface-app:       var(--nom-surface-base);
+  --surface-card:      var(--nom-surface-raised);
+  --surface-card-warm: var(--nom-surface-raised-2);
+  --surface-raised:    var(--nom-surface-raised);
+  --surface-sunken:    var(--nom-surface-sunken);
+  --text-strong:  var(--nom-on-1);
+  --text-body:    var(--nom-on-2);
+  --text-muted:   var(--nom-on-3);
+  --text-faint:   var(--nom-on-4);
+  --text-on-brand: var(--nom-on-brand);
+  --brand:        var(--nom-brand);
+  --brand-pressed: var(--nom-brand-pressed);
+  --brand-tint:   var(--nom-brand-tint);
+  --on-brand:     var(--nom-on-brand);
+  --border:        var(--nom-border);
+  --border-subtle: var(--nom-border-subtle);
+  --shadow-card:  var(--nom-card-lift);
+  --shadow-pop:   var(--nom-pop);
+  --focus-ring:   var(--nom-brand);
+}
+
+/* ============================================================
+   AI-SHIMMER GRADIENTS + shared motion (theme-independent)
+   ============================================================ */
+:root {
+  --nom-ai-gold:   #FEB712; --nom-ai-orange: #FB6B35; --nom-ai-pink-hot: #F70157;
+  --nom-ai-pink:   #EC4E8F; --nom-ai-purple: #AC52FC; --nom-ai-blue:     #299BFE;
+  --nom-ai-gradient: conic-gradient(from 0deg,
+    var(--nom-ai-gold), var(--nom-ai-orange), var(--nom-ai-pink-hot),
+    var(--nom-ai-pink), var(--nom-ai-purple), var(--nom-ai-blue), var(--nom-ai-gold));
+  --nom-ai-sweep: linear-gradient(90deg,
+    var(--nom-ai-gold), var(--nom-ai-orange), var(--nom-ai-pink-hot),
+    var(--nom-ai-pink), var(--nom-ai-purple), var(--nom-ai-blue), var(--nom-ai-gold));
+}
+
+@keyframes nomAiSpin   { to { transform: rotate(1turn); } }
+@keyframes nomAiSweep  { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
+@keyframes nomFadeIn   { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+@keyframes nomBarSlide { 0% { margin-left: -40%; } 100% { margin-left: 100%; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .nom-ai-rim > *, .nom-ai-sweep { animation: none !important; }
+}
