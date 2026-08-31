@@ -229,7 +229,7 @@
     <!--email_off-->
     <div class="content">
         <h1>Privacy Policy</h1>
-        <p class="effective-date">Effective date: 12 August 2026</p>
+        <p class="effective-date">Effective date: [AT-MERGE: store-live date]</p>
 
         <div class="summary-box">
             <p><strong>In brief:</strong> Nomology is a recipe app that learns your food preferences. We collect the information you give us and use it to recommend recipes you'll enjoy. If you choose to compare tastes with someone, they'll see how well your tastes match — never your full profile. We don't sell your personal data. You can delete your account and data at any time.</p>
@@ -263,12 +263,13 @@
         <p>If you use our premium features, we store recipes you create or import, recipe collections, meal plans, shopping lists, and notes you add to recipes. If you join or create a Circle (a shared group), we store content you share within that group.</p>
 
         <h3>Usage information</h3>
-        <p>We collect information about how you use the app, including which features you access, recipes you view, and actions you take (such as swiping, bookmarking, or starting a cooking session). We also collect technical information such as your device type, operating system version, app version, and general location (city-level, derived from your IP address). We do not track your search queries or the specific ingredients you exclude.</p>
+        <p>Where product analytics is switched on (see "Information stored on your device" below), we collect information about how you use the app, including which features you access, recipes you view, and actions you take (such as swiping, bookmarking, or starting a cooking session). We also collect technical information such as your device type, operating system version, app version, and general location (city-level, derived from your IP address). We do not track your search queries or the specific ingredients you exclude.</p>
         <p>We use crash reporting to identify and fix problems. Crash reports include technical information about your device and what happened before the crash, but are sanitised to remove any personal information such as authentication tokens.</p>
-        <p>To link your activity across sessions (for example, to understand your journey from signing up to subscribing), we associate analytics data with your account. This is used solely for internal product improvement and is not shared for advertising purposes.</p>
+        <p>Analytics data and crash reports are not linked to your account. They are grouped by an anonymous identifier that belongs to your app installation, not to you, so they cannot follow you across devices. We use them solely for internal product improvement — for example, to see which sign-up steps people give up on — and never for advertising. App versions before [AT-MERGE: store version] did associate analytics with your account; when you update, the app removes that link on your device, and data collected under earlier versions is deleted or ages out within the periods in section 7.</p>
 
         <h3>Information stored on your device</h3>
         <p>Like most apps, Nomology and the services we use store and read small amounts of information on your device — for example, to keep you signed in, to remember your settings, and, through our analytics and crash-reporting tools, to recognise your device between sessions and to detect and fix technical faults. Before you create an account, product analytics are switched off by default, so this early activity is mainly what the app needs to run and to recover from crashes. You can manage app permissions, such as notifications, in your device settings.</p>
+        <p>Product analytics has an in-app switch. If you are 18 or over, it is on by default, and you can change it at any time in Profile → Privacy → "Share usage data" — turning it off stops the collection from your device straight away. If you are under 18, product analytics is off, it stays off, and the switch cannot turn it on. Crash reporting stays on, because we need it to find and fix faults that would otherwise break the app for you.</p>
 
         <h3>Subscription information</h3>
         <p>If you subscribe to a paid plan, we track your subscription status and AI feature usage (to enforce usage limits). We do not see or store your payment card details—payments are handled entirely by Apple or Google.</p>
@@ -316,6 +317,10 @@
                 <tr>
                     <td>Fixing bugs and improving the app</td>
                     <td>Legitimate interests</td>
+                </tr>
+                <tr>
+                    <td>Product analytics (understanding how the app is used)</td>
+                    <td>Legitimate interests (with an in-app switch — see "Information stored on your device")</td>
                 </tr>
                 <tr>
                     <td>Preventing fraud</td>
@@ -407,12 +412,12 @@
                 <tr>
                     <td>Firebase Analytics</td>
                     <td>App analytics</td>
-                    <td>Usage events, device info, city-level location, user ID</td>
+                    <td>Usage events, device info, city-level location (no user ID or account link)</td>
                 </tr>
                 <tr>
                     <td>Firebase Crashlytics</td>
                     <td>Crash reporting</td>
-                    <td>Crash logs, device info, user ID (for correlation)</td>
+                    <td>Crash logs, device info (no user ID or account link)</td>
                 </tr>
                 <tr>
                     <td>Resend</td>
@@ -433,6 +438,7 @@
         <h2>7. How long we keep your data</h2>
         <p>We retain your personal data for as long as your account is active. If you delete your account, we will delete your personal data within 30 days. Some data may be retained for longer if required by law (for example, financial records for tax purposes) or if anonymised for analytics.</p>
         <p>Onboarding answers from people who leave before creating an account: we aim to delete these within 30 days.</p>
+        <p>Usage analytics are kept for a maximum of three months at the individual level; after that, only aggregate statistics remain.</p>
         <p>Share link attribution data is retained for a maximum of 24 hours and is automatically deleted after a successful match or when the period expires.</p>
         <p>A Taste Buds match, and the record of whether you chose to compare your tastes, last until either of you deletes their account — at which point both are deleted. We keep an anonymous note that a consent choice was made, with the account it belonged to removed, so that we can show we handled consent properly. The flavour dials and the flavours you have in common are never stored — they are worked out afresh each time you open a match.</p>
 
@@ -443,7 +449,7 @@
             <li><strong>Rectification:</strong> You can ask us to correct inaccurate data.</li>
             <li><strong>Erasure:</strong> You can ask us to delete your data (the "right to be forgotten").</li>
             <li><strong>Portability:</strong> You can request your data in a portable format.</li>
-            <li><strong>Objection:</strong> You can object to processing based on legitimate interests.</li>
+            <li><strong>Objection:</strong> You can object to processing based on legitimate interests. For product analytics, the quickest way is the in-app switch (Profile → Privacy → "Share usage data").</li>
             <li><strong>Restriction:</strong> You can ask us to restrict processing in certain circumstances.</li>
             <li><strong>Withdrawing consent:</strong> Where we rely on your consent — for example, to compare your tastes with someone in Taste Buds — you can withdraw it at any time in the app. For Taste Buds, that's "Stop sharing" on the match.</li>
         </ul>
@@ -467,6 +473,7 @@
         <p>On 10 August 2026 we expanded the Taste Buds section to describe comparing your tastes in more detail: the flavour dials (HEAT, UMAMI, SWEET, HERBAL and BRIGHT) that show how strongly each flavour comes through for each of you, the fact that a shared picture shows only the anonymised dials and never names the other person, that the flavours you have in common stay inside the app, and that none of it is stored.</p>
         <p>Also on 10 August 2026 we added the "Your age" section, updated the "Children's privacy" section, and added a row to the legal-basis table to explain that we ask your age when you create an account, why we need it, and what we do with it. This describes collection that was already happening; this policy had not explained it before.</p>
         <p>On 12 August 2026 we updated the "Your age", "Before you create an account" and "Children's privacy" sections: the age question now comes at the very start of the app, before anything else (your answer stays on your device and is only stored if you create an account); if you are under 18 we now ask for your full date of birth — not only when your birth year means you might not yet be 13 — so we can be sure how old you are and know exactly when you turn 18; and if you are under 13, you cannot register and nothing you entered is kept.</p>
+        <p>On [AT-MERGE: store-live date] we updated the "Usage information" and "Information stored on your device" sections, the legal-basis table, the service-provider table and the retention section: analytics data and crash reports are no longer linked to your account or to any user ID; product analytics now has an in-app switch for adults (on by default, in Profile → Privacy) and is always off for under-18s; and individual-level analytics data is kept for at most three months.</p>
 
         <h2>12. Contact us</h2>
         <p>If you have any questions about this privacy policy or how we handle your data, please contact us:</p>
