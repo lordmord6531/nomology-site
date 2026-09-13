@@ -24,7 +24,7 @@
     <meta name="robots" content="noindex" />
 
     <!-- OG Meta Tags for Social Sharing Previews -->
-    <meta property="og:title" content="Your friend shared something on Nomology" />
+    <meta property="og:title" content="Someone shared something on Nomology" />
     <meta property="og:description" content="Discover recipes matched to your taste" />
     <meta property="og:image" content="https://nomology.food/images/og/og-default.png" />
     <meta property="og:image:width" content="1200" />
@@ -35,7 +35,7 @@
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Your friend shared something on Nomology" />
+    <meta name="twitter:title" content="Someone shared something on Nomology" />
     <meta name="twitter:description" content="Discover recipes matched to your taste" />
     <meta name="twitter:image" content="https://nomology.food/images/og/og-default.png" />
 
@@ -246,6 +246,7 @@
             DOM.openAppBtn = document.getElementById('open-app-btn');
             DOM.copyFeedback = document.getElementById('copy-feedback');
             DOM.creatorName = document.getElementById('creator-name');
+            DOM.privacyNotice = document.getElementById('privacy-notice');
         }
 
         // ===========================================
@@ -397,12 +398,35 @@
             DOM.title.textContent = title;
             DOM.subtitle.textContent = subtitle;
 
-            // ⚠ Deliberately NOT the platform redirect handlers. Those try to
-            // OPEN THE APP (Android does `window.location.href = playIntent`)
-            // and they fire recordFingerprint(). On a dead link both are wrong:
-            // the app would open to a code that resolves to nothing, and we
-            // would collect device signals for a journey that cannot continue.
-            // A scenario shows the store as an offer, never as a redirect.
+            // CTO-4 / PRIV-2. The privacy notice says we collect device signals
+            // "to connect you to your friend's invitation". On a scenario there
+            // is no invitation and we collect nothing, so the notice would be
+            // an untrue statement about our own processing. Hide it.
+            if (DOM.privacyNotice) {
+                DOM.privacyNotice.style.display = 'none';
+            }
+
+            // ⚠ CTO-3 / ARCH-1 / DS-5. REBINDING IS LOAD-BEARING, NOT TIDYING.
+            // init() sets `DOM.appStoreBtn.onclick = openAppStore` at its top,
+            // BEFORE the link is resolved — so the handler is already attached
+            // when we get here. openAppStore() fires recordFingerprint() AND
+            // copies the URL with a "Link copied to clipboard!" toast. On a
+            // dead link that collects device signals for a journey that cannot
+            // continue, and tells the visitor it copied a link that goes
+            // nowhere.
+            //
+            // An earlier version of this function carried a comment claiming
+            // the scenario avoided that collection. The comment was FALSE: it
+            // avoided the AUTOMATIC path and left the tap path wired. Three
+            // reviewers found it independently. Do not remove this rebind and
+            // restore the claim.
+            DOM.appStoreBtn.onclick = function (e) {
+                e.preventDefault();
+                window.location.href = CONFIG.APP_STORE_URL;
+            };
+
+            // The store as an OFFER, never as a redirect. A scenario must not
+            // navigate into the app: the code resolves to nothing.
             if (isAndroid) {
                 DOM.playStoreBtn.style.display = 'block';
                 DOM.playStoreBtn.href =
@@ -443,7 +467,7 @@
             // "with you", "for you", or "waiting" - see 79 Q5.
             if (data.type === 'taste_buds') {
                 DOM.title.textContent = `See how your taste compares with ${creatorName}.`;
-                DOM.subtitle.textContent = 'Three minutes of taps builds your side. The match — and the why — reveals in the app.';
+                DOM.subtitle.textContent = 'Three minutes of taps builds your side. The match reveals in the app.';
             } else if (data.type === 'recipe') {
                 // Apple 5.1.1(v) / UK Licensing Act s.146. The flag already
                 // ships in resolve (social_routes.py:164), so this needs no new
@@ -455,11 +479,19 @@
                     DOM.subtitle.textContent = 'This one includes alcohol, so the details stay in the app.';
                 } else {
                     DOM.title.textContent = `${creatorName} saved this one for the table.`;
-                    DOM.subtitle.textContent = 'The method — and whether it fits your taste — lives in the app.';
+                    DOM.subtitle.textContent = 'The method, and whether it fits your taste, lives in the app.';
                 }
             } else if (data.type === 'profile') {
                 DOM.title.textContent = `${creatorName}'s taste, mapped.`;
                 DOM.subtitle.textContent = '158 points of flavour, learned from a few swipes. What would yours say?';
+            } else {
+                // ARCH-4. An unrecognised type must FAIL CLOSED, as the worker
+                // already does via its Record<ShareType> lookup. Without this
+                // the page keeps the initial "Opening Nomology..." title
+                // forever - a new share type would ship a visibly broken page
+                // to every recipient before anyone noticed.
+                DOM.title.textContent = `${creatorName} shared something on Nomology.`;
+                DOM.subtitle.textContent = 'Open it in the app.';
             }
         }
 
@@ -513,9 +545,15 @@
                 if (!response.ok) {
                     // 79 SF0 Q6: a dead link is a scenario that sells the
                     // mirror, not an error page. 410 = expired or deactivated.
-                    // 404 stays deliberately indistinguishable from 410 to the
-                    // visitor - telling a stranger "this code never existed"
-                    // versus "this code expired" is an enumeration oracle.
+                    // 404 and 410 render IDENTICALLY on purpose: telling a
+                    // stranger "this code never existed" versus "this code
+                    // expired" is an enumeration oracle.
+                    // ⚠ Closed at the DOM, NOT at the wire. The fetch still
+                    // returns distinct statuses and detail bodies, readable in
+                    // devtools (SEC-1). Low value against random 10-char codes
+                    // behind a 30/min limit, but do not read this as a closed
+                    // oracle - closing it properly means unifying the PRODUCER
+                    // response, which is a backend change.
                     if (response.status === 404 || response.status === 410) {
                         showExpiredScenario();
                     } else {
