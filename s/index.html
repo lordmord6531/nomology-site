@@ -19,10 +19,16 @@
     <!-- Preconnect to API for faster requests -->
     <link rel="preconnect" href="https://nomology-be.onrender.com">
 
+    <!-- 79 SF0 webRules.noindex: this is a private page for link-holders, never a
+         search result. The crawler-facing unfurl is served by nomology-worker. -->
+    <meta name="robots" content="noindex" />
+
     <!-- OG Meta Tags for Social Sharing Previews -->
     <meta property="og:title" content="Your friend shared something on Nomology" />
     <meta property="og:description" content="Discover recipes matched to your taste" />
-    <meta property="og:image" content="https://nomology.food/images/hero_image.png" />
+    <meta property="og:image" content="https://nomology.food/images/og/og-default.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:url" content="https://nomology.food/s/" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Nomology" />
@@ -31,7 +37,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Your friend shared something on Nomology" />
     <meta name="twitter:description" content="Discover recipes matched to your taste" />
-    <meta name="twitter:image" content="https://nomology.food/images/hero_image.png" />
+    <meta name="twitter:image" content="https://nomology.food/images/og/og-default.png" />
 
     <style>
         * {
@@ -373,6 +379,53 @@
             DOM.error.style.display = 'block';
         }
 
+        // 79 SF0 Q6 - an expired link is a SCENARIO, not an error page. It sells
+        // the mirror (your own taste card), keeps the brand row, and keeps a live
+        // CTA. Never a dead end.
+        //
+        // ⚠ SCOPED DOWN, and deliberately so. The designed frames
+        // 80-{recipe,profile,tastebuds}-expired are PER TYPE and carry the
+        // sharer's name. We can render neither today: the backend 410
+        // (social_routes.py:388-397) returns only {"detail": "..."} - no `type`,
+        // no `creator_display_name`. Inventing either would break 79 Q5.
+        // So this is the type-free, name-free honest version. When the 410
+        // carries type + name (tracked in the S2b field contract), swap in the
+        // three deck strings at copyDeck.80.expired.
+        function showScenario(title, subtitle) {
+            DOM.loading.style.display = 'none';
+            DOM.error.style.display = 'none';
+            DOM.title.textContent = title;
+            DOM.subtitle.textContent = subtitle;
+
+            // ⚠ Deliberately NOT the platform redirect handlers. Those try to
+            // OPEN THE APP (Android does `window.location.href = playIntent`)
+            // and they fire recordFingerprint(). On a dead link both are wrong:
+            // the app would open to a code that resolves to nothing, and we
+            // would collect device signals for a journey that cannot continue.
+            // A scenario shows the store as an offer, never as a redirect.
+            if (isAndroid) {
+                DOM.playStoreBtn.style.display = 'block';
+                DOM.playStoreBtn.href =
+                    `${CONFIG.PLAY_STORE_BASE}?id=${CONFIG.PACKAGE_NAME}`;
+            } else if (isIOS) {
+                DOM.appStoreBtn.style.display = 'block';
+            } else {
+                DOM.appStoreBtn.style.display = 'block';
+                DOM.playStoreBtn.style.display = 'block';
+                DOM.playStoreBtn.style.marginTop = '12px';
+                DOM.playStoreBtn.href =
+                    `${CONFIG.PLAY_STORE_BASE}?id=${CONFIG.PACKAGE_NAME}`;
+            }
+        }
+
+        // The always-alive payoff, whichever way the link died.
+        function showExpiredScenario() {
+            showScenario(
+                'This link has gone back in the drawer.',
+                'Your own taste card is three minutes away — and it doesn’t expire.'
+            );
+        }
+
         function updateTitleForShareType(data) {
             // Sanitize display name - remove any HTML/script tags
             const creatorName = sanitizeDisplayName(data.creator_display_name);
@@ -382,15 +435,31 @@
                 DOM.creatorName.textContent = creatorName;
             }
 
+            // 79 SF0 Q5 - FORWARD-SAFE. We cannot tell the original recipient
+            // from a forwardee (they hold the same code), so no string may claim
+            // the link was shared *with* the reader. Every line here is true for
+            // whoever holds it. Copy deck is the source of truth:
+            // 79_SF0_funnel_manifest.json -> copyDeck.80. Do NOT reintroduce
+            // "with you", "for you", or "waiting" - see 79 Q5.
             if (data.type === 'taste_buds') {
-                DOM.title.textContent = `${creatorName} wants to find your Taste Match!`;
-                DOM.subtitle.textContent = 'See which recipe you\'ll both love';
+                DOM.title.textContent = `See how your taste compares with ${creatorName}.`;
+                DOM.subtitle.textContent = 'Three minutes of taps builds your side. The match — and the why — reveals in the app.';
             } else if (data.type === 'recipe') {
-                DOM.title.textContent = `${creatorName} shared a recipe with you!`;
-                DOM.subtitle.textContent = 'Open in Nomology to see the recipe';
+                // Apple 5.1.1(v) / UK Licensing Act s.146. The flag already
+                // ships in resolve (social_routes.py:164), so this needs no new
+                // field. It PRE-EMPTS the teaser rather than decorating it:
+                // the alcohol strings replace the recipe strings outright, and
+                // no dish-identifying content renders. Neutral, not coy.
+                if (data.recipe_contains_alcohol === true) {
+                    DOM.title.textContent = `${creatorName} saved a recipe for the table.`;
+                    DOM.subtitle.textContent = 'This one includes alcohol, so the details stay in the app.';
+                } else {
+                    DOM.title.textContent = `${creatorName} saved this one for the table.`;
+                    DOM.subtitle.textContent = 'The method — and whether it fits your taste — lives in the app.';
+                }
             } else if (data.type === 'profile') {
-                DOM.title.textContent = `Check out ${creatorName}'s flavor profile!`;
-                DOM.subtitle.textContent = 'Discover your own taste profile';
+                DOM.title.textContent = `${creatorName}'s taste, mapped.`;
+                DOM.subtitle.textContent = '158 points of flavour, learned from a few swipes. What would yours say?';
             }
         }
 
@@ -442,11 +511,19 @@
                 clearTimeout(timeoutId);
 
                 if (!response.ok) {
-                    // Use generic message to avoid information leakage
+                    // 79 SF0 Q6: a dead link is a scenario that sells the
+                    // mirror, not an error page. 410 = expired or deactivated.
+                    // 404 stays deliberately indistinguishable from 410 to the
+                    // visitor - telling a stranger "this code never existed"
+                    // versus "this code expired" is an enumeration oracle.
                     if (response.status === 404 || response.status === 410) {
-                        showError('This share link is invalid or has expired');
+                        showExpiredScenario();
                     } else {
-                        showError('Could not validate share link');
+                        // A real fault, not a dead link. Honest, and retryable.
+                        showScenario(
+                            "This link isn't cooperating.",
+                            'Give it another try in a moment — or start fresh with your own taste card.'
+                        );
                     }
                     return null;
                 }
