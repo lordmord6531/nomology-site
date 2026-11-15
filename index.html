@@ -24,7 +24,7 @@
 <meta name="twitter:description" content="A personalised recipe app that learns your taste and finds food you'll genuinely love.">
 <meta name="twitter:image" content="https://nomology.food/images/og/og-default.png">
 
-<!-- CSP: identical policy to the live homepage. Covers Google Fonts (incl. Material Symbols),
+<!-- CSP: fonts are self-hosted under /assets/fonts/, so no font host is allowed. Covers
      inline styles/scripts (the page + ported engine + auth handler), and data: (grain SVG). -->
 <meta http-equiv="Content-Security-Policy"
       content="default-src 'self';
@@ -38,9 +38,9 @@
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/images/nomology_logo.svg" type="image/svg+xml">
 
-<!-- One combined css2 request; Material Symbols axes pinned to the values the page actually uses
-     (opsz 24, wght 400, FILL 0..1 for the .fill toggle, GRAD 0) to trim the icon-font payload. -->
-<link rel="stylesheet" href="/assets/fonts/fonts-home.css">
+<!-- Self-hosted fonts. The Material Symbols file holds only the nine icons the page uses
+     (opsz 24, wght 400, FILL 0..1 for the .fill toggle, GRAD 0). -->
+<link rel="stylesheet" href="/assets/fonts/home.css">
 
 <!-- Structured data: helps search/social understand this is an iOS app + the publisher. -->
 <script type="application/ld+json">
